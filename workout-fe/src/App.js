@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
+import Login from './components/Login.js';
+
 function App() {
   useEffect(() => {
     axios.get('https://weight-lifting-journal1.herokuapp.com/api/auth')
@@ -14,6 +16,7 @@ function App() {
   })
   return (
     <div className="App">
+      <Login/>
     </div>
   );
 }
