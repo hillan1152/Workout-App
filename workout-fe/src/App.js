@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
-import Login from './components/Login.js';
+import Login from './components/Login/Login.js';
+import Register from './components/Register/Register.js';
 
 function App() {
   useEffect(() => {
