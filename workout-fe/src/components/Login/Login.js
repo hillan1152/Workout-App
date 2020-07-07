@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 // ACTIONS
 import { userLogin } from '../../actions';
 
-export const Register = (props) => {
+export const Login = (props) => {
+  
   const [ user, setUser ] = useState({
     email: "",
     password: ""
@@ -40,4 +41,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { userLogin })(Register)
+export default connect(mapStateToProps, { userLogin })(Login)

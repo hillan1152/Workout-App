@@ -1,16 +1,18 @@
 import {
   AUTHORIZING,
   REGISTER_SUCCESS,
+  FETCH_SUCCESS,
   ERROR,
   LOGIN_SUCCESS
 } from '../actions';
 
 const initialState = {
-  user_email: JSON.parse(localStorage.getItem('email')),
-  token: JSON.parse(localStorage.getItem('token')),
+  token: localStorage.getItem('token'),
+  user_id: JSON.parse(localStorage.getItem('id')),
   isFetching: false,
   fetchMessage: "",
   error_message: "",
+  info: []
 }
 
 export const reducer = (state = initialState, action) => {
@@ -27,10 +29,17 @@ export const reducer = (state = initialState, action) => {
         isFetching: false,
         fetchMessage: ""
       }
+    case FETCH_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        fetchMessage: "",
+        info: action.payload
+      }
     case LOGIN_SUCCESS:
-      console.log("STATE", action.payload)
-      localStorage.setItem('token', action.payload);
-      localStorage.setItem('id', action.payload.user_Id);
+      // console.log("STATE", action.payload)
+      localStorage.setItem('token', action.payload.token);
+      localStorage.setItem('id', action.payload.userId);
       return {
         ...state,
         isFetching: false,

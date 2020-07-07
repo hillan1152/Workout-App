@@ -4,6 +4,7 @@ import axios from 'axios';
 // EXPORT TYPES
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const ERROR = "ERROR";
 export const AUTHORIZING = "AUTHORIZING";
 
@@ -23,5 +24,14 @@ export const userLogin = (user) => dispatch => {
   dispatch({ type: AUTHORIZING, payload: "Checking Login!" })
   axiosWithAuth().post(`${baseURL}/api/auth/login`, user)
     .then(res => dispatch({ type: LOGIN_SUCCESS, payload: res.data, user: user.data }))
+    .catch(err => dispatch({ type: ERROR, payload: err.response }))
+}
+
+// PASS USER ID
+export const userWorkouts = (id) => dispatch => {
+  console.log("USER WORKOUTS -- ACTIONS", id)
+  dispatch({ type: AUTHORIZING, payload: "Finding Workouts!" })
+  axiosWithAuth().get(`${baseURL}/api/workouts/${id}`)
+    .then(res => dispatch({ type: FETCH_SUCCESS, payload: res.data, log: console.log(res.data) }))
     .catch(err => dispatch({ type: ERROR, payload: err.response }))
 }
