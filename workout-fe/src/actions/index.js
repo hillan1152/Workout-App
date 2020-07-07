@@ -29,9 +29,8 @@ export const userLogin = (user) => dispatch => {
 
 // PASS USER ID
 export const userWorkouts = (id) => dispatch => {
-  console.log("USER WORKOUTS -- ACTIONS", id)
   dispatch({ type: AUTHORIZING, payload: "Finding Workouts!" })
   axiosWithAuth().get(`${baseURL}/api/workouts/${id}`)
-    .then(res => dispatch({ type: FETCH_SUCCESS, payload: res.data, log: console.log(res.data) }))
+    .then(res => dispatch({ type: FETCH_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: ERROR, payload: err.response }))
 }
