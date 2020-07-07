@@ -17,8 +17,7 @@ export const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     userRegister(user);
-  }
-
+  };
   
   return (
     <div>

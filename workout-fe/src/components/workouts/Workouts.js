@@ -16,6 +16,7 @@ export const Workouts = (props) => {
         setLoading(false)
       })
       .catch(err => {
+        
         setLoading(false)
       })
   }, [props.userId])
@@ -23,16 +24,15 @@ export const Workouts = (props) => {
   if(loading === true){
     return <h2>Gathering Workouts</h2>
   }
-  
+
   return (
-    <div>
-      <h1>HERE WE GO</h1>
+    <div className="workout-container">
+      <h1>Here Are You Workouts This Week</h1>
       {workoutList.map(workout => {
         return (
         <p key={workout.id}>{workout.name}, {workout.date}</p>
         )
       })}
-      
     </div>
   )
 }
