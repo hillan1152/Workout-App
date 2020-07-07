@@ -18,16 +18,13 @@ function App(props) {
       return <h2>LOADING PROPS</h2>
     }
 
-    // if(props.token){
-    //   history.push('/workouts')
-      
-    // }
   })
   return (
     <div className="App">
       <Route exact path="/signup" component={Register}/>
       <Route exact path="/login" component={Login}/>
       <PrivateRoute exact path="/workouts" component={Workouts}/>
+      <PrivateRoute exact path="/workouts/:id" component={Workouts}/>
     </div>
   );
 }
