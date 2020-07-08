@@ -12,7 +12,9 @@ const initialState = {
   isFetching: false,
   fetchMessage: "",
   error_message: "",
-  info: []
+  info: [],
+  exercises: [],
+  workouts: []
 }
 
 export const reducer = (state = initialState, action) => {
@@ -30,10 +32,10 @@ export const reducer = (state = initialState, action) => {
         fetchMessage: ""
       }
     case FETCH_SUCCESS:
+      console.log("FETCH SUCCESS", action.payload)
       return {
         ...state,
         isFetching: false,
-        fetchMessage: "",
         info: action.payload
       }
     case LOGIN_SUCCESS:

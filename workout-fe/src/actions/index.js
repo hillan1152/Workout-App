@@ -30,7 +30,7 @@ export const userLogin = (user) => dispatch => {
 // PASS USER ID
 export const userWorkouts = (id) => dispatch => {
   dispatch({ type: AUTHORIZING, payload: "Finding Workouts!" })
-  axiosWithAuth().get(`${baseURL}/api/workouts/${id}`)
+  return axiosWithAuth().get(`${baseURL}/api/workouts/${id}`)
     .then(res => dispatch({ type: FETCH_SUCCESS, payload: res.data }))
-    .catch(err => dispatch({ type: ERROR, payload: err.response }))
+    .catch(err => dispatch({ type: ERROR, payload: err }))
 }
