@@ -13,12 +13,12 @@ import Workouts from './components/workouts/Workouts.js';
 
 function App(props) {
   
-  useEffect(() => {
-    if(props.isFetching === true){
-      return <h2>LOADING PROPS</h2>
-    }
+  // useEffect(() => {
+  //   if(props.isFetching === true){
+  //     return <h2>LOADING PROPS</h2>
+  //   }
 
-  })
+  // })
   return (
     <div className="App">
       <Route exact path="/signup" component={Register}/>
