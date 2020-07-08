@@ -14,8 +14,6 @@ const initialState = {
   fetchMessage: "",
   error_message: "",
   info: [],
-  // exercises: [],
-  // workouts: []
 }
 
 export const reducer = (state = initialState, action) => {
@@ -37,7 +35,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        info: action.payload
+        info: action.payload,
       }
     case POST_WORKOUT_SUCCESS:
       console.log("POST WORKOUT SUCCESS", action.payload)

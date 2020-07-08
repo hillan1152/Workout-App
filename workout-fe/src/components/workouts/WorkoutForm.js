@@ -14,7 +14,7 @@ function WorkoutForm({ addWorkout, userWorkouts, setIsOpen, userId }) {
     setWorkout({ ...workout, [e.target.name]: e.target.value ? e.target.value: '' });
   };
 
-  // Submit Workout, Updates Automatically, Closes Modal
+  // Submit Workout, Updates List, Closes Modal
   const handleSubmit = (e) => {
     e.preventDefault();
     addWorkout(userId, workout);
