@@ -11,9 +11,8 @@ import { capital } from '../../utils/helpers';
 
 
 export const SingleWorkout = ({ match, singleWorkout, workout}) => {
-  // const [ workout, setWorkout ] = useState([])
   let workoutId = match.params.id;
-  // console.log(props)
+  
   useEffect(() => {
     singleWorkout(workoutId)
   }, [])

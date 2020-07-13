@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Route } from 'react-router-dom';
-import { history } from 'react-dom'
-import './App.css';
+import './App.scss';
 import { connect } from 'react-redux';
 import PrivateRoute from "./utils/PrivateRoute.js";
 
