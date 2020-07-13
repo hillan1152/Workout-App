@@ -1,49 +1,61 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import { userWorkouts } from '../../actions';
-
+import moment from 'moment';
+import { capital } from '../../utils/helpers'
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
 
 
-export const Workouts = (props) => {
-  const [ loading, setLoading ] = useState(props.isFetching);
-  const [ workoutList, setWorkoutList ] = useState([]);
-  const [ isOpen, setIsOpen ] = useState(false);
 
+
+export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message }) => {
+  const [ loading, setLoading ] = useState(false);
+  const [ isOpen, setIsOpen ] = useState(false);
+  const [ isEditOpen, setIsEditOpen ] = useState(false);
+  
+  // console.log(history)
   useEffect(() => {
-    setLoading(!props.isFetching)
-    axiosWithAuth().get(`https://weight-lifting-journal1.herokuapp.com/api/workouts/${props.userId}`)
-      .then(res => {
-        setWorkoutList(res.data)
-        setLoading(!props.isFetching)
-      })
-      .catch(err => {
-        console.log(err.message);
-        setLoading(!props.isFetching)
-      })
-      setLoading(!props.isFetching)
-    }, [])
-    
+    userWorkouts(userId)
+    setLoading(!isFetching)
+  }, [])
+  
+
   return (
     <div className="workout-container">
       <h1>Here Are You Workouts This Week</h1>
+      {/* Loader */}
+      {isFetching ? <div>Gathering Info....</div> : ""}
+
+      {error_message.length > 0 ? alert(error_message.data) : ''}
+
+      {/* Modal Form */}
       <button onClick={() => setIsOpen(!isOpen)}>Add Workout</button>
-      {workoutList.map(workout => {
+      {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen}/></> : ''}
+
+      {/* {isEditOpen ? <SingleWorkout setIsEditOpen={setIsEditOpen} capital={capital}/> : ""} */}
+      
+
+
+      {info.map(workout => {
         return (
         <div key={workout.id}>
-          <p>{workout.name}, {workout.date}</p>
-          <Link to={`/workouts/${workout.name}`}><button>Go To Workout</button></Link>
+          <p>{ capital(workout.name) }, { moment(workout.date).calendar() }</p>
+          <button onClick={() => setIsEditOpen(!isEditOpen)}>Go To Workout</button>
+          <Link to={`/workouts/${workout.id}`}>
+            <button onClick={() => setIsEditOpen(!isEditOpen)}>
+              Go To Workout
+            </button>
+          </Link>
+          {/* <button type="click" >Edit Workout</button> */}
+          {/* {isEditOpen && <EditForm/>} */}
+          {/* Edit workout form */}
+
         </div>
         )
       })}
-
-      {isOpen ? 
-        <>
-          <WorkoutForm/>
-        </> : ''}
+      
     </div> 
   )
 }
@@ -53,9 +65,11 @@ const mapStateToProps = (state) => {
   return {
     userId: state.user_id,
     isFetching: state.isFetching,
+    info: state.info,
+    error_message: state.error_message
   }
 }
 
 
 
-export default connect(mapStateToProps, {})(Workouts)
+export default connect(mapStateToProps, { userWorkouts })(Workouts)

@@ -1,3 +1,13 @@
+
+@import 
+    './components/workouts/workouts.scss',
+    
+    './sass/utilities/mixins',
+    './sass/utilities/variables',
+
+    './sass/base/global',
+    './sass/base/reset';
+
 .App {
   text-align: center;
 }

@@ -1,9 +1,11 @@
 import {
-  AUTHORIZING,
   REGISTER_SUCCESS,
+  LOGIN_SUCCESS,
   FETCH_SUCCESS,
+  FETCH_WORKOUT_SUCCESS,
+  POST_WORKOUT_SUCCESS,
+  AUTHORIZING,
   ERROR,
-  LOGIN_SUCCESS
 } from '../actions';
 
 const initialState = {
@@ -13,8 +15,7 @@ const initialState = {
   fetchMessage: "",
   error_message: "",
   info: [],
-  exercises: [],
-  workouts: []
+  workout: []
 }
 
 export const reducer = (state = initialState, action) => {
@@ -36,7 +37,21 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        info: action.payload
+        info: action.payload,
+      }
+    case FETCH_WORKOUT_SUCCESS:
+      console.log("FETCH WORKOUT SUCCESS", action.payload)
+      return {
+        ...state,
+        isFetching: false,
+        workout: action.payload,
+      }
+    case POST_WORKOUT_SUCCESS:
+      console.log("POST WORKOUT SUCCESS", action.payload)
+      return {
+        ...state,
+        isFetching: false,
+        workouts: action.payload
       }
     case LOGIN_SUCCESS:
       // console.log("STATE", action.payload)
