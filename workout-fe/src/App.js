@@ -16,7 +16,7 @@ function App(props) {
   return (
     <div className="App">
       <Route exact path="/signup" component={Register}/>
-      <Route exact path="/login" component={Login}/>
+      <Route exact path="/" component={Login}/>
       <PrivateRoute exact path="/workouts" component={Workouts}/>
       <PrivateRoute exact path="/workouts/:id" component={SingleWorkout}/>
     </div>
