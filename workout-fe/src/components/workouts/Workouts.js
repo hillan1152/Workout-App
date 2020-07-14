@@ -10,17 +10,21 @@ import WorkoutForm from './WorkoutForm';
 
 
 
-export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message }) => {
+export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message, token }) => {
   const [ loading, setLoading ] = useState(false);
   const [ isOpen, setIsOpen ] = useState(false);
   const [ isEditOpen, setIsEditOpen ] = useState(false);
   
   // console.log(history)
   useEffect(() => {
+    setLoading(!isFetching)
     userWorkouts(userId)
     setLoading(!isFetching)
   }, [])
-  
+
+  if (isFetching){
+    return <h2>Gather Data</h2>
+  }
 
   return (
     <div className="workout-container">
@@ -66,7 +70,8 @@ const mapStateToProps = (state) => {
     userId: state.user_id,
     isFetching: state.isFetching,
     info: state.info,
-    error_message: state.error_message
+    error_message: state.error_message,
+    token: state.token
   }
 }
 
