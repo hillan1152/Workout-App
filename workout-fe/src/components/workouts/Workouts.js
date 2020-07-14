@@ -15,6 +15,14 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
   const [ isOpen, setIsOpen ] = useState(false);
   const [ isEditOpen, setIsEditOpen ] = useState(false);
   
+  // SORT ALL WORKOUTS BY DATE
+  let sorted_by_date = info.sort((a, b) => {
+    let x = new moment(a.date).format('YYYYMMDD');
+    let y = new moment(b.date).format('YYYYMMDD');
+    return x - y
+  });
+
+  console.log("SORT BY DATE", sorted_by_date)
   // console.log(history)
   useEffect(() => {
     setLoading(!isFetching)
@@ -40,9 +48,7 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
 
       {/* {isEditOpen ? <SingleWorkout setIsEditOpen={setIsEditOpen} capital={capital}/> : ""} */}
       
-
-
-      {info.map(workout => {
+      {sorted_by_date.map(workout => {
         return (
         <div key={workout.id}>
           <p>{ capital(workout.name) }, { moment(workout.date).calendar() }</p>
