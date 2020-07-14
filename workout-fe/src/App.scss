@@ -1,6 +1,7 @@
-
+// @import-normalize;
 @import 
-    './components/workouts/workouts.scss',
+    './sass/components/workouts',
+    './sass/components/login',
     
     './sass/utilities/mixins',
     './sass/utilities/variables',

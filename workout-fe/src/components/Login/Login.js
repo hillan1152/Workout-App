@@ -22,8 +22,9 @@ export const Login = (props) => {
 
   
   return (
-    <div>
+    <div className="login-container">
       <form onSubmit={handleSubmit}>
+        <h2>Please Login</h2>
         <label htmlFor="email">Email</label>
         <input type="email" name="email" placeholder="Enter Email" onChange={handleChange}/>
         <label htmlFor="password">Password</label>

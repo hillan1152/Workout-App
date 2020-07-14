@@ -1,7 +1,66 @@
 .workout-container {
-  background: red;
+  background: black;
+  color: white;
 }
 
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-150%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@media screen and (max-device-width: 480px) {
+  .login-container {
+    background: black;
+    color: white;
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  .login-container form {
+    display: flex;
+    flex-flow: column;
+    align-self: center;
+    align-items: center;
+    margin-top: 10rem;
+    padding: 5%;
+    width: 75%;
+    border: 15px inset white;
+    box-shadow: 10px 7px white;
+    color: white;
+    line-height: 2;
+    animation: 1s ease-out 0s 1 slideInFromTop;
+  }
+  .login-container form h2 {
+    font-size: 2rem;
+    text-decoration: underline;
+  }
+  .login-container form label {
+    font-size: 1.5rem;
+    margin-bottom: 2%;
+  }
+  .login-container form input {
+    margin: 3%, 0;
+    height: 2.5rem;
+    font-size: 1.2rem;
+  }
+  .login-container form button {
+    margin-top: 10%;
+    border-radius: 8px;
+    height: 3rem;
+    width: 75%;
+  }
+  .login-container form button:hover {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+  }
+}
 * {
   box-sizing: border-box;
   font-family: "Roboto Condensed";
