@@ -22,8 +22,18 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
     return x - y
   });
 
-  console.log("SORT BY DATE", sorted_by_date)
-  // console.log(history)
+  // GATHER ALL FUTURE/PAST DATES
+  let new_dates = [];
+  let past = [];
+  sorted_by_date.forEach(day => {
+    if(moment(day.date).format('YYYYMMDD') >= moment().format('YYYYMMDD')){
+      new_dates.push(day)
+    } else {
+      past.push(day)
+    }
+  });
+
+    
   useEffect(() => {
     setLoading(!isFetching)
     userWorkouts(userId)
@@ -48,24 +58,18 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
 
       {/* {isEditOpen ? <SingleWorkout setIsEditOpen={setIsEditOpen} capital={capital}/> : ""} */}
       
-      {sorted_by_date.map(workout => {
+      {new_dates.map(workout => {
         return (
         <div key={workout.id}>
           <p>{ capital(workout.name) }, { moment(workout.date).calendar() }</p>
-          <button onClick={() => setIsEditOpen(!isEditOpen)}>Go To Workout</button>
           <Link to={`/workouts/${workout.id}`}>
             <button onClick={() => setIsEditOpen(!isEditOpen)}>
-              Go To Workout
+              Edit
             </button>
           </Link>
-          {/* <button type="click" >Edit Workout</button> */}
-          {/* {isEditOpen && <EditForm/>} */}
-          {/* Edit workout form */}
-
         </div>
         )
-      })}
-      
+      }).slice(0, 7)}
     </div> 
   )
 }
