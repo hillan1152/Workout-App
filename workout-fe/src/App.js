@@ -10,11 +10,12 @@ import Login from './components/Login/Login.js';
 import Register from './components/Register/Register.js';
 import Workouts from './components/workouts/Workouts.js';
 import SingleWorkout from './components/workouts/SingleWorkout';
-
+import Logout from './components/Login/Logout';
 function App(props) {
   
   return (
     <div className="App">
+      <Logout/>
       <Route exact path="/signup" component={Register}/>
       <Route exact path="/" component={Login}/>
       <PrivateRoute exact path="/workouts" component={Workouts}/>

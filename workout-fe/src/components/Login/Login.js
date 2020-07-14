@@ -5,11 +5,19 @@ import { connect } from 'react-redux';
 import { userLogin } from '../../actions';
 
 export const Login = (props) => {
-  
   const [ user, setUser ] = useState({
     email: "",
     password: ""
   });
+  let { error } = props;
+  
+  useEffect(() => {
+    if(props.token){
+      props.history.push('/workouts')
+    }
+
+  }, [props.history, props.token])
+
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value ? e.target.value: '' });
@@ -18,9 +26,19 @@ export const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.userLogin(user);
+    if(props.token){
+      props.history.push('/workouts')
+    }
   }
 
-  
+  if(error){
+    setTimeout(() => {
+      window.location.reload()
+    }, 1500)
+    return <h2>{error.data.message}. Please try again.</h2>
+  }
+
+
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit}>
@@ -38,7 +56,9 @@ export const Login = (props) => {
 const mapStateToProps = state => {
   console.log("MSTP LOGIN STATE", state)
   return {
-    token: state.token
+    isFetching: state.isFetching,
+    token: state.token,
+    error: state.error_message
   }
 }
 

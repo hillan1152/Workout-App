@@ -4,6 +4,7 @@ import axios from 'axios';
 // EXPORT TYPES
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGOUT = "LOGOUT";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const POST_WORKOUT_SUCCESS = "POST_WORKOUT_SUCCESS";
 export const FETCH_WORKOUT_SUCCESS = "FETCH_WORKOUT_SUCCESS";
@@ -23,6 +24,7 @@ export const userRegister = (user) => dispatch => {
 
 export const userLogin = (user) => dispatch => {
   console.log("USER LOGIN -- ACTIONS", user)
+  if(user == null) return window.location.reload()
   dispatch({ type: AUTHORIZING, payload: "Checking Login!" })
   axiosWithAuth().post(`${baseURL}/api/auth/login`, user)
     .then(res => dispatch({ type: LOGIN_SUCCESS, payload: res.data, user: user.data }))
@@ -32,6 +34,7 @@ export const userLogin = (user) => dispatch => {
 // GET WORKOUTS -- PASS USER ID --> NOT USED
 export const userWorkouts = (id) => dispatch => {
   console.log("USER WORKOUTS -- ACTIONS", id)
+  if(id == null) return window.location.reload()
   dispatch({ type: AUTHORIZING, payload: "Finding Workouts!" })
   axiosWithAuth().get(`${baseURL}/api/workouts/${id}`)
     .then(res => dispatch({ type: FETCH_SUCCESS, payload: res.data }))
@@ -55,6 +58,9 @@ export const singleWorkout = (id) => dispatch => {
     .catch(err => dispatch({ type: ERROR, payload: err }))
 }
 
+export const logout = () => {
+  return { type: LOGOUT }
+}
 // EDIT SINGLE WORKOUT -- PASS WORKOUT ID
 // export const editWorkout = (workout_id, data) => dispatch => {
 //   dispatch({ type: AUTHORIZING, payload: "Editing Workout!" })
