@@ -6,6 +6,13 @@ import { userLogin } from '../../actions';
 
 export const Login = (props) => {
   
+  useEffect(() => {
+    if(props.token){
+      props.history.push('/workouts')
+    }
+
+  }, [props.history, props.token, props.error.data])
+
   const [ user, setUser ] = useState({
     email: "",
     password: ""
@@ -18,9 +25,17 @@ export const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.userLogin(user);
+    if(props.token){
+      props.history.push('/workouts')
+    }
   }
 
-  
+  if(props.isFetching){
+    return <h2>Signing In</h2>
+  } 
+  if (props.error.status === 401){
+    return <h2>{props.error.data.message}</h2>
+  }
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit}>
@@ -38,7 +53,9 @@ export const Login = (props) => {
 const mapStateToProps = state => {
   console.log("MSTP LOGIN STATE", state)
   return {
-    token: state.token
+    isFetching: state.isFetching,
+    token: state.token,
+    error: state.error_message
   }
 }
 

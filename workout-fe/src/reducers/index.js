@@ -1,6 +1,7 @@
 import {
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
+  LOGOUT,
   FETCH_SUCCESS,
   FETCH_WORKOUT_SUCCESS,
   POST_WORKOUT_SUCCESS,
@@ -10,7 +11,7 @@ import {
 
 const initialState = {
   token: localStorage.getItem('token'),
-  user_id: JSON.parse(localStorage.getItem('id')),
+  user_id: localStorage.getItem('id'),
   isFetching: false,
   fetchMessage: "",
   error_message: "",
@@ -60,11 +61,21 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
+        token: localStorage.getItem('token', action.payload.token),
+        // user_id: localStorage.getItem('id', action.payload.userId),
         fetchMessage: action.payload.message,
       }
+    case LOGOUT:
+      localStorage.clear();
+      window.location.reload();
+      return {
+        ...state, token: ""
+      }
+
     case ERROR:
       return {
         ...state,
+        isFeching: false,
         error_message: action.payload
       }
     default: 
