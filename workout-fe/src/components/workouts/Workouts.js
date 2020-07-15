@@ -33,9 +33,8 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
     }
   });
 
-    
   useEffect(() => {
-    setLoading(!isFetching)
+    // setLoading(!isFetching)
     userWorkouts(userId)
     setLoading(!isFetching)
   }, [])
@@ -57,8 +56,7 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
       {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen}/></> : ''}
 
       {/* {isEditOpen ? <SingleWorkout setIsEditOpen={setIsEditOpen} capital={capital}/> : ""} */}
-      
-      {future.map(workout => {
+      {sorted_by_date.map(workout => {
         return (
         <div className="individual_workout" key={workout.id}>
           <h3>{ moment(workout.date).calendar() }</h3>
@@ -73,7 +71,7 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
           </Link>
         </div>
         )
-      }).slice(0, 7)}
+      })}
     </div> 
   )
 }

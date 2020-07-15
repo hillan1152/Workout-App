@@ -41,6 +41,26 @@
   margin: 3%;
 }
 
+.single-workout-container {
+  display: flex;
+  justify-content: center;
+}
+.single-workout-container form {
+  display: flex;
+  flex-flow: column wrap;
+  margin-top: 5%;
+}
+.single-workout-container input {
+  margin: 8% 0;
+}
+.single-workout-container button {
+  margin-top: 10%;
+  width: 75%;
+  height: 3rem;
+  border-radius: 8px;
+  align-self: center;
+}
+
 @keyframes slideInFromTop {
   0% {
     transform: translateY(-150%);

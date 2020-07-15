@@ -55,6 +55,13 @@ export const reducer = (state = initialState, action) => {
         isFetching: false,
         workouts: action.payload
       }
+    case EDIT_WORKOUT_SUCCESS:
+      console.log("EDIT WORKOUT SUCCESS", action.payload)
+      return {
+        ...state,
+        isFetching: false,
+        workouts: action.payload
+      }
     case LOGIN_SUCCESS:
       // console.log("STATE", action.payload)
       localStorage.setItem('token', action.payload.token);

@@ -61,8 +61,9 @@ export const singleWorkout = (id) => dispatch => {
 }
 // EDIT SINGLE WORKOUT -- PASS WORKOUT ID
 export const editWorkout = (id, data) => dispatch => {
+  console.log("EDIT WORKOUT --- ACTION ", id, data)
   dispatch({ type: AUTHORIZING, payload: "Editing Workout!" })
-  axiosWithAuth().post(`${baseURL}/api/workouts/${id}`, data)
+  axiosWithAuth().put(`${baseURL}/api/workouts/${id}`, data)
     .then(res => dispatch({ type: EDIT_WORKOUT_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: ERROR, payload: err.response }))
 }
