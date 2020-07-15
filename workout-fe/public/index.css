@@ -1,6 +1,44 @@
 .workout-container {
-  background: black;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  margin-top: 2rem;
+  margin-bottom: 5%;
+}
+.workout-container h2 {
+  font-size: 2rem;
+  font-weight: bolder;
+}
+.workout-container .add_workout {
+  margin-top: 4%;
+  width: 30%;
+  height: 2rem;
+  border-radius: 8px;
+  align-self: center;
+  margin-bottom: 2%;
+}
+.workout-container .add_workout:hover {
+  background-color: purple;
   color: white;
+}
+
+.individual_workout {
+  border: 1px solid white;
+  width: 75%;
+  align-self: center;
+  padding: 3%;
+  line-height: 1.3;
+  margin-top: 4%;
+}
+.individual_workout h3 {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.individual_workout p {
+  font-size: 1.2rem;
+}
+.individual_workout button {
+  margin: 3%;
 }
 
 @keyframes slideInFromTop {
@@ -11,56 +49,55 @@
     transform: translateY(0);
   }
 }
-@media screen and (max-device-width: 480px) {
-  .login-container {
-    background: black;
-    color: white;
-    display: flex;
-    flex-flow: column;
-    align-content: center;
-    height: 100vh;
-    overflow-x: hidden;
-    width: 100%;
-  }
-  .login-container form {
-    display: flex;
-    flex-flow: column;
-    align-self: center;
-    align-items: center;
-    margin-top: 10rem;
-    padding: 5%;
-    width: 75%;
-    border: 15px inset white;
-    box-shadow: 10px 7px white;
-    color: white;
-    line-height: 2;
-    animation: 1s ease-out 0s 1 slideInFromTop;
-  }
-  .login-container form h2 {
-    font-size: 2rem;
-    text-decoration: underline;
-  }
-  .login-container form label {
-    font-size: 1.5rem;
-    margin-bottom: 2%;
-  }
-  .login-container form input {
-    margin: 3%, 0;
-    height: 2.5rem;
-    font-size: 1.2rem;
-  }
-  .login-container form button {
-    margin-top: 10%;
-    border-radius: 8px;
-    height: 3rem;
-    width: 75%;
-  }
-  .login-container form button:hover {
-    background-color: black;
-    border: 1px solid black;
-    color: white;
-  }
+.login-container {
+  background: black;
+  color: white;
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
 }
+.login-container form {
+  display: flex;
+  flex-flow: column;
+  align-self: center;
+  align-items: center;
+  margin-top: 5rem;
+  padding: 5%;
+  width: 75%;
+  border: 10px inset white;
+  box-shadow: 8px 3px white;
+  color: white;
+  line-height: 2;
+  animation: 1s ease-out 0s 1 slideInFromTop;
+}
+.login-container form h2 {
+  font-size: 2rem;
+  text-decoration: underline;
+}
+.login-container form label {
+  font-size: 1.5rem;
+  margin-bottom: 2%;
+}
+.login-container form input {
+  margin: 3%, 0;
+  height: 2.5rem;
+  font-size: 1.2rem;
+}
+.login-container form button {
+  margin-top: 10%;
+  border-radius: 8px;
+  height: 3rem;
+  width: 75%;
+}
+.login-container form button:hover {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+}
+
 * {
   box-sizing: border-box;
   font-family: "Roboto Condensed";
@@ -161,7 +198,6 @@ table {
   text-align: center;
   background-color: black;
   color: white;
-  height: 100vh;
 }
 
 .App-logo {

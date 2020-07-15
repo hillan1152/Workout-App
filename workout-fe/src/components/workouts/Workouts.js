@@ -23,11 +23,11 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
   });
 
   // GATHER ALL FUTURE/PAST DATES
-  let new_dates = [];
+  let future = [];
   let past = [];
   sorted_by_date.forEach(day => {
     if(moment(day.date).format('YYYYMMDD') >= moment().format('YYYYMMDD')){
-      new_dates.push(day)
+      future.push(day)
     } else {
       past.push(day)
     }
@@ -46,23 +46,27 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
 
   return (
     <div className="workout-container">
-      <h1>Here Are You Workouts This Week</h1>
+      <h2>Weekly Workouts</h2>
       {/* Loader */}
       {isFetching ? <div>Gathering Info....</div> : ""}
 
       {error_message.length > 0 ? alert(error_message.data) : ''}
 
       {/* Modal Form */}
-      <button onClick={() => setIsOpen(!isOpen)}>Add Workout</button>
+      <button className="add_workout" onClick={() => setIsOpen(!isOpen)}>Add Workout</button>
       {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen}/></> : ''}
 
       {/* {isEditOpen ? <SingleWorkout setIsEditOpen={setIsEditOpen} capital={capital}/> : ""} */}
       
-      {new_dates.map(workout => {
+      {future.map(workout => {
         return (
-        <div key={workout.id}>
-          <p>{ capital(workout.name) }, { moment(workout.date).calendar() }</p>
+        <div className="individual_workout" key={workout.id}>
+          <h3>{ moment(workout.date).calendar() }</h3>
+          <p>{ capital(workout.name) }</p>
           <Link to={`/workouts/${workout.id}`}>
+            <button>
+              Look
+            </button>
             <button onClick={() => setIsEditOpen(!isEditOpen)}>
               Edit
             </button>

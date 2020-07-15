@@ -11,6 +11,8 @@ import { capital } from '../../utils/helpers';
 
 
 export const SingleWorkout = ({ match, singleWorkout, workout}) => {
+  const [ modalOpen, setModalOpen ] = useState(false)
+  
   let workoutId = match.params.id;
   
   useEffect(() => {
@@ -24,6 +26,7 @@ export const SingleWorkout = ({ match, singleWorkout, workout}) => {
         <input name="name" placeholder={capital(`${workout.name}`)}></input>
         <input name="date" placeholder={moment(workout.date).calendar()}></input>
         <button>Confirm Edit</button>
+        <button>Delete</button>
       </form>
     </div>
   )

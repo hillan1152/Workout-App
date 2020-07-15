@@ -1,7 +1,43 @@
+@import '../utilities/mixins';
 @import '../utilities/variables';
 
 .workout-container {
-  background: $base-color;
-  color: white;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  margin-top: 2rem;
+  margin-bottom: 5%;
+  h2 {
+    font-size: 2rem;
+    font-weight: bolder;
+  }
+  .add_workout {
+    @include button(4%, 30%, 2rem);
+    align-self: center;
+    margin-bottom: 2%;
+  }
+  .add_workout:hover{
+    background-color: purple;
+    color: white;
+  }
+}
+
+.individual_workout {
+  border: 1px solid white;
+  width: 75%;
+  align-self: center;
+  padding: 3%;
+  line-height: 1.3;
+  margin-top: 4%;
+  h3 {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: 1.2rem;
+  }
+  button {
+    margin: 3%;
+  }
 }
 
