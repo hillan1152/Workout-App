@@ -43,7 +43,9 @@
 
 .single-workout-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 .single-workout-container form {
   display: flex;

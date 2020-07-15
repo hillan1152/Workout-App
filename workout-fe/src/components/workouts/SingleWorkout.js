@@ -23,26 +23,31 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, workout, user
     singleWorkout(workoutId)
   }, [])
   
-  // console.log(history)
   const handleChange = (e) => {
     setUpdateWorkout({ ...updateWorkout, [e.target.name]: e.target.value ? e.target.value: '' });
   };
   const submitEdit = (e) => {
     e.preventDefault();
-    // setModalOpen(true)
+    setModalOpen(true)
     if(!updateWorkout.name){
       updateWorkout.name = workout.name
     }
     if(!updateWorkout.date){
       updateWorkout.date = moment(workout.date).calendar()
     } 
-    editWorkout(workoutId, updateWorkout);
-    history.goBack();
+    // editWorkout(workoutId, updateWorkout);
+    // history.goBack();
   };
-  
   return (
     <div className="single-workout-container">
-      {/* {modalOpen ? <Modal info={updateWorkout}/> : ''} */}
+      {modalOpen && (
+        <section>
+          <p onClick={() => setModalOpen(false)}>x</p>
+          <h3>Are you sure you want these changes?</h3>
+          <p>Name: {updateWorkout.name}</p>
+          <p>Date: {updateWorkout.date}</p>
+        </section> 
+      )}
       <form>
         <input name="name" placeholder={capital(`${workout.name}`)} onChange={handleChange}></input>
         <label htmlFor="date">{moment(workout.date).calendar()}</label>
@@ -51,10 +56,10 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, workout, user
         <button onClick={submitEdit}>Edit</button>
         <button>Delete</button>
       </form>
-      <div>
+      {/* <div>
         <h3>Exercises</h3>
 
-      </div>
+      </div> */}
     </div>
   )
 }
