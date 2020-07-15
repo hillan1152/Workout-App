@@ -16,7 +16,7 @@ export const AUTHORIZING = "AUTHORIZING";
 const baseURL = "https://weight-lifting-journal1.herokuapp.com";
 
 export const userRegister = (user) => dispatch => {
-  console.log("USER REGISTER -- ACTIONS", user)
+  // console.log("USER REGISTER -- ACTIONS", user)
   dispatch({ type: AUTHORIZING, payload: "Signing up..."})
   axios.post(`${baseURL}/api/auth/register`, user)
     .then(res => dispatch({ type: REGISTER_SUCCESS, payload: res.data, user: user.email }))
@@ -24,7 +24,7 @@ export const userRegister = (user) => dispatch => {
 }
   
 export const userLogin = (user) => dispatch => {
-  console.log("USER LOGIN -- ACTIONS", user)
+  // console.log("USER LOGIN -- ACTIONS", user)
   if(user == null) return window.location.reload()
   dispatch({ type: AUTHORIZING, payload: "Checking Login!" })
   axiosWithAuth().post(`${baseURL}/api/auth/login`, user)
@@ -37,7 +37,7 @@ export const logout = () => {
 }
   // GET WORKOUTS -- PASS USER ID --> NOT USED
 export const userWorkouts = (id) => dispatch => {
-  console.log("USER WORKOUTS -- ACTIONS", id)
+  // console.log("USER WORKOUTS -- ACTIONS", id)
   if(id == null) return window.location.reload()
   dispatch({ type: AUTHORIZING, payload: "Finding Workouts!" })
   axiosWithAuth().get(`${baseURL}/api/workouts/${id}`)
@@ -53,7 +53,7 @@ export const addWorkout = (id, data) => dispatch => {
 }
 // GETS SINGLE WORKOUT --- PASS WORKOUT ID
 export const singleWorkout = (id) => dispatch => {
-  console.log("SINGLE WORKOUT-- ACTIONS", id)
+  // console.log("SINGLE WORKOUT-- ACTIONS", id)
   dispatch({ type: AUTHORIZING, payload: "Finding Individual Workout!" })
   axiosWithAuth().get(`${baseURL}/api/workouts/single/${id}`)
     .then(res => dispatch({ type: FETCH_WORKOUT_SUCCESS, payload: res.data[0] }))
@@ -61,7 +61,7 @@ export const singleWorkout = (id) => dispatch => {
 }
 // EDIT SINGLE WORKOUT -- PASS WORKOUT ID
 export const editWorkout = (id, data) => dispatch => {
-  console.log("EDIT WORKOUT --- ACTION ", id, data)
+  // console.log("EDIT WORKOUT --- ACTION ", id, data)
   dispatch({ type: AUTHORIZING, payload: "Editing Workout!" })
   axiosWithAuth().put(`${baseURL}/api/workouts/${id}`, data)
     .then(res => dispatch({ type: EDIT_WORKOUT_SUCCESS, payload: res.data }))

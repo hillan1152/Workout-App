@@ -24,7 +24,7 @@ function App(props) {
   );
 }
 const mapStateToProps = state => {
-  console.log("STATE", state);
+  // console.log("STATE", state);
   
   return {
     token: state.token,

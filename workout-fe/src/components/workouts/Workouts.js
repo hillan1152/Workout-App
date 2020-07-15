@@ -77,7 +77,7 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP WORKOUTS", state)
+  // console.log("MSTP WORKOUTS", state)
   return {
     userId: state.user_id,
     isFetching: state.isFetching,

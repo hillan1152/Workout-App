@@ -20,11 +20,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, workout, user
   let workoutId = match.params.id;
   
   useEffect(() => {
-    if(editId){
-      singleWorkout(editId)
-    } else {
-      singleWorkout(workoutId)
-    }
+    singleWorkout(workoutId)
   }, [])
   
   // console.log(history)
@@ -46,7 +42,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, workout, user
   
   return (
     <div className="single-workout-container">
-      {modalOpen ? <Modal info={updateWorkout}/> : ''}
+      {/* {modalOpen ? <Modal info={updateWorkout}/> : ''} */}
       <form>
         <input name="name" placeholder={capital(`${workout.name}`)} onChange={handleChange}></input>
         <label htmlFor="date">{moment(workout.date).calendar()}</label>
@@ -55,6 +51,10 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, workout, user
         <button onClick={submitEdit}>Edit</button>
         <button>Delete</button>
       </form>
+      <div>
+        <h3>Exercises</h3>
+
+      </div>
     </div>
   )
 }
