@@ -9,6 +9,7 @@ export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const POST_WORKOUT_SUCCESS = "POST_WORKOUT_SUCCESS";
 export const EDIT_WORKOUT_SUCCESS = "EDIT_WORKOUT_SUCCESS";
 export const FETCH_WORKOUT_SUCCESS = "FETCH_WORKOUT_SUCCESS";
+export const FETCH_EXERCISE_SUCCESS = "FETCH_EXERCISE_SUCCESS";
 export const DELETE_WORKOUT_SUCCESS = "DELETE_WORKOUT_SUCCESS";
 export const ERROR = "ERROR";
 export const AUTHORIZING = "AUTHORIZING";
@@ -72,5 +73,13 @@ export const editWorkout = (id, data) => dispatch => {
 export const deleteWorkout = (id) => dispatch => {
   axiosWithAuth().delete(`${baseURL}/api/workouts/${id}`)
     .then(res => dispatch({ type: DELETE_WORKOUT_SUCCESS, payload: res.data }))
+    .catch(err => dispatch({ type: ERROR, payload: err.response }))
+}
+
+// EXERCISE DATA -- PASS WORKOUT ID
+export const fetchExercises = (id) => dispatch => {
+  dispatch({ type: AUTHORIZING, payload: "Fetching Exercise Data!" })
+  axiosWithAuth().delete(`${baseURL}/api/exercises/${id}`)
+    .then(res => dispatch({ type: FETCH_EXERCISE_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: ERROR, payload: err.response }))
 }
