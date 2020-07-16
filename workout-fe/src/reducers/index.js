@@ -6,6 +6,7 @@ import {
   FETCH_WORKOUT_SUCCESS,
   POST_WORKOUT_SUCCESS,
   EDIT_WORKOUT_SUCCESS,
+  DELETE_WORKOUT_SUCCESS,
   AUTHORIZING,
   ERROR,
 } from '../actions';
@@ -61,6 +62,13 @@ export const reducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         workouts: action.payload
+      }
+    case DELETE_WORKOUT_SUCCESS:
+      console.log("DELETE_WORKOUT_SUCCESS", action.payload)
+      return {
+        ...state,
+        isFetching: false,
+        workout: action.payload
       }
     case LOGIN_SUCCESS:
       // console.log("STATE", action.payload)
