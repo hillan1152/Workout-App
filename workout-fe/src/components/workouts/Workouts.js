@@ -60,7 +60,7 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
         <div className="individual_workout" key={workout.id}>
           <h3>{ moment(workout.date).calendar() }</h3>
           <p>{ capital(workout.name) }</p>
-          <Link to={`/workouts/${workout.id}`}>
+          <Link to={`/workouts/${workout.id}/${workout.name}`}>
             <button>
               Look
             </button>

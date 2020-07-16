@@ -19,7 +19,7 @@ function App(props) {
       <Route exact path="/signup" component={Register}/>
       <Route exact path="/" component={Login}/>
       <PrivateRoute exact path="/workouts" component={Workouts}/>
-      <PrivateRoute exact path="/workouts/:id" component={SingleWorkout}/>
+      <PrivateRoute exact path="/workouts/:id/:name" component={SingleWorkout}/>
     </div>
   );
 }

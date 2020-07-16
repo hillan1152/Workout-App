@@ -5,8 +5,6 @@ import moment from 'moment';
 import { singleWorkout, editWorkout, deleteWorkout } from '../../actions';
 import { capital } from '../../utils/helpers';
 import Modal from './Modal';
-// GET ALL EXERCISES W/ WORKOUT NAME
-// DELETE A WORKOUT
 // ADD AN EXERCISE
 // EDIT AN EXERCISE
 
@@ -19,7 +17,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
     date: ""
   })
   let workoutId = match.params.id;
-  
+
   useEffect(() => {
     singleWorkout(workoutId)
   }, [])
@@ -27,7 +25,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
   const handleChange = (e) => {
     setUpdateWorkout({ ...updateWorkout, [e.target.name]: e.target.value ? e.target.value: '' });
   };
-
+  // Toggles all modals
   const toggleChange = (e) => {
     e.preventDefault();
     const target = e.target.name;
@@ -41,24 +39,26 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
       if(!updateWorkout.date) updateWorkout.date = moment(workout.date).calendar();
     }
   }
-
+  // Confirms Edit and Sends Back to Workout Page
   const submitEdit = (e) => {
     e.preventDefault();
     editWorkout(workoutId, updateWorkout);
     setOpenEdit(false);
     history.goBack();
   };
-
+  // Confirms Removal and Sends Back to Workout Page
   const removeWorkout = (e) => {
     e.preventDefault();
     deleteWorkout(workoutId);
     setOpenDelete(false);
+    alert(`Successfully Deleted ${match.params.name} workout`)
     history.goBack();
   }
 
   return (
     <div className="single-workout-container">
       <button className="back-arrow" onClick={toggleChange}>BACK</button>
+      {/* EDIT TOGGLE */}
       {openEdit && (
         <section>
           <p onClick={() => setOpenEdit(false)}>x</p>
@@ -70,6 +70,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
           </form>
         </section> 
       )}
+      {/* DELETE TOGGLE */}
       {openDelete && (
         <section>
           <p onClick={() => setOpenDelete(false)}>x</p>
@@ -77,11 +78,11 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
           <button onClick={removeWorkout}>Delete</button>
         </section> 
       )}
+      {/* EDIT FORM: Modal Toggle*/}
       <form>
         <input name="name" placeholder={capital(`${workout.name}`)} onChange={handleChange}></input>
         <label htmlFor="date">{moment(workout.date).calendar()}</label>
         <input name="date" type="date" onChange={handleChange}></input>
-        {/* <input name="date" type="date" placeholder={moment(workout.date).calendar()} onChange={handleChange}></input> */}
         <button onClick={toggleChange} name="edit">Edit</button>
         <button onClick={toggleChange} name="delete">Delete</button>
       </form>
