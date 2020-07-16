@@ -55,7 +55,6 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
       <button className="add_workout" onClick={() => setIsOpen(!isOpen)}>Add Workout</button>
       {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen}/></> : ''}
 
-      {/* {isEditOpen ? <SingleWorkout setIsEditOpen={setIsEditOpen} capital={capital}/> : ""} */}
       {sorted_by_date.map(workout => {
         return (
         <div className="individual_workout" key={workout.id}>

@@ -32,14 +32,13 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
     e.preventDefault();
     const target = e.target.name;
     if(target === "delete") setOpenDelete(true);
+    
+    if(e.target.className === "back-arrow") history.goBack();
+    
     else if(target === "edit") {
       setOpenEdit(true)
-      if(!updateWorkout.name){
-        updateWorkout.name = workout.name
-      }
-      if(!updateWorkout.date){
-        updateWorkout.date = moment(workout.date).calendar()
-      } 
+      if(!updateWorkout.name) updateWorkout.name = workout.name;
+      if(!updateWorkout.date) updateWorkout.date = moment(workout.date).calendar();
     }
   }
 
@@ -59,6 +58,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
 
   return (
     <div className="single-workout-container">
+      <button className="back-arrow" onClick={toggleChange}>BACK</button>
       {openEdit && (
         <section>
           <p onClick={() => setOpenEdit(false)}>x</p>
