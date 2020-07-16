@@ -1,0 +1,22 @@
+.single-workout-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  form {
+    display: flex;
+    flex-flow: column wrap;
+    margin-top: 5%;
+  }
+  input {
+    margin: 8% 0;
+  }
+  button {
+    @include button;
+    align-self: center;
+  }
+  .back-arrow {
+    width: 20%;
+    height: 1.5rem;
+  }
+}

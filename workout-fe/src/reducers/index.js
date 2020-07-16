@@ -5,6 +5,9 @@ import {
   FETCH_SUCCESS,
   FETCH_WORKOUT_SUCCESS,
   POST_WORKOUT_SUCCESS,
+  EDIT_WORKOUT_SUCCESS,
+  DELETE_WORKOUT_SUCCESS,
+  FETCH_EXERCISE_SUCCESS,
   AUTHORIZING,
   ERROR,
 } from '../actions';
@@ -16,7 +19,8 @@ const initialState = {
   fetchMessage: "",
   error_message: "",
   info: [],
-  workout: []
+  workout: [],
+  exercises: []
 }
 
 export const reducer = (state = initialState, action) => {
@@ -34,25 +38,46 @@ export const reducer = (state = initialState, action) => {
         fetchMessage: ""
       }
     case FETCH_SUCCESS:
-      console.log("FETCH SUCCESS", action.payload)
+      // console.log("FETCH SUCCESS", action.payload)
       return {
         ...state,
         isFetching: false,
         info: action.payload,
       }
     case FETCH_WORKOUT_SUCCESS:
-      console.log("FETCH WORKOUT SUCCESS", action.payload)
+      // console.log("FETCH WORKOUT SUCCESS", action.payload)
       return {
         ...state,
         isFetching: false,
         workout: action.payload,
       }
+    case FETCH_EXERCISE_SUCCESS:
+      // console.log("FETCH WORKOUT SUCCESS", action.payload)
+      return {
+        ...state,
+        isFetching: false,
+        exercises: action.payload,
+      }
     case POST_WORKOUT_SUCCESS:
-      console.log("POST WORKOUT SUCCESS", action.payload)
+      // console.log("POST WORKOUT SUCCESS", action.payload)
       return {
         ...state,
         isFetching: false,
         workouts: action.payload
+      }
+    case EDIT_WORKOUT_SUCCESS:
+      // console.log("EDIT WORKOUT SUCCESS", action.payload)
+      return {
+        ...state,
+        isFetching: false,
+        workouts: action.payload
+      }
+    case DELETE_WORKOUT_SUCCESS:
+      // console.log("DELETE_WORKOUT_SUCCESS", action.payload)
+      return {
+        ...state,
+        isFetching: false,
+        workout: action.payload
       }
     case LOGIN_SUCCESS:
       // console.log("STATE", action.payload)
@@ -71,7 +96,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state, token: ""
       }
-
     case ERROR:
       return {
         ...state,

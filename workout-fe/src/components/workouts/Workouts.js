@@ -15,9 +15,26 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
   const [ isOpen, setIsOpen ] = useState(false);
   const [ isEditOpen, setIsEditOpen ] = useState(false);
   
-  // console.log(history)
+  // SORT ALL WORKOUTS BY DATE
+  let sorted_by_date = info.sort((a, b) => {
+    let x = new moment(a.date).format('YYYYMMDD');
+    let y = new moment(b.date).format('YYYYMMDD');
+    return x - y
+  });
+
+  // GATHER ALL FUTURE/PAST DATES
+  let future = [];
+  let past = [];
+  sorted_by_date.forEach(day => {
+    if(moment(day.date).format('YYYYMMDD') >= moment().format('YYYYMMDD')){
+      future.push(day)
+    } else {
+      past.push(day)
+    }
+  });
+
   useEffect(() => {
-    setLoading(!isFetching)
+    // setLoading(!isFetching)
     userWorkouts(userId)
     setLoading(!isFetching)
   }, [])
@@ -28,44 +45,38 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
 
   return (
     <div className="workout-container">
-      <h1>Here Are You Workouts This Week</h1>
+      <h2>Weekly Workouts</h2>
       {/* Loader */}
       {isFetching ? <div>Gathering Info....</div> : ""}
 
       {error_message.length > 0 ? alert(error_message.data) : ''}
 
       {/* Modal Form */}
-      <button onClick={() => setIsOpen(!isOpen)}>Add Workout</button>
+      <button className="add_workout" onClick={() => setIsOpen(!isOpen)}>Add Workout</button>
       {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen}/></> : ''}
 
-      {/* {isEditOpen ? <SingleWorkout setIsEditOpen={setIsEditOpen} capital={capital}/> : ""} */}
-      
-
-
-      {info.map(workout => {
+      {sorted_by_date.map(workout => {
         return (
-        <div key={workout.id}>
-          <p>{ capital(workout.name) }, { moment(workout.date).calendar() }</p>
-          <button onClick={() => setIsEditOpen(!isEditOpen)}>Go To Workout</button>
-          <Link to={`/workouts/${workout.id}`}>
+        <div className="individual_workout" key={workout.id}>
+          <h3>{ moment(workout.date).calendar() }</h3>
+          <p>{ capital(workout.name) }</p>
+          <Link to={`/workouts/${workout.id}/${workout.name}`}>
+            <button>
+              Look
+            </button>
             <button onClick={() => setIsEditOpen(!isEditOpen)}>
-              Go To Workout
+              Edit
             </button>
           </Link>
-          {/* <button type="click" >Edit Workout</button> */}
-          {/* {isEditOpen && <EditForm/>} */}
-          {/* Edit workout form */}
-
         </div>
         )
       })}
-      
     </div> 
   )
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP WORKOUTS", state)
+  // console.log("MSTP WORKOUTS", state)
   return {
     userId: state.user_id,
     isFetching: state.isFetching,

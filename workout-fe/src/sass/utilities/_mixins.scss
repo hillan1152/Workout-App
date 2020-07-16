@@ -1,0 +1,6 @@
+@mixin button($margin-top: 10%, $width: 75%, $height: 3rem) {
+  margin-top: $margin-top;
+  width: $width;
+  height: $height;
+  border-radius: 8px;
+}
