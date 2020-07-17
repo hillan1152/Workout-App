@@ -1,19 +1,17 @@
 // @import-normalize;
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
+
 @import 
+    './sass/utilities/custom',
     './sass/components/workouts',
     './sass/components/singleworkout',
     './sass/components/login',
     
     './sass/utilities/mixins',
     './sass/utilities/variables',
-    // './sass/utilities/custom',
     
     './sass/base/global',
-    './sass/base/reset',
-    "../node_modules/bootstrap/scss/bootstrap";
+    './sass/base/reset';
+    
   
 
 

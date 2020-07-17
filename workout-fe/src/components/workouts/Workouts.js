@@ -35,11 +35,7 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
   useEffect(() => {
     userWorkouts(userId)
   }, [])
-
-  if (isFetching){
-    return <h2>Gather Data</h2>
-  }
-
+  
   return (
     <div className="workout-container">
       <h2>Weekly Workouts</h2>

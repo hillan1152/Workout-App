@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { fetchExercises } from '../../actions'
 export const ExerciseList = ({ workoutId, fetchExercises }) => {
   let id = parseInt(workoutId);
-
+  console.log(id);
+  
   // useEffect(() => {
   //   fetchExercises(id)
   // }, [])
