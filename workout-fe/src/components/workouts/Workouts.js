@@ -58,15 +58,9 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
       {sorted_by_date.map(workout => {
         return (
         <div className="individual_workout" key={workout.id}>
+          <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
           <h3>{ moment(workout.date).calendar() }</h3>
           <p>{ capital(workout.name) }</p>
-          <Link to={`/workouts/${workout.id}/${workout.name}`}>
-            <button>
-              Look
-            </button>
-            <button onClick={() => setIsEditOpen(!isEditOpen)}>
-              Edit
-            </button>
           </Link>
         </div>
         )

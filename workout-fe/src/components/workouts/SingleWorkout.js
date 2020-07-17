@@ -5,6 +5,7 @@ import moment from 'moment';
 import { singleWorkout, editWorkout, deleteWorkout } from '../../actions';
 import { capital } from '../../utils/helpers';
 import Modal from './Modal';
+import { ExerciseList } from '../Exercises/ExerciseList';
 // ADD AN EXERCISE
 // EDIT AN EXERCISE
 
@@ -86,6 +87,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
         <button onClick={toggleChange} name="edit">Edit</button>
         <button onClick={toggleChange} name="delete">Delete</button>
       </form>
+      <ExerciseList workoutId={workoutId}/>
     </div>
   )
 }

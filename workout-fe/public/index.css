@@ -4,6 +4,8 @@
   flex-flow: column;
   margin-top: 2rem;
   margin-bottom: 5%;
+  background-color: black;
+  height: 100%;
 }
 .workout-container h2 {
   font-size: 2rem;
@@ -19,6 +21,10 @@
 }
 .workout-container .add_workout:hover {
   background-color: purple;
+  color: white;
+}
+.workout-container .link {
+  text-decoration: none;
   color: white;
 }
 
