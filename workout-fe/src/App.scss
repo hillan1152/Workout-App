@@ -1,4 +1,7 @@
 // @import-normalize;
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
 @import 
     './sass/components/workouts',
     './sass/components/singleworkout',
@@ -6,9 +9,13 @@
     
     './sass/utilities/mixins',
     './sass/utilities/variables',
-
+    // './sass/utilities/custom',
+    
     './sass/base/global',
-    './sass/base/reset';
+    './sass/base/reset',
+    "../node_modules/bootstrap/scss/bootstrap";
+  
+
 
 .App {
   text-align: center;

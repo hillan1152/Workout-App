@@ -11,7 +11,6 @@ import WorkoutForm from './WorkoutForm';
 
 
 export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message, token }) => {
-  const [ loading, setLoading ] = useState(false);
   const [ isOpen, setIsOpen ] = useState(false);
   const [ isEditOpen, setIsEditOpen ] = useState(false);
   
@@ -34,9 +33,7 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
   });
 
   useEffect(() => {
-    // setLoading(!isFetching)
     userWorkouts(userId)
-    setLoading(!isFetching)
   }, [])
 
   if (isFetching){
