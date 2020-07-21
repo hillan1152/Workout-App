@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // ACTIONS
 import { userRegister } from '../../actions';
 
-export const Register = () => {
+export const Register = ({ userRegister }) => {
   const [ user, setUser ] = useState({
     email: "",
     password: ""

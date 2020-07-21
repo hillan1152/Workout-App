@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-
+import { PlusCircleOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
 import { fetchExercises, addExercise, editExercise, deleteExercise } from '../../actions'
 export const ExerciseList =  (props) => {
   const [ inputExercise, setInputExercise ] = useState({
@@ -31,7 +31,6 @@ export const ExerciseList =  (props) => {
     e.preventDefault();
     props.deleteExercise(parseInt(e.target.dataset.key));
     props.setOpenEditExercise(!props.openEditExercise);
-    alert(`Successfully Deleted Exercise`)
     window.location.reload();
   }
   const toggleEdit = e => {
@@ -52,12 +51,12 @@ export const ExerciseList =  (props) => {
               <h3>{data.exercise_name}</h3>
               <p>{data.weight === 0 ? '' : `${data.weight}lbs :`} {data.sets} sets {data.reps} reps</p>
             </section>
-            <button data-key={data.user_exercise_id} data-ex={data.exercise_id} onClick={toggleEdit}>EDIT SIGN</button>
-            <button data-key={data.user_exercise_id} onClick={removeExercise}>DELETE</button>
+            <EditFilled style={{ fontSize: "2rem", color:"yellow" }} data-key={data.user_exercise_id} data-ex={data.exercise_id} onClick={toggleEdit}/>
+            <DeleteFilled style={{ fontSize: "2rem", color:"red" }} data-key={data.user_exercise_id} onClick={removeExercise}/>
           </div>
         )
       }))}
-      <button onClick={() => setIsFormOpen(!isFormOpen)}>PLUS SIGN</button>
+      <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
       {isFormOpen && (
         <form onSubmit={addExercise} className="add-exercise-form">
           <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
