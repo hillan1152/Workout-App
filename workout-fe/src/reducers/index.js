@@ -108,7 +108,7 @@ export const reducer = (state = initialState, action) => {
     case ERROR:
       return {
         ...state,
-        isFeching: false,
+        isFetching: false,
         error_message: action.payload
       }
     default: 

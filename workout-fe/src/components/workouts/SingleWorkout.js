@@ -11,7 +11,7 @@ import ExerciseList from '../Exercises/ExerciseList';
 // EDIT AN EXERCISE
 
 
-export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, exercise_list, history }) => {
+export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, exercise_list, history, error }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
   const [ updateWorkout, setUpdateWorkout ] = useState({
@@ -44,7 +44,13 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
   }
   // Confirms Edit and Sends Back to Workout Page
   const submitEdit = (e) => {
-    e.preventDefault();
+    e.preventDefault();    
+    if(updateWorkout.name === '') { 
+      updateWorkout.name = workout.name
+    };
+    if(updateWorkout.date === '') {
+      updateWorkout.name = workout.date;
+    };
     editWorkout(workoutId, updateWorkout);
     setOpenEdit(false);
     history.goBack();
@@ -95,12 +101,13 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP -- SINGLE WORKOUT", state.info.data);
+  console.log("MSTP -- SINGLE WORKOUT", state);
   return {
     userId: state.user_id,
     workout: state.workout,
     editId: state.workouts,
-    exercise_list: state.info
+    exercise_list: state.info,
+    error: state.error_message
   }
 }
 
