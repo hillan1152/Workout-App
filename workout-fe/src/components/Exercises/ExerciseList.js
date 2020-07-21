@@ -44,6 +44,7 @@ export const ExerciseList =  (props) => {
   return (
     <div>
       <h2>{props.workout.name}</h2>
+      <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
       {((exData || []).map(data => {
         return (
           <div key={data.user_exercise_id}>
@@ -56,7 +57,6 @@ export const ExerciseList =  (props) => {
           </div>
         )
       }))}
-      <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
       {isFormOpen && (
         <form onSubmit={addExercise} className="add-exercise-form">
           <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
