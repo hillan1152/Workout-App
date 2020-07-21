@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 // ACTIONS
 import { userRegister } from '../../actions';
 
-export const Register = () => {
+export const Register = ({ userRegister }) => {
   const [ user, setUser ] = useState({
     email: "",
     password: ""

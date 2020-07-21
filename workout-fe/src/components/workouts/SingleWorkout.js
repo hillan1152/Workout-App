@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { singleWorkout, editWorkout, deleteWorkout } from '../../actions';
+import { singleWorkout, editWorkout, deleteWorkout, fetchExercises } from '../../actions';
 import { capital } from '../../utils/helpers';
-import Modal from './Modal';
+import ExerciseList from '../Exercises/ExerciseList';
+
 // ADD AN EXERCISE
 // EDIT AN EXERCISE
 
 
-export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, userId, history, editId }) => {
+export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, exercise_list, history, error }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
+  const [ openEditExercise, setOpenEditExercise ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
   const [ updateWorkout, setUpdateWorkout ] = useState({
     name: "",
@@ -19,8 +21,9 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
   let workoutId = match.params.id;
 
   useEffect(() => {
-    singleWorkout(workoutId)
-  }, [])
+      fetchExercises(workoutId)
+      singleWorkout(workoutId)
+  }, [fetchExercises, singleWorkout, workoutId])
   
   const handleChange = (e) => {
     setUpdateWorkout({ ...updateWorkout, [e.target.name]: e.target.value ? e.target.value: '' });
@@ -39,9 +42,16 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
       if(!updateWorkout.date) updateWorkout.date = moment(workout.date).calendar();
     }
   }
+  
   // Confirms Edit and Sends Back to Workout Page
   const submitEdit = (e) => {
-    e.preventDefault();
+    e.preventDefault();    
+    if(updateWorkout.name === '') { 
+      updateWorkout.name = workout.name
+    };
+    if(updateWorkout.date === '') {
+      updateWorkout.name = workout.date;
+    };
     editWorkout(workoutId, updateWorkout);
     setOpenEdit(false);
     history.goBack();
@@ -86,6 +96,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
         <button onClick={toggleChange} name="edit">Edit</button>
         <button onClick={toggleChange} name="delete">Delete</button>
       </form>
+      <ExerciseList setOpenEditExercise={setOpenEditExercise} openEditExercise={openEditExercise}/>
     </div>
   )
 }
@@ -95,10 +106,12 @@ const mapStateToProps = (state) => {
   return {
     userId: state.user_id,
     workout: state.workout,
-    editId: state.workouts
+    editId: state.workouts,
+    exercise_list: state.info,
+    error: state.error_message
   }
 }
 
 
-export default connect(mapStateToProps, { singleWorkout, editWorkout, deleteWorkout } )(SingleWorkout)
+export default connect(mapStateToProps, { singleWorkout, editWorkout, deleteWorkout, fetchExercises } )(SingleWorkout)
 

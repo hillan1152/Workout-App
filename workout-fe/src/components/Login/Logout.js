@@ -11,8 +11,4 @@ export const Logout = ({ logout}) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  
-})
-
 export default connect(null, { logout })(Logout)

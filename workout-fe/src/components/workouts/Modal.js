@@ -12,3 +12,8 @@ export default function Modal({ info }) {
     </div>
   )
 }
+
+Modal.propTypes = {
+  info: PropTypes.arrayOf(PropTypes.object).isRequired,
+  
+}

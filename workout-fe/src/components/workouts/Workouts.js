@@ -11,10 +11,12 @@ import WorkoutForm from './WorkoutForm';
 
 
 export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message, token }) => {
-  const [ loading, setLoading ] = useState(false);
   const [ isOpen, setIsOpen ] = useState(false);
-  const [ isEditOpen, setIsEditOpen ] = useState(false);
   
+  useEffect(() => {
+    userWorkouts(userId)
+  }, [userWorkouts, userId])
+
   // SORT ALL WORKOUTS BY DATE
   let sorted_by_date = info.sort((a, b) => {
     let x = new moment(a.date).format('YYYYMMDD');
@@ -33,15 +35,6 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
     }
   });
 
-  useEffect(() => {
-    // setLoading(!isFetching)
-    userWorkouts(userId)
-    setLoading(!isFetching)
-  }, [])
-
-  if (isFetching){
-    return <h2>Gather Data</h2>
-  }
 
   return (
     <div className="workout-container">
@@ -58,15 +51,9 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
       {sorted_by_date.map(workout => {
         return (
         <div className="individual_workout" key={workout.id}>
+          <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
           <h3>{ moment(workout.date).calendar() }</h3>
           <p>{ capital(workout.name) }</p>
-          <Link to={`/workouts/${workout.id}/${workout.name}`}>
-            <button>
-              Look
-            </button>
-            <button onClick={() => setIsEditOpen(!isEditOpen)}>
-              Edit
-            </button>
           </Link>
         </div>
         )
