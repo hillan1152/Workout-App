@@ -26,8 +26,7 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
   switch(action.type){
     case AUTHORIZING:
-      console.log("Authorizing");
-      
+      // console.log("Authorizing");
       return {
         ...state,
         isFetching: true,

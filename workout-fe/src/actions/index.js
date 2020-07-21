@@ -33,7 +33,6 @@ export const userLogin = (user) => dispatch => {
     .then(res => dispatch({ type: LOGIN_SUCCESS, payload: res.data, user: user.data }))
     .catch(err => dispatch({ type: ERROR, payload: err.response }))
 }
-  
 export const logout = () => {
   return { type: LOGOUT }
 }
@@ -71,6 +70,7 @@ export const editWorkout = (id, data) => dispatch => {
 }
 // DELETE A SINGLE WORKOUT -- PASS WORKOUT ID
 export const deleteWorkout = (id) => dispatch => {
+  dispatch({ type: AUTHORIZING, payload: "Deleting Workout!" })
   axiosWithAuth().delete(`${baseURL}/api/workouts/${id}`)
     .then(res => dispatch({ type: DELETE_WORKOUT_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: ERROR, payload: err.response }))
@@ -78,8 +78,9 @@ export const deleteWorkout = (id) => dispatch => {
 
 // EXERCISE DATA -- PASS WORKOUT ID
 export const fetchExercises = (id) => dispatch => {
+  console.log("FETCH EXERCISES", id)
   dispatch({ type: AUTHORIZING, payload: "Fetching Exercise Data!" })
-  axiosWithAuth().delete(`${baseURL}/api/exercises/${id}`)
+  axiosWithAuth().get(`${baseURL}/api/exercises/${id}`)
     .then(res => dispatch({ type: FETCH_EXERCISE_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: ERROR, payload: err.response }))
 }

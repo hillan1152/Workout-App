@@ -14,6 +14,10 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
   const [ isOpen, setIsOpen ] = useState(false);
   const [ isEditOpen, setIsEditOpen ] = useState(false);
   
+  useEffect(() => {
+    userWorkouts(userId)
+  }, [])
+
   // SORT ALL WORKOUTS BY DATE
   let sorted_by_date = info.sort((a, b) => {
     let x = new moment(a.date).format('YYYYMMDD');
@@ -32,10 +36,7 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
     }
   });
 
-  useEffect(() => {
-    userWorkouts(userId)
-  }, [])
-  
+
   return (
     <div className="workout-container">
       <h2>Weekly Workouts</h2>
