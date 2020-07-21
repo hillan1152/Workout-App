@@ -1,18 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchExercises } from '../../actions'
+import { fetchExercises, addExercise } from '../../actions'
 export const ExerciseList =  (props) => {
+  const [ inputExercise, setInputExercise ] = useState({
+    name: "",
+    region: "",
+    weight: 0,
+    sets: 0,
+    reps: 0
+  })
   const exData = (((props.exercises || {}).data || {}).exercises || []);
+  console.log(exData);
   
-  console.log((exData[0] || []).region)
-  // if(exData.length == 0) return alert(`${props.exercises.message}`)
+  const addExercise = e => {
+    e.preventDefault();
+    props.addExercise(props.workout.id, inputExercise);
+    window.location.reload();
+  };
+
+  const handleChange = (e) => {
+    setInputExercise({ ...inputExercise, [e.target.name]: e.target.value ? e.target.value: '' });
+  };
+
   return (
     <div>
-      <h2>{(exData[0] || []).region}</h2>
+      <h2>{props.workout.name}</h2>
       {((exData || []).map(data => {
         return (
-          <div key={data.exercise_id}>
+          <div key={data.user_exercise_id}>
             <section>
               <h3>{data.exercise_name}</h3>
               <p>{data.weight == 0 ? '' : `${data.weight}lbs :`} {data.sets} sets {data.reps} reps</p>
@@ -20,6 +36,14 @@ export const ExerciseList =  (props) => {
           </div>
         )
       }))}
+      <form onSubmit={addExercise}>
+        <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
+        <input onChange={handleChange} placeholder="Region" name="region"/>
+        <input onChange={handleChange} placeholder="Weight" name="weight"/>
+        <input onChange={handleChange} placeholder="Sets" name="sets"/>
+        <input onChange={handleChange} placeholder="Reps" name="reps"/>
+        <button type="submit">Add</button>
+      </form>
     </div>
   )
 }
@@ -35,4 +59,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { fetchExercises })(ExerciseList)
+export default connect(mapStateToProps, { fetchExercises, addExercise })(ExerciseList)

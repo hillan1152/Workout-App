@@ -89,7 +89,7 @@ export const fetchExercises = (id) => dispatch => {
 }
 // ADD EXERCISE --  WORKOUT ID, DATA
 export const addExercise = (id, data) => dispatch => {
-  dispatch({ type: AUTHORIZING, payload: "Posting Exercise!" })
+  // dispatch({ type: AUTHORIZING, payload: "Posting Exercise!" })
   axiosWithAuth().post(`${baseURL}/api/exercises/${id}`, data)
     .then(res => dispatch({ type: POST_EXERCISE_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: ERROR, payload: err.response }))
