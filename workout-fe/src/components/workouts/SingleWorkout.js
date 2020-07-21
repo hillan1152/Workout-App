@@ -4,7 +4,6 @@ import moment from 'moment';
 
 import { singleWorkout, editWorkout, deleteWorkout, fetchExercises } from '../../actions';
 import { capital } from '../../utils/helpers';
-import Modal from './Modal';
 import ExerciseList from '../Exercises/ExerciseList';
 
 // ADD AN EXERCISE
@@ -13,6 +12,7 @@ import ExerciseList from '../Exercises/ExerciseList';
 
 export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, exercise_list, history, error }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
+  const [ openEditExercise, setOpenEditExercise ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
   const [ updateWorkout, setUpdateWorkout ] = useState({
     name: "",
@@ -35,13 +35,15 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
     if(target === "delete") setOpenDelete(true);
     
     if(e.target.className === "back-arrow") history.goBack();
-    
+    if(e.target.className === "edit-exercise-form") setOpenEditExercise(!openEditExercise)
+
     else if(target === "edit") {
       setOpenEdit(true)
       if(!updateWorkout.name) updateWorkout.name = workout.name;
       if(!updateWorkout.date) updateWorkout.date = moment(workout.date).calendar();
     }
   }
+  
   // Confirms Edit and Sends Back to Workout Page
   const submitEdit = (e) => {
     e.preventDefault();    
@@ -95,7 +97,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
         <button onClick={toggleChange} name="edit">Edit</button>
         <button onClick={toggleChange} name="delete">Delete</button>
       </form>
-      <ExerciseList list={exercise_list.data}/>
+      <ExerciseList setOpenEditExercise={setOpenEditExercise} openEditExercise={openEditExercise}/>
     </div>
   )
 }
