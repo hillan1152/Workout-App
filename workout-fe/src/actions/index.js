@@ -3,16 +3,19 @@ import axios from 'axios';
 
 // EXPORT TYPES
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGOUT";
-export const FETCH_SUCCESS = "FETCH_SUCCESS";
+export const ERROR = "ERROR";
+export const AUTHORIZING = "AUTHORIZING";
+
 export const POST_WORKOUT_SUCCESS = "POST_WORKOUT_SUCCESS";
 export const EDIT_WORKOUT_SUCCESS = "EDIT_WORKOUT_SUCCESS";
 export const FETCH_WORKOUT_SUCCESS = "FETCH_WORKOUT_SUCCESS";
-export const FETCH_EXERCISE_SUCCESS = "FETCH_EXERCISE_SUCCESS";
 export const DELETE_WORKOUT_SUCCESS = "DELETE_WORKOUT_SUCCESS";
-export const ERROR = "ERROR";
-export const AUTHORIZING = "AUTHORIZING";
+
+export const FETCH_EXERCISE_SUCCESS = "FETCH_EXERCISE_SUCCESS";
+export const POST_EXERCISE_SUCCESS = "POST_EXERCISE_SUCCESS";
 
 
 const baseURL = "https://weight-lifting-journal1.herokuapp.com";
@@ -82,5 +85,12 @@ export const fetchExercises = (id) => dispatch => {
   dispatch({ type: AUTHORIZING, payload: "Fetching Exercise Data!" })
   axiosWithAuth().get(`${baseURL}/api/exercises/${id}`)
     .then(res => dispatch({ type: FETCH_EXERCISE_SUCCESS, payload: res.data }))
+    .catch(err => dispatch({ type: ERROR, payload: err.response }))
+}
+// ADD EXERCISE --  WORKOUT ID, DATA
+export const addExercise = (id, data) => dispatch => {
+  dispatch({ type: AUTHORIZING, payload: "Posting Exercise!" })
+  axiosWithAuth().post(`${baseURL}/api/exercises/${id}`, data)
+    .then(res => dispatch({ type: POST_EXERCISE_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: ERROR, payload: err.response }))
 }
