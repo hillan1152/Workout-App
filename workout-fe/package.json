@@ -44,7 +44,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^10.4.3",
-    "sass": "^1.26.10",
-    "webpack": "^4.43.0"
+    "sass": "^1.26.10"
   }
 }

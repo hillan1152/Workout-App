@@ -26,6 +26,7 @@ function App(props) {
         <Route exact path="/" component={Login}/>
         <PrivateRoute exact path="/workouts" component={Workouts}/>
         <PrivateRoute exact path="/workouts/:id/:name" component={SingleWorkout}/>
+        {/* <PrivateRoute exact path="/exercises/:id/:workout" component={}/> */}
       </>
     </div>
   );
