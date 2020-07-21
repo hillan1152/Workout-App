@@ -23,7 +23,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
   useEffect(() => {
       fetchExercises(workoutId)
       singleWorkout(workoutId)
-  }, [])
+  }, [fetchExercises, singleWorkout, workoutId])
   
   const handleChange = (e) => {
     setUpdateWorkout({ ...updateWorkout, [e.target.name]: e.target.value ? e.target.value: '' });
@@ -35,8 +35,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
     if(target === "delete") setOpenDelete(true);
     
     if(e.target.className === "back-arrow") history.goBack();
-    if(e.target.className === "edit-exercise-form") setOpenEditExercise(!openEditExercise)
-
+    
     else if(target === "edit") {
       setOpenEdit(true)
       if(!updateWorkout.name) updateWorkout.name = workout.name;

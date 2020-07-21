@@ -9,8 +9,10 @@ import {
   DELETE_WORKOUT_SUCCESS,
   FETCH_EXERCISE_SUCCESS,
   POST_EXERCISE_SUCCESS,
+  EDIT_EXERCISE_SUCCESS,
   AUTHORIZING,
   ERROR,
+  DELETE
 } from '../actions';
 
 const initialState = {
@@ -21,7 +23,8 @@ const initialState = {
   error_message: "",
   info: [],
   workout: [],
-  exercises: []
+  exercises: [],
+  edited: false
 }
 
 export const reducer = (state = initialState, action) => {
@@ -31,6 +34,13 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
+        fetchMessage: action.payload
+      }
+    case DELETE:
+      // console.log("DELETE");
+      return {
+        ...state,
+        isFetching: false,
         fetchMessage: action.payload
       }
     case REGISTER_SUCCESS:
@@ -67,15 +77,22 @@ export const reducer = (state = initialState, action) => {
         isFetching: false,
         workouts: action.payload
       }
-    case POST_EXERCISE_SUCCESS:
-      // console.log("POST EXERCISE SUCCESS", action.payload)
+    case EDIT_EXERCISE_SUCCESS:
+      console.log("EDIT EXERCISE SUCCESS", action.payload)
       return {
         ...state,
         isFetching: false,
-        exercises: action.payload
-      }
+        edited: action.payload > 0 ? true : false
+    }
+    case POST_EXERCISE_SUCCESS:
+    // console.log("POST EXERCISE SUCCESS", action.payload)
+    return {
+      ...state,
+      isFetching: false,
+      exercises: action.payload
+    }
     case EDIT_WORKOUT_SUCCESS:
-      // console.log("EDIT WORKOUT SUCCESS", action.payload)
+      console.log("EDIT WORKOUT SUCCESS", action.payload)
       return {
         ...state,
         isFetching: false,
@@ -113,5 +130,5 @@ export const reducer = (state = initialState, action) => {
       }
     default: 
       return state;
-  }
+    }
 }
