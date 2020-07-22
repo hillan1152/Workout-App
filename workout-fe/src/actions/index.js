@@ -107,6 +107,7 @@ export const editExercise = (exercise_id, workout_id, data) => dispatch => {
 
 // DELETE EXERCISE -- user_exercise_id
 export const deleteExercise = (id) => dispatch => {
+  console.log("ACTION DELETE EXERCISE", id)
   dispatch({ type: AUTHORIZING, payload: "Deleting Exercise!" })
   axiosWithAuth().delete(`${baseURL}/api/exercises/in_workout/${id}`)
     .then(res => dispatch({ type: DELETE, payload: res.data }))

@@ -18,17 +18,16 @@ export const ExerciseList =  (props) => {
   const exerciseObj = new Set();
 
   const addExercise = e => {
-    e.preventDefault();
     props.addExercise(props.workout.id, inputExercise);
-    window.location.reload();
+    // window.location.reload();
   };
 
   const editSingleExercise = e => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log(editExerciseId)
     let workoutId = props.workout.id;
-    props.editExercise(editExerciseId, workoutId, inputExercise);
-    window.location.reload();
+    props.editExercise(deleteInfo.id, workoutId, inputExercise);
+    // window.location.reload();
   };
 
   const removeExercise = (e) => {
@@ -54,15 +53,16 @@ export const ExerciseList =  (props) => {
   const handleChange = e => {
     setInputExercise({ ...inputExercise, [e.target.name]: e.target.value ? e.target.value: '' });
   };
-
+  console.log("ERROR", props.error)
   return (
     <div>
       <h2>{props.workout.name}</h2>
       <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
       {((exData || []).map(data => {
         // ONLY ONE OF EACH WORKOUT ID
-        if(!exerciseObj.has(data.exercise_id)){
-          exerciseObj.add(data.exercise_id)
+        // console.log("DATA", data)
+        // if(!exerciseObj.has(data.exercise_id)){
+        //   exerciseObj.add(data.exercise_id)
           return (
             <div key={data.user_exercise_id}>
               <section>
@@ -73,7 +73,8 @@ export const ExerciseList =  (props) => {
               <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "2rem", color:"red" }} onClick={() => toggle(data.exercise_id, "delete", data)}/>
             </div>
           )
-      }}))};
+      // }
+      }))};
       {toggleDelete && (
         <div>
           <h2>Are you sure you want to delete {deleteInfo.name}</h2>
@@ -111,7 +112,7 @@ const mapStateToProps = (state) => {
   return {
     info: state.info,
     workout: state.workout,
-    error: state.error_message,
+    error: state.error_message.data,
     exercises: state.exercises,
     fetchMessage: state.fetchMessage
   }
