@@ -14,43 +14,40 @@ export const ExerciseList =  (props) => {
   const [ deleteInfo, setDeleteInfo ] = useState();
   const [ isFormOpen, setIsFormOpen ] = useState(false);
   const [ toggleDelete, setToggleDelete ] = useState(false);
-
-
   const exData = (((props.exercises || {}).data || {}).exercises || []);
   const exerciseObj = new Set();
-
-  // exerciseObj.add(exData)
-  // console.log(exData)
-
-
 
   const addExercise = e => {
     e.preventDefault();
     props.addExercise(props.workout.id, inputExercise);
     window.location.reload();
   };
+
   const editSingleExercise = e => {
     e.preventDefault();
-    let workoutId = parseInt(props.workout.id)
+    console.log(editExerciseId)
+    let workoutId = props.workout.id;
     props.editExercise(editExerciseId, workoutId, inputExercise);
-    // window.location.reload();
+    window.location.reload();
   };
+
   const removeExercise = (e) => {
-    // e.preventDefault();
-    console.log(e, "is it working")
+    e.preventDefault();
     props.deleteExercise(deleteInfo.id);
     setToggleDelete(false);
-    // window.location.reload();
-  }
+    window.location.reload();
+  };
 
   const toggle = (id, className, data) => {
+    setDeleteInfo({ name: data.exercise_name, id: data.user_exercise_id })
     if(className === "edit") {
+      if(toggleDelete) setToggleDelete(false);
       props.setOpenEditExercise(!props.openEditExercise);
       setEditExerciseId(id)
     }
     if(className === "delete") {
+      if(props.openEditExercise) props.setOpenEditExercise(false);
       setToggleDelete(!toggleDelete);
-      setDeleteInfo({ name: data.exercise_name, id: data.user_exercise_id })
     }
   };
 
@@ -77,7 +74,6 @@ export const ExerciseList =  (props) => {
             </div>
           )
       }}))};
-      {console.log(deleteInfo)}
       {toggleDelete && (
         <div>
           <h2>Are you sure you want to delete {deleteInfo.name}</h2>
