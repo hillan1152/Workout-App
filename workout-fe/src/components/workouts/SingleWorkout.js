@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { StepBackwardFilled, DeleteFilled, EditFilled } from '@ant-design/icons';
 
 import { singleWorkout, editWorkout, deleteWorkout, fetchExercises } from '../../actions';
 import { capital } from '../../utils/helpers';
@@ -67,7 +68,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
 
   return (
     <div className="single-workout-container">
-      <button className="back-arrow" onClick={toggleChange}>BACK</button>
+      <StepBackwardFilled className="back-arrow" style={{ color: 'white', fontSize: '2rem', flexDirection: 'start' }}onClick={toggleChange}/>
       {/* EDIT TOGGLE */}
       {openEdit && (
         <section>
@@ -76,7 +77,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
           <form onSubmit={submitEdit}>
             <p>Name: {updateWorkout.name}</p>
             <p>Date: {updateWorkout.date}</p>
-            <button>Confirm</button>
+            <button>Confirm Edit</button>
           </form>
         </section> 
       )}
@@ -85,7 +86,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
         <section>
           <p onClick={() => setOpenDelete(false)}>x</p>
           <h3>Are you sure you want to delete {workout.name}?</h3>
-          <button onClick={removeWorkout}>Delete</button>
+          <button onClick={removeWorkout}>Confirm Delete</button>
         </section> 
       )}
       {/* EDIT FORM: Modal Toggle*/}
@@ -93,8 +94,8 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
         <input name="name" placeholder={capital(`${workout.name}`)} onChange={handleChange}></input>
         <label htmlFor="date">{moment(workout.date).calendar()}</label>
         <input name="date" type="date" onChange={handleChange}></input>
-        <button onClick={toggleChange} name="edit">Edit</button>
-        <button onClick={toggleChange} name="delete">Delete</button>
+        <EditFilled style={{ fontSize: "2rem", color:"yellow" }} onClick={toggleChange} name="edit"/>
+        <DeleteFilled style={{ fontSize: "2rem", color:"red" }} onClick={toggleChange} name="delete"/>
       </form>
       <ExerciseList setOpenEditExercise={setOpenEditExercise} openEditExercise={openEditExercise}/>
     </div>

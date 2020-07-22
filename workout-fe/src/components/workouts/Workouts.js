@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userWorkouts } from '../../actions';
 import moment from 'moment';
-import { capital } from '../../utils/helpers'
+import { capital } from '../../utils/helpers';
+import { PlusCircleOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
 
@@ -45,7 +46,7 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
       {error_message.length > 0 ? alert(error_message.data) : ''}
 
       {/* Modal Form */}
-      <button className="add_workout" onClick={() => setIsOpen(!isOpen)}>Add Workout</button>
+      <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen" }} onClick={() => setIsOpen(!isOpen)}/>
       {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen}/></> : ''}
 
       {sorted_by_date.map(workout => {
