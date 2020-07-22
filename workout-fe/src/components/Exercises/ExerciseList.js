@@ -10,53 +10,77 @@ export const ExerciseList =  (props) => {
     sets: 0,
     reps: 0
   })
-  const [ isFormOpen, setIsFormOpen ] = useState(false);
   const [ editExerciseId, setEditExerciseId ] = useState();
+  const [ deleteInfo, setDeleteInfo ] = useState();
+  const [ isFormOpen, setIsFormOpen ] = useState(false);
+  const [ toggleDelete, setToggleDelete ] = useState(false);
   const exData = (((props.exercises || {}).data || {}).exercises || []);
-  
+  const exerciseObj = new Set();
 
   const addExercise = e => {
     e.preventDefault();
     props.addExercise(props.workout.id, inputExercise);
     window.location.reload();
   };
+
   const editSingleExercise = e => {
     e.preventDefault();
-    console.log("EDIT SINGLE EXERCISE", props.workout.id, editExerciseId)
-    let workoutId = parseInt(props.workout.id)
+    console.log(editExerciseId)
+    let workoutId = props.workout.id;
     props.editExercise(editExerciseId, workoutId, inputExercise);
-    // window.location.reload();
+    window.location.reload();
   };
+
   const removeExercise = (e) => {
     e.preventDefault();
-    props.deleteExercise(parseInt(e.target.dataset.key));
-    props.setOpenEditExercise(!props.openEditExercise);
+    props.deleteExercise(deleteInfo.id);
+    setToggleDelete(false);
     window.location.reload();
-  }
-  const toggleEdit = e => {
-    props.setOpenEditExercise(!props.openEditExercise);
-    setEditExerciseId(parseInt(e.target.dataset.key))
+  };
+
+  const toggle = (id, className, data) => {
+    setDeleteInfo({ name: data.exercise_name, id: data.user_exercise_id })
+    if(className === "edit") {
+      if(toggleDelete) setToggleDelete(false);
+      props.setOpenEditExercise(!props.openEditExercise);
+      setEditExerciseId(id)
+    }
+    if(className === "delete") {
+      if(props.openEditExercise) props.setOpenEditExercise(false);
+      setToggleDelete(!toggleDelete);
+    }
   };
 
   const handleChange = e => {
     setInputExercise({ ...inputExercise, [e.target.name]: e.target.value ? e.target.value: '' });
   };
+
   return (
     <div>
       <h2>{props.workout.name}</h2>
       <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
       {((exData || []).map(data => {
-        return (
-          <div key={data.user_exercise_id}>
-            <section>
-              <h3>{data.exercise_name}</h3>
-              <p>{data.weight === 0 ? '' : `${data.weight}lbs :`} {data.sets} sets {data.reps} reps</p>
-            </section>
-            <EditFilled style={{ fontSize: "2rem", color:"yellow" }} data-key={data.user_exercise_id} data-ex={data.exercise_id} onClick={toggleEdit}/>
-            <DeleteFilled style={{ fontSize: "2rem", color:"red" }} data-key={data.user_exercise_id} onClick={removeExercise}/>
-          </div>
-        )
-      }))}
+        // ONLY ONE OF EACH WORKOUT ID
+        if(!exerciseObj.has(data.exercise_id)){
+          exerciseObj.add(data.exercise_id)
+          return (
+            <div key={data.user_exercise_id}>
+              <section>
+                <h3>{data.exercise_name}</h3>
+                <p>{data.weight === 0 ? '' : `${data.weight}lbs :`} {data.sets} sets {data.reps} reps</p>
+              </section>
+              <EditFilled className="edit-icon" style={{ fontSize: "2rem", color:"yellow" }} onClick={() => toggle(data.exercise_id, "edit", data)}/>
+              <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "2rem", color:"red" }} onClick={() => toggle(data.exercise_id, "delete", data)}/>
+            </div>
+          )
+      }}))};
+      {toggleDelete && (
+        <div>
+          <h2>Are you sure you want to delete {deleteInfo.name}</h2>
+          <button onClick={removeExercise}>YES</button>
+          <button onClick={() => toggle('', 'delete', '')}>Cancel</button>
+        </div>
+      )}
       {isFormOpen && (
         <form onSubmit={addExercise} className="add-exercise-form">
           <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
@@ -69,7 +93,7 @@ export const ExerciseList =  (props) => {
       )}
       {props.openEditExercise && (
         <form onSubmit={editSingleExercise} className="edit-exercise-form">
-          <input onChange={handleChange} placeholder={"Exercise Name"} name="name"/>
+          <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
           <input onChange={handleChange} placeholder="Region" name="region"/>
           <input onChange={handleChange} type="number" placeholder="Weight" name="weight"/>
           <input onChange={handleChange} type="number" placeholder="Sets" name="sets"/>
