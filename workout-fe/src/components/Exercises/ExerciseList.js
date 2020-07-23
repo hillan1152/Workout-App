@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { PlusCircleOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
 import { fetchExercises, addExercise, editExercise, deleteExercise } from '../../actions'
+import { capital } from '../../utils/helpers'
+
 export const ExerciseList =  (props) => {
   const [ inputExercise, setInputExercise ] = useState({
     name: "",
@@ -18,28 +20,24 @@ export const ExerciseList =  (props) => {
   const exerciseObj = new Set();
 
   const addExercise = e => {
-    e.preventDefault();
     props.addExercise(props.workout.id, inputExercise);
-    window.location.reload();
   };
 
-  const editSingleExercise = e => {
-    e.preventDefault();
-    console.log(editExerciseId)
+  const editSingleExercise = async e => {
+    let reload = await props.fetchExercises(props.workout.id)
     let workoutId = props.workout.id;
-    props.editExercise(editExerciseId, workoutId, inputExercise);
-    window.location.reload();
+    props.editExercise(deleteInfo.new_id, workoutId, inputExercise);
+    return reload;
   };
 
-  const removeExercise = (e) => {
+  const removeExercise = async e => {
     e.preventDefault();
-    props.deleteExercise(deleteInfo.id);
+    props.deleteExercise(deleteInfo.id, props.workout.id);
     setToggleDelete(false);
-    window.location.reload();
   };
 
   const toggle = (id, className, data) => {
-    setDeleteInfo({ name: data.exercise_name, id: data.user_exercise_id })
+    setDeleteInfo({ name: data.exercise_name, id: data.user_exercise_id, new_id: data.exercise_id  })
     if(className === "edit") {
       if(toggleDelete) setToggleDelete(false);
       props.setOpenEditExercise(!props.openEditExercise);
@@ -56,13 +54,10 @@ export const ExerciseList =  (props) => {
   };
 
   return (
-    <div>
-      <h2>{props.workout.name}</h2>
+    <div className="exercise-list-container">
+      <h2>{capital(`${props.workout.name}`)}</h2>
       <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
       {((exData || []).map(data => {
-        // ONLY ONE OF EACH WORKOUT ID
-        if(!exerciseObj.has(data.exercise_id)){
-          exerciseObj.add(data.exercise_id)
           return (
             <div key={data.user_exercise_id}>
               <section>
@@ -73,7 +68,7 @@ export const ExerciseList =  (props) => {
               <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "2rem", color:"red" }} onClick={() => toggle(data.exercise_id, "delete", data)}/>
             </div>
           )
-      }}))};
+      }))};
       {toggleDelete && (
         <div>
           <h2>Are you sure you want to delete {deleteInfo.name}</h2>
@@ -107,11 +102,11 @@ export const ExerciseList =  (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP EXERCISE LIST", state.exercises)
+  // console.log("MSTP EXERCISE LIST", state.exercises)
   return {
     info: state.info,
     workout: state.workout,
-    error: state.error_message,
+    error: state.error_message.data,
     exercises: state.exercises,
     fetchMessage: state.fetchMessage
   }
