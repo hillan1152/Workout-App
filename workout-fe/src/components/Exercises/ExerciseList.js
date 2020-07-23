@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { PlusCircleOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
 import { fetchExercises, addExercise, editExercise, deleteExercise } from '../../actions'
 import { capital } from '../../utils/helpers'
+import moment from 'moment';
 
 export const ExerciseList =  (props) => {
   const [ inputExercise, setInputExercise ] = useState({
@@ -17,7 +18,6 @@ export const ExerciseList =  (props) => {
   const [ isFormOpen, setIsFormOpen ] = useState(false);
   const [ toggleDelete, setToggleDelete ] = useState(false);
   const exData = (((props.exercises || {}).data || {}).exercises || []);
-  const exerciseObj = new Set();
 
   const addExercise = e => {
     props.addExercise(props.workout.id, inputExercise);
@@ -55,20 +55,23 @@ export const ExerciseList =  (props) => {
 
   return (
     <div className="exercise-list-container">
-      <h2>{capital(`${props.workout.name}`)}</h2>
-      <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
+      <div>
+        <h2>{capital(`${props.workout.name}`)}</h2>
+        <PlusCircleOutlined style={{ fontSize: "1.5rem", color:"darkGreen", marginTop: "4%", marginLeft: "3%" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
+      </div>
+      <h4>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
       {((exData || []).map(data => {
           return (
-            <div key={data.user_exercise_id}>
+            <section className="exercise" key={data.user_exercise_id}>
+              <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", marginTop: "5%", marginLeft: "5%" }} onClick={() => toggle(data.exercise_id, "edit", data)}/>
               <section>
-                <h3>{data.exercise_name}</h3>
+                <h3>{capital(`${data.exercise_name}`)}</h3>
                 <p>{data.weight === 0 ? '' : `${data.weight}lbs :`} {data.sets} sets {data.reps} reps</p>
-              </section>
-              <EditFilled className="edit-icon" style={{ fontSize: "2rem", color:"yellow" }} onClick={() => toggle(data.exercise_id, "edit", data)}/>
-              <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "2rem", color:"red" }} onClick={() => toggle(data.exercise_id, "delete", data)}/>
-            </div>
+              </section>             
+              <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", marginTop: "5%", marginRight: "5%"}} onClick={() => toggle(data.exercise_id, "delete", data)}/>
+            </section>
           )
-      }))};
+      }))}
       {toggleDelete && (
         <div>
           <h2>Are you sure you want to delete {deleteInfo.name}</h2>
@@ -96,7 +99,6 @@ export const ExerciseList =  (props) => {
         <button type="submit">Edit</button>
         </form>
       )}
-      
     </div>
   )
 }

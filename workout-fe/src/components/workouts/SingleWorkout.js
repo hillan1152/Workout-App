@@ -33,11 +33,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
 
   // Toggles all modals
   const toggleChange = (className) => {
-    // const target = e.target.name;
-    if(className === "back-arrow") {
-      // return <Redirect to="/workouts"/>
-    };
-    
+
     if(className === "delete") {
       if(openEdit) setOpenEdit(false)
       setOpenDelete(true)
