@@ -11,7 +11,7 @@ import ExerciseList from '../Exercises/ExerciseList';
 // EDIT AN EXERCISE
 
 
-export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, exercise_list, history, error }) => {
+export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, history, exercise_list, error }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
   const [ openEditExercise, setOpenEditExercise ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
@@ -24,20 +24,26 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
   useEffect(() => {
       fetchExercises(workoutId)
       singleWorkout(workoutId)
-  }, [fetchExercises, singleWorkout, workoutId])
+      // fetchExercises, workoutId, singleWorkout
+  }, [])
   
   const handleChange = (e) => {
     setUpdateWorkout({ ...updateWorkout, [e.target.name]: e.target.value ? e.target.value: '' });
   };
+
   // Toggles all modals
-  const toggleChange = (e) => {
-    e.preventDefault();
-    const target = e.target.name;
-    if(target === "delete") setOpenDelete(true);
+  const toggleChange = (className) => {
+    // const target = e.target.name;
+    if(className === "back-arrow") {
+      // return <Redirect to="/workouts"/>
+    };
     
-    if(e.target.className === "back-arrow") history.goBack();
-    
-    else if(target === "edit") {
+    if(className === "delete") {
+      if(openEdit) setOpenEdit(false)
+      setOpenDelete(true)
+    }
+    else if(className === "edit") {
+      if(openDelete) setOpenDelete(false)
       setOpenEdit(true)
       if(!updateWorkout.name) updateWorkout.name = workout.name;
       if(!updateWorkout.date) updateWorkout.date = moment(workout.date).calendar();
@@ -57,6 +63,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
     setOpenEdit(false);
     history.goBack();
   };
+
   // Confirms Removal and Sends Back to Workout Page
   const removeWorkout = (e) => {
     e.preventDefault();
@@ -68,7 +75,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
 
   return (
     <div className="single-workout-container">
-      <StepBackwardFilled className="back-arrow" style={{ color: 'white', fontSize: '2rem', flexDirection: 'start' }}onClick={toggleChange}/>
+      <StepBackwardFilled style={{ color: 'white', fontSize: '2rem', flexDirection: 'start' }} onClick={() => history.push('/workouts')}/>
       {/* EDIT TOGGLE */}
       {openEdit && (
         <section>
@@ -94,8 +101,8 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
         <input name="name" placeholder={capital(`${workout.name}`)} onChange={handleChange}></input>
         <label htmlFor="date">{moment(workout.date).calendar()}</label>
         <input name="date" type="date" onChange={handleChange}></input>
-        <EditFilled style={{ fontSize: "2rem", color:"yellow" }} onClick={toggleChange} name="edit"/>
-        <DeleteFilled style={{ fontSize: "2rem", color:"red" }} onClick={toggleChange} name="delete"/>
+        <EditFilled style={{ fontSize: "2rem", color:"yellow" }} onClick={() => toggleChange("edit")} name="edit"/>
+        <DeleteFilled style={{ fontSize: "2rem", color:"red" }} onClick={() => toggleChange("delete")} name="delete"/>
       </form>
       <ExerciseList setOpenEditExercise={setOpenEditExercise} openEditExercise={openEditExercise}/>
     </div>
@@ -107,8 +114,7 @@ const mapStateToProps = (state) => {
   return {
     userId: state.user_id,
     workout: state.workout,
-    editId: state.workouts,
-    exercise_list: state.info,
+    exercise_list: state.exercises,
     error: state.error_message
   }
 }

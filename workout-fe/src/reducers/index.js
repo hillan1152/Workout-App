@@ -64,7 +64,7 @@ export const reducer = (state = initialState, action) => {
         workout: action.payload,
       }
     case FETCH_EXERCISE_SUCCESS:
-      // console.log("FETCH WORKOUT SUCCESS", action.payload)
+      // console.log("FETCH EXERCISE SUCCESS", action.payload)
       return {
         ...state,
         isFetching: false,

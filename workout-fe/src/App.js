@@ -9,7 +9,7 @@ import Register from './components/Register/Register.js';
 import Workouts from './components/workouts/Workouts.js';
 import SingleWorkout from './components/workouts/SingleWorkout';
 import Logout from './components/Login/Logout';
-// import ExerciseList from './components/Login/Logout';
+
 function App(props) {
 
   return (
@@ -26,14 +26,12 @@ function App(props) {
         <Route exact path="/" component={Login}/>
         <PrivateRoute exact path="/workouts" component={Workouts}/>
         <PrivateRoute exact path="/workouts/:id/:name" component={SingleWorkout}/>
-        {/* <PrivateRoute exact path="/exercises/:id/:workout" component={}/> */}
       </>
     </div>
   );
 }
 const mapStateToProps = state => {
-  console.log("APP MTSP", state.isFetching);
-  
+  // console.log("APP MTSP", state.isFetching);
   return {
     token: state.token,
     isFetching: state.isFetching,

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { userWorkouts } from '../../actions';
 import moment from 'moment';
 import { capital } from '../../utils/helpers';
-import { PlusCircleOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
 
@@ -35,7 +35,6 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
       past.push(day)
     }
   });
-
 
   return (
     <div className="workout-container">
@@ -73,7 +72,5 @@ const mapStateToProps = (state) => {
     token: state.token
   }
 }
-
-
 
 export default connect(mapStateToProps, { userWorkouts })(Workouts)
