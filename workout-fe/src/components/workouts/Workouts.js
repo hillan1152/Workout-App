@@ -39,9 +39,6 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
   return (
     <div className="workout-container">
       <h2>Weekly Workouts</h2>
-      {/* Loader */}
-      {isFetching ? <div>Gathering Info....</div> : ""}
-
       {error_message.length > 0 ? alert(error_message.data) : ''}
 
       {/* Modal Form */}

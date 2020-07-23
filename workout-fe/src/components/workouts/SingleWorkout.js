@@ -7,18 +7,16 @@ import { singleWorkout, editWorkout, deleteWorkout, fetchExercises } from '../..
 import { capital } from '../../utils/helpers';
 import ExerciseList from '../Exercises/ExerciseList';
 
-// ADD AN EXERCISE
-// EDIT AN EXERCISE
-
 
 export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, history, exercise_list, error }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
+  const [ openWorkoutName, setOpenWorkoutName ] = useState(false);
   const [ openEditExercise, setOpenEditExercise ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
   const [ updateWorkout, setUpdateWorkout ] = useState({
     name: "",
     date: ""
-  })
+  });
   let workoutId = match.params.id;
 
   useEffect(() => {
@@ -74,7 +72,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
       <StepBackwardFilled style={{ color: 'white', fontSize: '2rem', flexDirection: 'start' }} onClick={() => history.push('/workouts')}/>
       {/* EDIT TOGGLE */}
       {openEdit && (
-        <section>
+        <section className="confirm-edit">
           <p onClick={() => setOpenEdit(false)}>x</p>
           <h3>Are you sure you want these changes?</h3>
           <form onSubmit={submitEdit}>
@@ -86,27 +84,33 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
       )}
       {/* DELETE TOGGLE */}
       {openDelete && (
-        <section>
+        <section className="confirm-delete">
           <p onClick={() => setOpenDelete(false)}>x</p>
           <h3>Are you sure you want to delete {workout.name}?</h3>
           <button onClick={removeWorkout}>Confirm Delete</button>
         </section> 
       )}
       {/* EDIT FORM: Modal Toggle*/}
-      <form>
+      {openWorkoutName && (
+      
+      <form className="workout-name-form">
+        <p onClick={() => setOpenWorkoutName(false)}>X</p>
         <input name="name" placeholder={capital(`${workout.name}`)} onChange={handleChange}></input>
         <label htmlFor="date">{moment(workout.date).calendar()}</label>
         <input name="date" type="date" onChange={handleChange}></input>
-        <EditFilled style={{ fontSize: "2rem", color:"yellow" }} onClick={() => toggleChange("edit")} name="edit"/>
-        <DeleteFilled style={{ fontSize: "2rem", color:"red" }} onClick={() => toggleChange("delete")} name="delete"/>
+        <div>
+          <EditFilled style={{ fontSize: "2rem", color:"yellow" }} onClick={() => toggleChange("edit")} name="edit"/>
+          <DeleteFilled style={{ fontSize: "2rem", color:"red" }} onClick={() => toggleChange("delete")} name="delete"/>
+        </div>
       </form>
-      <ExerciseList setOpenEditExercise={setOpenEditExercise} openEditExercise={openEditExercise}/>
+      )}
+      <ExerciseList setOpenWorkoutName={setOpenWorkoutName} setOpenEditExercise={setOpenEditExercise} openEditExercise={openEditExercise}/>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP -- SINGLE WORKOUT", state);
+  // console.log("MSTP -- SINGLE WORKOUT", state);
   return {
     userId: state.user_id,
     workout: state.workout,

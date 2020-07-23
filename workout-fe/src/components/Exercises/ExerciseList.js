@@ -56,7 +56,7 @@ export const ExerciseList =  (props) => {
   return (
     <div className="exercise-list-container">
       <div>
-        <h2>{capital(`${props.workout.name}`)}</h2>
+        <h2 onClick={() => props.setOpenWorkoutName(true)}>{capital(`${props.workout.name}`)}</h2>
         <PlusCircleOutlined style={{ fontSize: "1.5rem", color:"darkGreen", marginTop: "4%", marginLeft: "3%" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
       </div>
       <h4>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
@@ -66,7 +66,7 @@ export const ExerciseList =  (props) => {
               <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", marginTop: "5%", marginLeft: "5%" }} onClick={() => toggle(data.exercise_id, "edit", data)}/>
               <section>
                 <h3>{capital(`${data.exercise_name}`)}</h3>
-                <p>{data.weight === 0 ? '' : `${data.weight}lbs :`} {data.sets} sets {data.reps} reps</p>
+                <p>{data.weight === 0 ? '' : `${data.weight}lbs `}{data.sets}x{data.reps}</p>
               </section>             
               <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", marginTop: "5%", marginRight: "5%"}} onClick={() => toggle(data.exercise_id, "delete", data)}/>
             </section>
