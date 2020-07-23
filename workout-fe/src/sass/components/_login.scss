@@ -17,6 +17,10 @@
   height: 100vh;
   overflow-x: hidden;
   width: 100%;
+  p {
+    margin-top: 5%;
+    animation: .7s ease-out 0s 1 slideInFromTop;
+  }
 
   form {
     h2 {

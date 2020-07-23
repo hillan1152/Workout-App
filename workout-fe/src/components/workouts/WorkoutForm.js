@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import * as yup from 'yup';
 
 import { addWorkout } from '../../actions';
 import { userWorkouts } from '../../actions';
@@ -23,7 +24,7 @@ function WorkoutForm({ addWorkout, userWorkouts, setIsOpen, userId }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="add-workout-form" onSubmit={handleSubmit}>
       <input type="text" name="name" placeholder="Workout Name" onChange={handleChange}/>
       <input type="date" name="date" placeholder="Date" onChange={handleChange}/>
       <button type="submit">Confirm Add</button>

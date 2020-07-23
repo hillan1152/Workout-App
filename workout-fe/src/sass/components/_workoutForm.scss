@@ -1,0 +1,25 @@
+.add-workout-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  line-height: 1.4;
+  background-color: lightgrey;
+  padding: 5%;
+  border: 2px inset lightgrey;
+  border-radius: 2px;
+  // position: absolute;
+  // z-index: 1000;
+  // height: 100%;
+  input {
+    width: 100%;
+    justify-content: center;
+    margin-top: 2%;
+    height: 3rem;
+  }
+  button {
+    width: 100%;
+    margin-top: 4%;
+    @include button;
+  }
+}

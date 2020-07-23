@@ -4,23 +4,15 @@
 .workout-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-flow: column;
-  margin-top: 2rem;
   margin-bottom: 5%;
   background-color: black;
   height: 100%;
   h2 {
+    margin-top: 2rem;
     font-size: 2rem;
     font-weight: bolder;
-  }
-  .add_workout {
-    @include button(4%, 30%, 2rem);
-    align-self: center;
-    margin-bottom: 2%;
-  }
-  .add_workout:hover{
-    background-color: purple;
-    color: white;
   }
   .link {
     text-decoration: none;
@@ -41,9 +33,6 @@
   }
   p {
     font-size: 1.2rem;
-  }
-  button {
-    margin: 3%;
   }
 }
 

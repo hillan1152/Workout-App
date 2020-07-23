@@ -11,8 +11,8 @@ import WorkoutForm from './WorkoutForm';
 
 
 
-export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message, token }) => {
-  const [ isOpen, setIsOpen ] = useState(false);
+export const Workouts = ({ info, userId, userWorkouts, error_message, exercises }) => {
+  const [ isOpen, setIsOpen ] = useState(true);
   
   useEffect(() => {
     userWorkouts(userId)
@@ -35,22 +35,22 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
       past.push(day)
     }
   });
-
+  console.log(exercises)
   return (
     <div className="workout-container">
-      <h2>Weekly Workouts</h2>
-      {error_message.length > 0 ? alert(error_message.data) : ''}
-
       {/* Modal Form */}
-      <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen" }} onClick={() => setIsOpen(!isOpen)}/>
       {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen}/></> : ''}
+      <h2>Weekly Workouts</h2>
+      <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen", width: "100", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
+      {/* {error_message.length > 0 ? alert(error_message.data) : ''} */}
+
 
       {sorted_by_date.map(workout => {
         return (
         <div className="individual_workout" key={workout.id}>
           <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
-          <h3>{ moment(workout.date).calendar() }</h3>
-          <p>{ capital(workout.name) }</p>
+            <h3>{ moment(workout.date).calendar() }</h3>
+            <p>{ capital(workout.name) }</p>
           </Link>
         </div>
         )
@@ -66,7 +66,8 @@ const mapStateToProps = (state) => {
     isFetching: state.isFetching,
     info: state.info,
     error_message: state.error_message,
-    token: state.token
+    token: state.token,
+    exercises: state.exercises
   }
 }
 
