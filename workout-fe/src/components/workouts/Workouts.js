@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userWorkouts } from '../../actions';
@@ -12,8 +12,10 @@ import Errors from './Errors';
 
 
 
+
 export const Workouts = ({ info, userId, userWorkouts, error_message, exercises }) => {
-  const [ isOpen, setIsOpen ] = useState(true);
+  const [ isOpen, setIsOpen ] = useState(false);
+  // const [ visible, setVisible ] = useState(true)
   useEffect(() => {
     userWorkouts(userId)
   }, [userWorkouts, userId, error_message])
@@ -36,27 +38,32 @@ export const Workouts = ({ info, userId, userWorkouts, error_message, exercises 
     }
   });
 
+  const toggleBackground = (e) => {
+    console.log(e.target)
+  }
+
   return (
-    <div className="workout-container">
+    <>
+    <div className="workout-align">
       {/* Modal Form */}
-      {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen} /></> : ''}
-      {error_message.data ? <Errors error_message={error_message}/> : ''}
-      <h2>Weekly Workouts</h2>
+      {isOpen ? <WorkoutForm setIsOpen={setIsOpen} isOpen={isOpen} /> : ''}
       <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen", width: "100", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
-      {/* {error_message.length > 0 ? alert(error_message.data) : ''} */}
+      <div className={`workout-container ${isOpen ? "active" : ""}`} onClick={() => setIsOpen(false)}>
+        <h2>Weekly Workouts</h2>
 
-
-      {sorted_by_date.map(workout => {
-        return (
-        <div className="individual_workout" key={workout.id}>
-          <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
-            <h3>{ moment(workout.date).calendar() }</h3>
-            <p>{ capital(workout.name) }</p>
-          </Link>
-        </div>
-        )
-      })}
-    </div> 
+        {sorted_by_date.map(workout => {
+          return (
+          <div className="individual_workout" key={workout.id}>
+            <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
+              <h3>{ moment(workout.date).calendar() }</h3>
+              <p>{ capital(workout.name) }</p>
+            </Link>
+          </div>
+          )
+        })}
+      </div> 
+    </div>
+  </>
   )
 }
 

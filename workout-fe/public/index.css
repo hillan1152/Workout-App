@@ -9924,6 +9924,16 @@ h3 {
   opacity: 0.8;
 }
 
+.workout-align {
+  display: flex;
+  justify-content: center;
+}
+
+.active {
+  opacity: 0.2;
+  background-color: white;
+}
+
 .workout-container {
   display: flex;
   justify-content: center;
@@ -10031,6 +10041,9 @@ h3 {
   padding: 5%;
   border: 2px inset lightgrey;
   border-radius: 2px;
+  position: absolute;
+  z-index: 1000;
+  margin-top: 15%;
 }
 .add-workout-form input {
   width: 100%;

@@ -104,7 +104,7 @@ export const ExerciseList =  (props) => {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("MSTP EXERCISE LIST", state.exercises)
+  console.log("MSTP EXERCISE LIST", state.exercises)
   return {
     info: state.info,
     workout: state.workout,

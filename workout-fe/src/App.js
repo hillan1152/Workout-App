@@ -9,6 +9,7 @@ import Register from './components/Register/Register.js';
 import Workouts from './components/workouts/Workouts.js';
 import SingleWorkout from './components/workouts/SingleWorkout';
 import Logout from './components/Login/Logout';
+import Errors from './components/workouts/Errors';
 
 function App(props) {
 
@@ -22,6 +23,7 @@ function App(props) {
       </div>}
       <>
         <Logout/>
+        {props.error_message.data ? <Errors error_message={props.error_message}/> : ''}
         <Route exact path="/signup" component={Register}/>
         <Route exact path="/" component={Login}/>
         <PrivateRoute exact path="/workouts" component={Workouts}/>
@@ -35,7 +37,8 @@ const mapStateToProps = state => {
   return {
     token: state.token,
     isFetching: state.isFetching,
-    fetching: state.fetchMessage
+    fetching: state.fetchMessage,
+    error_message: state.error_message
   }
 }
 export default connect(mapStateToProps, {})(App);

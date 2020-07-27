@@ -1,6 +1,13 @@
 @import '../utilities/mixins';
 @import '../utilities/variables';
-
+.workout-align {
+  display: flex;
+  justify-content: center;
+}
+.active {
+  opacity: .2;
+  background-color: white;
+}
 .workout-container {
   display: flex;
   justify-content: center;
