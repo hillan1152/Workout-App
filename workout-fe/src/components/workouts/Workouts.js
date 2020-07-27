@@ -7,16 +7,16 @@ import { capital } from '../../utils/helpers';
 import { PlusCircleOutlined } from '@ant-design/icons';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
+import Errors from './Errors';
 
 
 
 
 export const Workouts = ({ info, userId, userWorkouts, error_message, exercises }) => {
   const [ isOpen, setIsOpen ] = useState(true);
-  
   useEffect(() => {
     userWorkouts(userId)
-  }, [userWorkouts, userId])
+  }, [userWorkouts, userId, error_message])
 
   // SORT ALL WORKOUTS BY DATE
   let sorted_by_date = info.sort((a, b) => {
@@ -35,11 +35,12 @@ export const Workouts = ({ info, userId, userWorkouts, error_message, exercises 
       past.push(day)
     }
   });
-  console.log(exercises)
+
   return (
     <div className="workout-container">
       {/* Modal Form */}
-      {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen}/></> : ''}
+      {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen} /></> : ''}
+      {error_message.data ? <Errors error_message={error_message}/> : ''}
       <h2>Weekly Workouts</h2>
       <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen", width: "100", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
       {/* {error_message.length > 0 ? alert(error_message.data) : ''} */}
@@ -60,7 +61,7 @@ export const Workouts = ({ info, userId, userWorkouts, error_message, exercises 
 }
 
 const mapStateToProps = (state) => {
-  // console.log("MSTP WORKOUTS", state)
+  console.log("MSTP WORKOUTS", state)
   return {
     userId: state.user_id,
     isFetching: state.isFetching,
