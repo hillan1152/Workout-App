@@ -4,3 +4,18 @@
   height: $height;
   border-radius: 8px;
 }
+
+@mixin modalForm(){
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  line-height: 1.4;
+  background-color: darkgray;
+  padding: 5%;
+  border: 2px inset black;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 1000;
+  margin-top: 15%;
+}

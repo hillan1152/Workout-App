@@ -1,29 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { connect } from 'react-redux';
+import * as yup from 'yup';
+import moment from 'moment';
 
 import { addWorkout } from '../../actions';
 import { userWorkouts } from '../../actions';
 
-function WorkoutForm({ addWorkout, userWorkouts, setIsOpen, userId }) {
+function WorkoutForm({ addWorkout, userWorkouts, isOpen, setIsOpen, userId, ref }) {
+
   const [ workout, setWorkout ] = useState({
     name: "",
     date: ""
   });
-
   const handleChange = (e) => {
     setWorkout({ ...workout, [e.target.name]: e.target.value ? e.target.value: '' });
   };
 
   // Submit Workout, Updates List, Closes Modal
   const handleSubmit = (e) => {
+    console.log("sub")
     e.preventDefault();
+    workout.date = moment(workout.date).calendar();
     addWorkout(userId, workout);
     userWorkouts(userId);
     setIsOpen(false)
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="add-workout-form" onSubmit={handleSubmit} onClick={() => setIsOpen(true)}>
       <input type="text" name="name" placeholder="Workout Name" onChange={handleChange}/>
       <input type="date" name="date" placeholder="Date" onChange={handleChange}/>
       <button type="submit">Confirm Add</button>
@@ -33,11 +37,12 @@ function WorkoutForm({ addWorkout, userWorkouts, setIsOpen, userId }) {
 
 
 const mapStateToProps = (state) => {
-  console.log("MSTP FORM", state)
+  // console.log("MSTP FORM", state)
   return {
     userId: state.user_id,
     workouts: state.workouts,
-    isFetching: state.isFetching
+    isFetching: state.isFetching, 
+    error_message: state.error_message
   }
 }
 

@@ -1,0 +1,23 @@
+.add-exercise-form {
+  @include modalForm;
+  border: 2px inset black;
+  align-self: center;
+  z-index: 1001;
+  background-color: darkgray;
+  input {
+    width: 100%;
+    justify-content: center;
+    margin-top: 2%;
+    height: 3rem;
+  }
+  button {
+    width: 100%;
+    margin-top: 4%;
+    @include button;
+  }
+}
+
+.active-ex {
+  opacity: .2;
+  background-color: seashell;
+}

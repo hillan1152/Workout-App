@@ -25,6 +25,9 @@ export const ExerciseList =  (props) => {
 
   const editSingleExercise = async e => {
     let reload = await props.fetchExercises(props.workout.id)
+    if(!inputExercise.name){
+      inputExercise.name = props.exercises.name;
+    }
     let workoutId = props.workout.id;
     props.editExercise(deleteInfo.new_id, workoutId, inputExercise);
     return reload;
@@ -54,57 +57,60 @@ export const ExerciseList =  (props) => {
   };
 
   return (
-    <div className="exercise-list-container">
-      <div>
-        <h2 onClick={() => props.setOpenWorkoutName(true)}>{capital(`${props.workout.name}`)}</h2>
-        <PlusCircleOutlined style={{ fontSize: "1.5rem", color:"darkGreen", marginTop: "4%", marginLeft: "3%" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
-      </div>
-      <h4>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
-      {((exData || []).map(data => {
-          return (
-            <section className="exercise" key={data.user_exercise_id}>
-              <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", marginTop: "5%", marginLeft: "5%" }} onClick={() => toggle(data.exercise_id, "edit", data)}/>
-              <section>
-                <h3>{capital(`${data.exercise_name}`)}</h3>
-                <p>{data.weight === 0 ? '' : `${data.weight}lbs `}{data.sets}x{data.reps}</p>
-              </section>             
-              <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", marginTop: "5%", marginRight: "5%"}} onClick={() => toggle(data.exercise_id, "delete", data)}/>
-            </section>
-          )
-      }))}
+    <div className="align-ex">
+      <div className={`exercise-list-container`}>
+      <h2 className={isFormOpen ? `active` : ''} onClick={() => props.setOpenWorkoutName(true)}>{capital(`${props.workout.name}`)}</h2>
+      <PlusCircleOutlined style={{ fontSize: "3rem", color:"darkGreen", marginTop: "2%" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
       {toggleDelete && (
-        <div>
-          <h2>Are you sure you want to delete {deleteInfo.name}</h2>
-          <button onClick={removeExercise}>YES</button>
-          <button onClick={() => toggle('', 'delete', '')}>Cancel</button>
-        </div>
-      )}
-      {isFormOpen && (
-        <form onSubmit={addExercise} className="add-exercise-form">
-          <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
-          <input onChange={handleChange} placeholder="Region" name="region"/>
-          <input onChange={handleChange} placeholder="Weight" name="weight"/>
-          <input onChange={handleChange} placeholder="Sets" name="sets"/>
-          <input onChange={handleChange} placeholder="Reps" name="reps"/>
-          <button type="submit">Add</button>
-        </form>
-      )}
-      {props.openEditExercise && (
-        <form onSubmit={editSingleExercise} className="edit-exercise-form">
-          <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
-          <input onChange={handleChange} placeholder="Region" name="region"/>
-          <input onChange={handleChange} type="number" placeholder="Weight" name="weight"/>
-          <input onChange={handleChange} type="number" placeholder="Sets" name="sets"/>
-          <input onChange={handleChange} type="number" placeholder="Reps" name="reps"/>
-        <button type="submit">Edit</button>
-        </form>
-      )}
+          <div>
+            <h2>Are you sure you want to delete {deleteInfo.name}</h2>
+            <button onClick={removeExercise}>YES</button>
+            <button onClick={() => toggle('', 'delete', '')}>Cancel</button>
+          </div>
+        )}
+        {isFormOpen && (
+          <form onSubmit={addExercise} className="add-exercise-form align">
+            <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
+            <input onChange={handleChange} placeholder="Region" name="region"/>
+            <input onChange={handleChange} placeholder="Weight" name="weight"/>
+            <input onChange={handleChange} placeholder="Sets" name="sets"/>
+            <input onChange={handleChange} placeholder="Reps" name="reps"/>
+            <button type="submit">Add</button>
+          </form>
+        )}
+        {props.openEditExercise && (
+          <form onSubmit={editSingleExercise} className="edit-exercise-form">
+            <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
+            <input onChange={handleChange} placeholder="Region" name="region"/>
+            <input onChange={handleChange} type="number" placeholder="Weight" name="weight"/>
+            <input onChange={handleChange} type="number" placeholder="Sets" name="sets"/>
+            <input onChange={handleChange} type="number" placeholder="Reps" name="reps"/>
+          <button type="submit">Edit</button>
+          </form>
+        )}
+
+        <h4 className={isFormOpen ? `active` : ''}>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
+        {((exData || []).map(data => {
+            return (
+              <section className={`exercise ${isFormOpen ? `active` : ''}`} key={data.user_exercise_id}>
+                <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", marginTop: "5%", marginLeft: "5%" }} onClick={() => toggle(data.exercise_id, "edit", data)}/>
+                <section>
+                  <h3>{capital(`${data.exercise_name}`)}</h3>
+                  <p>{data.weight === 0 ? '' : `${data.weight}lbs `}{data.sets}x{data.reps}</p>
+                </section>             
+                <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", marginTop: "5%", marginRight: "5%"}} onClick={() => toggle(data.exercise_id, "delete", data)}/>
+              </section>
+            )
+        }))}
+        
+
+      </div>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  // console.log("MSTP EXERCISE LIST", state.exercises)
+  console.log("MSTP EXERCISE LIST", state.exercises)
   return {
     info: state.info,
     workout: state.workout,

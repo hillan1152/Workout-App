@@ -1,4 +1,6 @@
 .exercise-list-container {
+  display: flex;
+  flex-flow: column;
   border: 2px solid white;
   width: 100%;
   margin-top: 5%;
@@ -31,6 +33,5 @@
   div {
     display: flex;
     justify-content: end;
-    background-color: blue;
   }
 }

@@ -9,7 +9,7 @@ export const Login = (props) => {
     email: "",
     password: ""
   });
-  let { error } = props;
+  
   
   useEffect(() => {
     if(props.token){
@@ -28,15 +28,16 @@ export const Login = (props) => {
     props.userLogin(user);
     if(props.token){
       props.history.push('/workouts')
+    } else {
+      setUser('')
     }
   }
-
-  if(error){
-    setTimeout(() => {
-      window.location.reload()
-    }, 1500)
-    return <h2>{error.data.message}. Please try again.</h2>
-  }
+    
+  // if(error){
+  //   setTimeout(() => {
+  //     window.location.reload()
+  //   }, 1500)
+  // }
 
 
   return (
@@ -49,12 +50,13 @@ export const Login = (props) => {
         <input type="password" name="password" placeholder="Password" onChange={handleChange}/>
         <button type="submit">Submit</button>
       </form>
+      {props.error ? <p className="err-message">{props.error.data.message}</p> : ''}
     </div>
   )
 }
 
 const mapStateToProps = state => {
-  console.log("MSTP LOGIN STATE", state)
+  // console.log("MSTP LOGIN STATE", state)
   return {
     isFetching: state.isFetching,
     token: state.token,

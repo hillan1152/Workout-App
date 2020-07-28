@@ -1,0 +1,14 @@
+.add-workout-form {
+  @include modalForm;
+  input {
+    width: 100%;
+    justify-content: center;
+    margin-top: 2%;
+    height: 3rem;
+  }
+  button {
+    width: 100%;
+    margin-top: 4%;
+    @include button;
+  }
+}

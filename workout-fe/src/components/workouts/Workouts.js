@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userWorkouts } from '../../actions';
@@ -7,16 +7,18 @@ import { capital } from '../../utils/helpers';
 import { PlusCircleOutlined } from '@ant-design/icons';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
+import Errors from './Errors';
 
 
 
 
-export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message, token }) => {
+
+export const Workouts = ({ info, userId, userWorkouts, error_message, exercises }) => {
   const [ isOpen, setIsOpen ] = useState(false);
-  
+  // const [ visible, setVisible ] = useState(true)
   useEffect(() => {
     userWorkouts(userId)
-  }, [userWorkouts, userId])
+  }, [userWorkouts, userId, error_message])
 
   // SORT ALL WORKOUTS BY DATE
   let sorted_by_date = info.sort((a, b) => {
@@ -36,37 +38,43 @@ export const Workouts = ({ info, userId, userWorkouts, isFetching, error_message
     }
   });
 
+
   return (
-    <div className="workout-container">
-      <h2>Weekly Workouts</h2>
-      {error_message.length > 0 ? alert(error_message.data) : ''}
+    <>
+    <PlusCircleOutlined style={{ fontSize: "3rem", color:"lightGreen", width: "100", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
 
+    <div className="align">
       {/* Modal Form */}
-      <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen" }} onClick={() => setIsOpen(!isOpen)}/>
-      {isOpen ? <> <WorkoutForm setIsOpen={setIsOpen}/></> : ''}
+      {isOpen ? <WorkoutForm setIsOpen={setIsOpen} isOpen={isOpen} /> : ''}
 
-      {sorted_by_date.map(workout => {
-        return (
-        <div className="individual_workout" key={workout.id}>
-          <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
-          <h3>{ moment(workout.date).calendar() }</h3>
-          <p>{ capital(workout.name) }</p>
-          </Link>
-        </div>
-        )
-      })}
-    </div> 
+      <div className={`workout-container ${isOpen ? "active" : ""}`} onClick={() => setIsOpen(false)}>
+        <h2>Weekly Workouts</h2>
+        {sorted_by_date.map(workout => {
+          return (
+          <div className="individual_workout" key={workout.id}>
+            <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
+              <h3>{ moment(workout.date).calendar() }</h3>
+              <p>{ capital(workout.name) }</p>
+            </Link>
+          </div>
+          )
+        })}
+      </div> 
+      
+    </div>
+  </>
   )
 }
 
 const mapStateToProps = (state) => {
-  // console.log("MSTP WORKOUTS", state)
+  console.log("MSTP WORKOUTS", state)
   return {
     userId: state.user_id,
     isFetching: state.isFetching,
     info: state.info,
     error_message: state.error_message,
-    token: state.token
+    token: state.token,
+    exercises: state.exercises
   }
 }
 

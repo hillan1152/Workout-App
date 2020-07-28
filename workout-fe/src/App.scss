@@ -5,6 +5,8 @@
     './sass/components/workouts',
     './sass/components/exercises',
     './sass/components/singleworkout',
+    './sass/components/workoutForm',
+    './sass/components/exerciseForm',
     './sass/components/login',
     
     './sass/utilities/mixins',
@@ -19,7 +21,7 @@
 .App {
   text-align: center;
   background-color: black;
-  color: white;
+  color: seashell;
 }
 
 .App-logo {
@@ -42,6 +44,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  
 }
 
 .App-link {
