@@ -38,19 +38,17 @@ export const Workouts = ({ info, userId, userWorkouts, error_message, exercises 
     }
   });
 
-  const toggleBackground = (e) => {
-    console.log(e.target)
-  }
 
   return (
     <>
-    <div className="workout-align">
+    <PlusCircleOutlined style={{ fontSize: "3rem", color:"lightGreen", width: "100", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
+
+    <div className="align">
       {/* Modal Form */}
       {isOpen ? <WorkoutForm setIsOpen={setIsOpen} isOpen={isOpen} /> : ''}
-      <PlusCircleOutlined style={{ fontSize: "2rem", color:"lightGreen", width: "100", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
+
       <div className={`workout-container ${isOpen ? "active" : ""}`} onClick={() => setIsOpen(false)}>
         <h2>Weekly Workouts</h2>
-
         {sorted_by_date.map(workout => {
           return (
           <div className="individual_workout" key={workout.id}>
@@ -62,6 +60,7 @@ export const Workouts = ({ info, userId, userWorkouts, error_message, exercises 
           )
         })}
       </div> 
+      
     </div>
   </>
   )
