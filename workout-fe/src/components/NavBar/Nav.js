@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBCollapse, MDBContainer,
 MDBHamburgerToggler } from 'mdbreact';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { logout } from '../../actions/index';
-import {useSelector, useDispatch} from 'react-redux'
 import Logout from '../Login/Logout';
 
 class NavbarPage extends Component {
@@ -27,7 +25,7 @@ render() {
   return (
     <Router>
       <MDBContainer>
-        <MDBNavbar color="amber lighten-4" style={{ marginTop: '20px' }} light>
+        <MDBNavbar color="amber lighten-4" light>
           <MDBContainer>
             <MDBNavbarBrand>
               MDBNavbar
@@ -39,10 +37,7 @@ render() {
                     <MDBNavLink to="#!">Home</MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
-                    <Logout/>
-                  </MDBNavItem>
-                  <MDBNavItem>
-                    <MDBNavLink to="#!">Profile</MDBNavLink>
+                    <Logout>LOGOUT</Logout>
                   </MDBNavItem>
                 </MDBNavbarNav>
               </MDBCollapse>

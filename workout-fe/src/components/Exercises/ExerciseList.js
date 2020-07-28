@@ -39,15 +39,23 @@ export const ExerciseList =  (props) => {
     setToggleDelete(false);
   };
 
+  const closeForms = () => {
+    setToggleDelete(false);
+    setIsFormOpen(false);
+    props.setOpenEditExercise(false);
+  }
+
   const toggle = (id, className, data) => {
-    setDeleteInfo({ name: data.exercise_name, id: data.user_exercise_id, new_id: data.exercise_id  })
-    if(className === "edit") {
-      if(toggleDelete) setToggleDelete(false);
-      props.setOpenEditExercise(!props.openEditExercise);
-      setEditExerciseId(id)
+    if(data){
+      setDeleteInfo({ name: data.exercise_name, id: data.user_exercise_id, new_id: data.exercise_id  })
+      if(className === "edit") {
+        if(toggleDelete || isFormOpen) setToggleDelete(false) && setIsFormOpen(false);
+        props.setOpenEditExercise(!props.openEditExercise);
+        setEditExerciseId(id)
+      }
     }
     if(className === "delete") {
-      if(props.openEditExercise) props.setOpenEditExercise(false);
+      if(props.openEditExercise || isFormOpen) props.setOpenEditExercise(false) && setIsFormOpen(false);
       setToggleDelete(!toggleDelete);
     }
   };
@@ -57,44 +65,49 @@ export const ExerciseList =  (props) => {
   };
 
   return (
-    <div className="align-ex">
-      <div className={`exercise-list-container`}>
-      <h2 className={isFormOpen ? `active` : ''} onClick={() => props.setOpenWorkoutName(true)}>{capital(`${props.workout.name}`)}</h2>
-      <PlusCircleOutlined style={{ fontSize: "3rem", color:"darkGreen", marginTop: "2%" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
+    <div className="exercise-list-container" >
+      {isFormOpen && (
+        <form onSubmit={addExercise} className="add-exercise-form align">
+          <h2>Add An Exercise</h2>
+          <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
+          <input onChange={handleChange} placeholder="Region" name="region"/>
+          <input onChange={handleChange} placeholder="Weight" name="weight"/>
+          <input onChange={handleChange} placeholder="Sets" name="sets"/>
+          <input onChange={handleChange} placeholder="Reps" name="reps"/>
+          <button type="submit">Add</button>
+          <button onClick={() => toggle('', 'add', '')}>Cancel</button>
+        </form>
+      )}
       {toggleDelete && (
-          <div>
-            <h2>Are you sure you want to delete {deleteInfo.name}</h2>
-            <button onClick={removeExercise}>YES</button>
-            <button onClick={() => toggle('', 'delete', '')}>Cancel</button>
-          </div>
-        )}
-        {isFormOpen && (
-          <form onSubmit={addExercise} className="add-exercise-form align">
-            <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
-            <input onChange={handleChange} placeholder="Region" name="region"/>
-            <input onChange={handleChange} placeholder="Weight" name="weight"/>
-            <input onChange={handleChange} placeholder="Sets" name="sets"/>
-            <input onChange={handleChange} placeholder="Reps" name="reps"/>
-            <button type="submit">Add</button>
-          </form>
-        )}
-        {props.openEditExercise && (
-          <form onSubmit={editSingleExercise} className="edit-exercise-form">
-            <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
-            <input onChange={handleChange} placeholder="Region" name="region"/>
-            <input onChange={handleChange} type="number" placeholder="Weight" name="weight"/>
-            <input onChange={handleChange} type="number" placeholder="Sets" name="sets"/>
-            <input onChange={handleChange} type="number" placeholder="Reps" name="reps"/>
+        <div className="add-exercise-form align">
+          <h2>Are you sure you want to delete {deleteInfo.name}</h2>
+          <button onClick={removeExercise}>YES</button>
+          <button onClick={() => toggle('', 'delete', '')}>Cancel</button>
+        </div>
+      )}
+      {props.openEditExercise && (
+        <form onSubmit={editSingleExercise} className="add-exercise-form align">
+          <h2>Edit An Exercise</h2>
+          <input onChange={handleChange} placeholder={`Exercise Name ${(exData || []).exercise_name}`} name="name"/>
+          <input onChange={handleChange} placeholder="Region" name="region"/>
+          <input onChange={handleChange} type="number" placeholder="Weight" name="weight"/>
+          <input onChange={handleChange} type="number" placeholder="Sets" name="sets"/>
+          <input onChange={handleChange} type="number" placeholder="Reps" name="reps"/>
           <button type="submit">Edit</button>
-          </form>
-        )}
+          <button onClick={() => toggle('', 'edit', '')}>Cancel</button>
+        </form>
+      )}
+      <h2 onClick={() => closeForms()}>{capital(`${props.workout.name}`)}</h2>
+      <PlusCircleOutlined style={{ fontSize: "3rem", color:"darkGreen", marginTop: "2%" }} onClick={() => setIsFormOpen(!isFormOpen)}/>
+      <div className={`exercise-list-container ${isFormOpen ? `active` : ''}`} >
+        {/* <h2 className={isFormOpen ? `active` : ''} onClick={() => props.setOpenWorkoutName(true)}>{capital(`${props.workout.name}`)}</h2> */}
 
         <h4 className={isFormOpen ? `active` : ''}>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
         {((exData || []).map(data => {
             return (
-              <section className={`exercise ${isFormOpen ? `active` : ''}`} key={data.user_exercise_id}>
+              <section className={`exercise ${isFormOpen ? `active` : ''}`} key={data.user_exercise_id} onClick={() => setIsFormOpen(false)}>
                 <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", marginTop: "5%", marginLeft: "5%" }} onClick={() => toggle(data.exercise_id, "edit", data)}/>
-                <section>
+                <section onClick={() => closeForms()}>
                   <h3>{capital(`${data.exercise_name}`)}</h3>
                   <p>{data.weight === 0 ? '' : `${data.weight}lbs `}{data.sets}x{data.reps}</p>
                 </section>             
@@ -102,9 +115,7 @@ export const ExerciseList =  (props) => {
               </section>
             )
         }))}
-        
-
-      </div>
+      </div>  
     </div>
   )
 }
