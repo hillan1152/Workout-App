@@ -13,9 +13,13 @@ export const ExerciseList =  (props) => {
     sets: 0,
     reps: 0
   })
+  // NOT USED YET, SHOULD BE FOR PLACE HOLDERS
   const [ editExerciseId, setEditExerciseId ] = useState();
-  const [ deleteInfo, setDeleteInfo ] = useState();
+  // PASSES ALL EXERCISE DATA BETWEEN FORMS
+  const [ exerciseData, setExerciseData ] = useState();
+  // ADD FORM 
   const [ isFormOpen, setIsFormOpen ] = useState(false);
+  // TOGGLE DELETE FORM
   const [ toggleDelete, setToggleDelete ] = useState(false);
   const exData = (((props.exercises || {}).data || {}).exercises || []);
 
@@ -23,19 +27,20 @@ export const ExerciseList =  (props) => {
     props.addExercise(props.workout.id, inputExercise);
   };
 
+  console.log("editExerciseId", editExerciseId)
   const editSingleExercise = async e => {
     let reload = await props.fetchExercises(props.workout.id)
     if(!inputExercise.name){
       inputExercise.name = props.exercises.name;
-    }
+    };
     let workoutId = props.workout.id;
-    props.editExercise(deleteInfo.new_id, workoutId, inputExercise);
+    props.editExercise(exerciseData.new_id, workoutId, inputExercise);
     return reload;
   };
 
   const removeExercise = async e => {
     e.preventDefault();
-    props.deleteExercise(deleteInfo.id, props.workout.id);
+    props.deleteExercise(exerciseData.id, props.workout.id);
     setToggleDelete(false);
   };
 
@@ -47,7 +52,7 @@ export const ExerciseList =  (props) => {
 
   const toggle = (id, className, data) => {
     if(data){
-      setDeleteInfo({ name: data.exercise_name, id: data.user_exercise_id, new_id: data.exercise_id  })
+      setExerciseData({ name: data.exercise_name, id: data.user_exercise_id, new_id: data.exercise_id  })
       if(className === "edit") {
         if(toggleDelete || isFormOpen) setToggleDelete(false) && setIsFormOpen(false);
         props.setOpenEditExercise(!props.openEditExercise);
@@ -80,7 +85,7 @@ export const ExerciseList =  (props) => {
       )}
       {toggleDelete && (
         <div className="add-exercise-form align">
-          <h2>Are you sure you want to delete {deleteInfo.name}</h2>
+          <h2>Are you sure you want to delete {exerciseData.name}</h2>
           <button onClick={removeExercise}>YES</button>
           <button onClick={() => toggle('', 'delete', '')}>Cancel</button>
         </div>
@@ -121,9 +126,8 @@ export const ExerciseList =  (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP EXERCISE LIST", state.exercises)
+  // console.log("MSTP EXERCISE LIST", state.exercises)
   return {
-    info: state.info,
     workout: state.workout,
     error: state.error_message.data,
     exercises: state.exercises,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userWorkouts } from '../../actions';
@@ -7,15 +7,10 @@ import { capital } from '../../utils/helpers';
 import { PlusCircleOutlined } from '@ant-design/icons';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
-import Errors from './Errors';
-
-
-
-
 
 export const Workouts = ({ info, userId, userWorkouts, error_message, exercises }) => {
   const [ isOpen, setIsOpen ] = useState(false);
-  // const [ visible, setVisible ] = useState(true)
+  
   useEffect(() => {
     userWorkouts(userId)
   }, [userWorkouts, userId, error_message])
@@ -41,33 +36,31 @@ export const Workouts = ({ info, userId, userWorkouts, error_message, exercises 
 
   return (
     <>
-    <PlusCircleOutlined style={{ fontSize: "3rem", color:"lightGreen", width: "100", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
 
+    {/* Modal Form */}
     <div className="align">
-      {/* Modal Form */}
       {isOpen ? <WorkoutForm setIsOpen={setIsOpen} isOpen={isOpen} /> : ''}
-
-      <div className={`workout-container ${isOpen ? "active" : ""}`} onClick={() => setIsOpen(false)}>
-        <h2>Weekly Workouts</h2>
-        {sorted_by_date.map(workout => {
-          return (
-          <div className="individual_workout" key={workout.id}>
-            <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
-              <h3>{ moment(workout.date).calendar() }</h3>
-              <p>{ capital(workout.name) }</p>
-            </Link>
-          </div>
-          )
-        })}
-      </div> 
-      
+      <PlusCircleOutlined style={{ fontSize: "3rem", color:"green", width: "100%", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
+    </div> 
+    <div className={`workout-container ${isOpen ? "active" : ""}`} onClick={() => setIsOpen(false)}>
+      <h2 onClick={() => setIsOpen(false)}>Weekly Workouts</h2>
+      {sorted_by_date.map(workout => {
+        return (
+        <div className="individual_workout" key={workout.id}>
+          <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
+            <h3>{ moment(workout.date).calendar() }</h3>
+            <p>{ capital(workout.name) }</p>
+          </Link>
+        </div>
+        )
+      })}
     </div>
   </>
   )
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP WORKOUTS", state)
+  // console.log("MSTP WORKOUTS", state)
   return {
     userId: state.user_id,
     isFetching: state.isFetching,

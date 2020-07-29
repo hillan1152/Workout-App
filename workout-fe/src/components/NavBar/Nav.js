@@ -1,52 +1,29 @@
-import React, { Component } from 'react';
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBCollapse, MDBContainer,
-MDBHamburgerToggler } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Logout from '../Login/Logout';
+import React from 'react';
+import { connect } from 'react-redux';
+import { useLocation } from "react-router-dom";
 
-class NavbarPage extends Component {
-state = {
-  collapse1: false,
-  collapseID: ''
-}
+function Nav(props) {
+  const location = useLocation();
+  const { id, name } = props.workout;
 
-toggleCollapse = collapseID => () => {
-  this.setState(prevState => ({ collapseID: (prevState.collapseID !== collapseID ? collapseID : '') }));
-}
-
-toggleSingleCollapse = collapseId => {
-  this.setState({
-    ...this.state,
-    [collapseId]: !this.state[collapseId]
-  });
-}
-
-render() {
   return (
-    <Router>
-      <MDBContainer>
-        <MDBNavbar color="amber lighten-4" light>
-          <MDBContainer>
-            <MDBNavbarBrand>
-              MDBNavbar
-            </MDBNavbarBrand>
-            <MDBHamburgerToggler color="#d3531a" id="hamburger1" onClick={()=> this.toggleSingleCollapse('collapse1')} />
-              <MDBCollapse isOpen={this.state.collapse1} navbar>
-                <MDBNavbarNav left>
-                  <MDBNavItem active>
-                    <MDBNavLink to="#!">Home</MDBNavLink>
-                  </MDBNavItem>
-                  <MDBNavItem>
-                    <Logout>LOGOUT</Logout>
-                  </MDBNavItem>
-                </MDBNavbarNav>
-              </MDBCollapse>
-          </MDBContainer>
-        </MDBNavbar>
-      </MDBContainer>
-    </Router>
-    );
+    <div className="nav-align">
+      <div className={`left-nav ${location.pathname === '/workouts' ? 'nav-location' : ''}`}>
+        <h2>Workouts</h2>
+      </div>
+      <div className={`right-nav ${location.pathname === `/workouts/${id}/${name}` ? 'nav-location' : ''}`}>
+        <h2>Exercises</h2>
+      </div>
+    </div>
+  )
+}
+
+const mapStateToProps = state => {
+  // console.log("NAV MTSP", state);
+  return {
+    workout: state.workout,
+    error: state.error_message.data,
+    exercises: state.exercises,
   }
 }
-
-export default NavbarPage;
+export default connect(mapStateToProps, {})(Nav);

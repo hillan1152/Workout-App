@@ -69,7 +69,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
 
   return (
     <div className="single-workout-container">
-      <StepBackwardFilled style={{ color: 'white', fontSize: '2rem', flexDirection: 'start' }} onClick={() => history.push('/workouts')}/>
+      {/* <StepBackwardFilled style={{ color: 'white', fontSize: '2rem', flexDirection: 'start' }} onClick={() => history.push('/workouts')}/> */}
       {/* EDIT TOGGLE */}
       {openEdit && (
         <section className="confirm-edit">
