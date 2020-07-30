@@ -72,26 +72,28 @@ export const ExerciseList =  (props) => {
   return (
     <div className="exercise-list-container" >
       {isFormOpen && (
-        <form onSubmit={addExercise} className="add-exercise-form align">
-          <h2>Add An Exercise</h2>
-          <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
-          <input onChange={handleChange} placeholder="Region" name="region"/>
-          <input onChange={handleChange} placeholder="Weight" name="weight"/>
-          <input onChange={handleChange} placeholder="Sets" name="sets"/>
-          <input onChange={handleChange} placeholder="Reps" name="reps"/>
-          <button type="submit">Add</button>
-          <button onClick={() => toggle('', 'add', '')}>Cancel</button>
-        </form>
+        <div className="forms align">
+          <form onSubmit={addExercise} >
+            <h2>Add An Exercise</h2>
+            <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
+            <input onChange={handleChange} placeholder="Region" name="region"/>
+            <input onChange={handleChange} placeholder="Weight" name="weight"/>
+            <input onChange={handleChange} placeholder="Sets" name="sets"/>
+            <input onChange={handleChange} placeholder="Reps" name="reps"/>
+            <button type="submit">Add</button>
+          </form>
+          <button onClick={() => closeForms()}>Cancel</button>
+        </div>
       )}
       {toggleDelete && (
-        <div className="add-exercise-form align">
+        <div className="forms align">
           <h2>Are you sure you want to delete {exerciseData.name}</h2>
           <button onClick={removeExercise}>YES</button>
           <button onClick={() => toggle('', 'delete', '')}>Cancel</button>
         </div>
       )}
       {props.openEditExercise && (
-        <div className="add-exercise-form align">
+        <div className="forms align">
           <form onSubmit={editSingleExercise} >
             <h2>Edit An Exercise</h2>
             <input onChange={handleChange} placeholder={`Exercise Name ${(exData || []).exercise_name}`} name="name"/>
