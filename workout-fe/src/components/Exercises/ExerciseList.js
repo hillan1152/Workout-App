@@ -91,16 +91,18 @@ export const ExerciseList =  (props) => {
         </div>
       )}
       {props.openEditExercise && (
-        <form onSubmit={editSingleExercise} className="add-exercise-form align">
-          <h2>Edit An Exercise</h2>
-          <input onChange={handleChange} placeholder={`Exercise Name ${(exData || []).exercise_name}`} name="name"/>
-          <input onChange={handleChange} placeholder="Region" name="region"/>
-          <input onChange={handleChange} type="number" placeholder="Weight" name="weight"/>
-          <input onChange={handleChange} type="number" placeholder="Sets" name="sets"/>
-          <input onChange={handleChange} type="number" placeholder="Reps" name="reps"/>
-          <button type="submit">Edit</button>
-          <button onClick={() => toggle('', 'edit', '')}>Cancel</button>
-        </form>
+        <div className="add-exercise-form align">
+          <form onSubmit={editSingleExercise} >
+            <h2>Edit An Exercise</h2>
+            <input onChange={handleChange} placeholder={`Exercise Name ${(exData || []).exercise_name}`} name="name"/>
+            <input onChange={handleChange} placeholder="Region" name="region"/>
+            <input onChange={handleChange} type="number" placeholder="Weight" name="weight"/>
+            <input onChange={handleChange} type="number" placeholder="Sets" name="sets"/>
+            <input onChange={handleChange} type="number" placeholder="Reps" name="reps"/>
+            <button type="submit">Edit</button>
+          </form>
+          <button onClick={() => closeForms()}>Cancel</button>
+        </div>
       )}
       <h2 onClick={() => closeForms()}>{capital(`${props.workout.name}`)}</h2>
       <PlusCircleOutlined style={{ fontSize: "3rem", color:"darkGreen", marginTop: "2%" }} onClick={() => setIsFormOpen(!isFormOpen)}/>

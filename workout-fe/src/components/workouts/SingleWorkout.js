@@ -8,7 +8,7 @@ import { capital } from '../../utils/helpers';
 import ExerciseList from '../Exercises/ExerciseList';
 
 
-export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, history, exercise_list, error }) => {
+export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, history }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
   const [ openWorkoutName, setOpenWorkoutName ] = useState(false);
   const [ openEditExercise, setOpenEditExercise ] = useState(false);
