@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import * as yup from 'yup';
 import moment from 'moment';
 
 import { addWorkout } from '../../actions';
 import { userWorkouts } from '../../actions';
 
-function WorkoutForm({ addWorkout, userWorkouts, isOpen, setIsOpen, userId, ref }) {
+function WorkoutForm({ addWorkout, userWorkouts, setIsOpen, userId }) {
 
   const [ workout, setWorkout ] = useState({
     name: "",

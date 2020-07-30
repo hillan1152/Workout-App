@@ -8,10 +8,9 @@ import { capital } from '../../utils/helpers';
 import ExerciseList from '../Exercises/ExerciseList';
 
 
-export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, history }) => {
+export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, history }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
   const [ openWorkoutName, setOpenWorkoutName ] = useState(false);
-  const [ openEditExercise, setOpenEditExercise ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
   const [ updateWorkout, setUpdateWorkout ] = useState({
     name: "",
@@ -20,9 +19,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
   let workoutId = match.params.id;
 
   useEffect(() => {
-      fetchExercises(workoutId)
       singleWorkout(workoutId)
-      // fetchExercises, workoutId, singleWorkout
   }, [])
   
   const handleChange = (e) => {
@@ -104,13 +101,13 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
         </div>
       </form>
       )}
-      <ExerciseList setOpenWorkoutName={setOpenWorkoutName} setOpenEditExercise={setOpenEditExercise} openEditExercise={openEditExercise}/>
+      <ExerciseList setOpenWorkoutName={setOpenWorkoutName} workoutId={workoutId}/>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  // console.log("MSTP -- SINGLE WORKOUT", state);
+  // console.log("MSTP -- SINGLE WORKOUT", state.workout.id);
   return {
     userId: state.user_id,
     workout: state.workout,
