@@ -10,7 +10,7 @@ export const AddExerciseForm = ({ submitExercise, setInputExercise, inputExercis
     <div className="forms align">
       <form onSubmit={submitExercise}>
         <h2>Add An Exercise</h2>
-        <input onChange={handleChange} placeholder="Exercise Name" name="name"/>
+        <input onChange={handleChange} placeholder="Exercise Name" name="exercise"/>
         <input onChange={handleChange} placeholder="Region" name="region"/>
         <input onChange={handleChange} placeholder="Weight" name="weight"/>
         <input onChange={handleChange} placeholder="Sets" name="sets"/>

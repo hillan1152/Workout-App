@@ -78,7 +78,8 @@ export const reducer = (state = initialState, action) => {
         workouts: action.payload
       }
     case EDIT_EXERCISE_SUCCESS:
-      // console.log("EDIT EXERCISE SUCCESS", action.payload)
+      console.log("EDIT EXERCISE SUCCESS", action.payload)
+      debugger
       return {
         ...state,
         isFetching: false,

@@ -8,12 +8,14 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
 
-export const Workouts = ({ info, userId, userWorkouts, error_message, exercises }) => {
+
+export const Workouts = ({ info, userId, userWorkouts, error_message }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   
   useEffect(() => {
     userWorkouts(userId)
-  }, [userWorkouts, userId, error_message])
+    // userWorkouts, userId, error_message
+  }, [])
 
   // SORT ALL WORKOUTS BY DATE
   let sorted_by_date = info.sort((a, b) => {
@@ -36,7 +38,6 @@ export const Workouts = ({ info, userId, userWorkouts, error_message, exercises 
 
   return (
     <>
-
     {/* Modal Form */}
     <div className="align">
       {isOpen ? <WorkoutForm setIsOpen={setIsOpen} isOpen={isOpen} /> : ''}

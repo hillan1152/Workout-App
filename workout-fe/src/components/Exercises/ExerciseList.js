@@ -10,7 +10,7 @@ import EditExerciseForm from './EditExerciseForm';
 
 export const ExerciseList =  (props) => {
   const [ inputExercise, setInputExercise ] = useState({
-    name: "",
+    exercise: "",
     region: "",
     weight: 0,
     sets: 0,
@@ -28,17 +28,23 @@ export const ExerciseList =  (props) => {
   const exData = (((props.exercises || {}).data || {}).exercises || []);
 
   useEffect(() => {
-    props.fetchExercises(props.workoutId)
+    let woID = parseInt(props.workoutId);
+    props.fetchExercises(woID)
+    props.singleWorkout(woID)
   }, []);
 
   const submitExercise = e => {
-    props.addExercise(props.workout.id, inputExercise);
+    console.log(props.workout.id, props.workoutId, inputExercise)
+    props.addExercise(props.workoutId, inputExercise);
   };
 
+
   const editSingleExercise = e => {
-    console.log(!inputExercise.name)
-    if(!inputExercise.name){
-      inputExercise.name = exerciseData.exercise_name;
+    let woID = parseInt(props.workoutId);
+    console.log(exerciseData, inputExercise)
+    debugger
+    if(!inputExercise.exercise){
+      inputExercise.exercise = exerciseData.exercise;
     };
     if(!inputExercise.region){
       inputExercise.region = exerciseData.region;
@@ -52,13 +58,17 @@ export const ExerciseList =  (props) => {
     if(!inputExercise.reps){
       inputExercise.reps = exerciseData.reps;
     };
-    let workoutId = props.workout.id;
-    props.editExercise(exerciseData.exercise_id, workoutId, inputExercise);
+    inputExercise.weight = parseInt(inputExercise.weight)
+    inputExercise.sets = parseInt(inputExercise.sets)
+    inputExercise.reps = parseInt(inputExercise.reps)
+    console.log(exerciseData.exercise_id, woID, inputExercise)
+    debugger
+    props.editExercise(exerciseData.exercise_id, woID, inputExercise);
   };
 
   const removeExercise = async e => {
-    let reload = await props.singleWorkout(props.userId)
-    props.deleteExercise(exerciseData.user_exercise_id, props.workout.id);
+    let reload = await props.singleWorkout(props.workoutId)
+    props.deleteExercise(exerciseData.exercise_id, props.workoutId);
     setIsDeleteOpen(false);
     return reload;
   };
@@ -102,10 +112,10 @@ export const ExerciseList =  (props) => {
         <h4 className={isAddFormOpen ? `active` : ''}>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
         {((exData || []).map(data => {
           return (
-            <section className={`exercise ${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`} key={data.user_exercise_id} onClick={() => setIsAddFormOpen(false)}>
+            <section className={`exercise ${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`} key={data.exercise_id} onClick={() => setIsAddFormOpen(false)}>
               <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", marginTop: "5%", marginLeft: "5%" }} onClick={() => toggle("edit", data)}/>
               <section onClick={() => closeForms()}>
-                <h3>{capital(`${data.exercise_name}`)}</h3>
+                <h3>{capital(`${data.exercise}`)}</h3>
                 <p>{data.weight === 0 ? '' : `${data.weight}lbs `}{data.sets}x{data.reps}</p>
               </section>             
               <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", marginTop: "5%", marginRight: "5%"}} onClick={() => toggle("delete", data)}/>
@@ -118,7 +128,7 @@ export const ExerciseList =  (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP EXERCISE LIST", state)
+  console.log("MSTP EXERCISE LIST", state.exercises.data, state.workout)
   return {
     userId: state.user_id,
     workout: state.workout,
