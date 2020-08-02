@@ -8,6 +8,7 @@
     './sass/components/workoutForm',
     './sass/components/exerciseForm',
     './sass/components/login',
+    './sass/components/nav',
     
     './sass/utilities/mixins',
     './sass/utilities/variables',
@@ -20,8 +21,8 @@
 
 .App {
   text-align: center;
-  background-color: black;
-  color: seashell;
+  background-color: rgb(250, 250, 250);
+  color: black;
 }
 
 .App-logo {

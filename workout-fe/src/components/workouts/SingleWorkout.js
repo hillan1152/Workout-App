@@ -8,10 +8,10 @@ import { capital } from '../../utils/helpers';
 import ExerciseList from '../Exercises/ExerciseList';
 
 
-export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, fetchExercises, history, exercise_list, error }) => {
+
+export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, history }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
   const [ openWorkoutName, setOpenWorkoutName ] = useState(false);
-  const [ openEditExercise, setOpenEditExercise ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
   const [ updateWorkout, setUpdateWorkout ] = useState({
     name: "",
@@ -20,9 +20,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
   let workoutId = match.params.id;
 
   useEffect(() => {
-      fetchExercises(workoutId)
       singleWorkout(workoutId)
-      // fetchExercises, workoutId, singleWorkout
   }, [])
   
   const handleChange = (e) => {
@@ -69,7 +67,7 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
 
   return (
     <div className="single-workout-container">
-      <StepBackwardFilled style={{ color: 'white', fontSize: '2rem', flexDirection: 'start' }} onClick={() => history.push('/workouts')}/>
+      {/* <StepBackwardFilled style={{ color: 'white', fontSize: '2rem', flexDirection: 'start' }} onClick={() => history.push('/workouts')}/> */}
       {/* EDIT TOGGLE */}
       {openEdit && (
         <section className="confirm-edit">
@@ -104,13 +102,13 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
         </div>
       </form>
       )}
-      <ExerciseList setOpenWorkoutName={setOpenWorkoutName} setOpenEditExercise={setOpenEditExercise} openEditExercise={openEditExercise}/>
+      <ExerciseList setOpenWorkoutName={setOpenWorkoutName} workoutId={workoutId}/>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  // console.log("MSTP -- SINGLE WORKOUT", state);
+  // console.log("MSTP -- SINGLE WORKOUT", state.workout.id);
   return {
     userId: state.user_id,
     workout: state.workout,

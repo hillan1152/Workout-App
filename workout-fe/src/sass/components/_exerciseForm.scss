@@ -1,4 +1,4 @@
-.add-exercise-form {
+.forms {
   @include modalForm;
   border: 2px inset black;
   align-self: center;
@@ -19,5 +19,5 @@
 
 .active-ex {
   opacity: .2;
-  background-color: seashell;
+  background-color: rgb(224, 224, 224);
 }
