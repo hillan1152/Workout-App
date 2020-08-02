@@ -35,6 +35,7 @@ export const ExerciseList =  (props) => {
 
   const submitExercise = e => {
     console.log(props.workout.id, props.workoutId, inputExercise)
+    debugger
     props.addExercise(props.workoutId, inputExercise);
   };
 
