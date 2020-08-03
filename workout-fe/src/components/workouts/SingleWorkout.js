@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { StepBackwardFilled, DeleteFilled, EditFilled } from '@ant-design/icons';
 
-import { singleWorkout, editWorkout, deleteWorkout, fetchExercises } from '../../actions';
+import { singleWorkout, editWorkout, deleteWorkout, fetchExercises, userWorkouts } from '../../actions';
 import { capital } from '../../utils/helpers';
 import ExerciseList from '../Exercises/ExerciseList';
 
 
 
-export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, history }) => {
+export const SingleWorkout = ({ match, userWorkouts, singleWorkout, userId, editWorkout, deleteWorkout, workout, history }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
   const [ openWorkoutName, setOpenWorkoutName ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
@@ -20,7 +20,8 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
   let workoutId = match.params.id;
 
   useEffect(() => {
-      singleWorkout(workoutId)
+      singleWorkout(workoutId);
+      userWorkouts(userId);
   }, [])
   
   const handleChange = (e) => {
@@ -118,5 +119,5 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { singleWorkout, editWorkout, deleteWorkout, fetchExercises } )(SingleWorkout)
+export default connect(mapStateToProps, { singleWorkout, editWorkout, deleteWorkout, fetchExercises, userWorkouts } )(SingleWorkout)
 

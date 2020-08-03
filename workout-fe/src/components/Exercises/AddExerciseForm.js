@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux'
+import { addExercise } from '../../actions'
 
-
-export const AddExerciseForm = ({ submitExercise, setInputExercise, inputExercise, closeForms}) => {
+export const AddExerciseForm = (props) => {
+  const [ inputExercise, setInputExercise ] = useState({
+    exercise: "",
+    region: "",
+    weight: 0,
+    sets: 0,
+    reps: 0
+  })
+  console.log(props.workoutId, inputExercise)
+  
+  const submitExercise = e => {
+    if(!inputExercise.exercise || !inputExercise.region || !inputExercise.weight || !inputExercise.sets || !inputExercise.reps){
+      alert("Please Complete Form")
+    };
+    inputExercise.weight = parseInt(inputExercise.weight)
+    inputExercise.sets = parseInt(inputExercise.sets)
+    inputExercise.reps = parseInt(inputExercise.reps)
+    console.log(props.workoutId, inputExercise)
+    props.addExercise(props.workoutId, inputExercise)
+  };
 
   const handleChange = e => {
     setInputExercise({ ...inputExercise, [e.target.name]: e.target.value ? e.target.value: '' });
@@ -17,11 +37,17 @@ export const AddExerciseForm = ({ submitExercise, setInputExercise, inputExercis
         <input onChange={handleChange} placeholder="Reps" name="reps"/>
         <button type="submit">Add</button>
       </form>
-      <button onClick={() => closeForms()}>Cancel</button>
+      <button onClick={() => props.closeForms()}>Cancel</button>
     </div>
   )
 }
 
 
 
-export default AddExerciseForm;
+// const mapStateToProps = (state) => ({
+  
+// })
+
+
+
+export default connect(null, { addExercise })(AddExerciseForm)

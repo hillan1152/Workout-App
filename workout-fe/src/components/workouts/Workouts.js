@@ -14,7 +14,6 @@ export const Workouts = ({ info, userId, userWorkouts, error_message }) => {
   
   useEffect(() => {
     userWorkouts(userId)
-    // userWorkouts, userId, error_message
   }, [])
 
   // SORT ALL WORKOUTS BY DATE

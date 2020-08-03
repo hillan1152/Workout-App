@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { PlusCircleOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
-import { fetchExercises, addExercise, editExercise, deleteExercise, singleWorkout } from '../../actions'
+import { fetchExercises, editExercise, deleteExercise, singleWorkout } from '../../actions'
 import { capital } from '../../utils/helpers'
 import moment from 'moment';
-import { AddExerciseForm } from './AddExerciseForm';
+import AddExerciseForm from './AddExerciseForm';
 import DeleteExerciseForm from './DeleteExerciseForm';
 import EditExerciseForm from './EditExerciseForm';
 
@@ -33,13 +33,6 @@ export const ExerciseList =  (props) => {
     props.singleWorkout(woID)
   }, []);
 
-  const submitExercise = e => {
-    console.log(props.workout.id, props.workoutId, inputExercise)
-    debugger
-    props.addExercise(props.workoutId, inputExercise);
-  };
-
-
   const editSingleExercise = e => {
     let woID = parseInt(props.workoutId);
     console.log(exerciseData, inputExercise)
@@ -62,13 +55,11 @@ export const ExerciseList =  (props) => {
     inputExercise.weight = parseInt(inputExercise.weight)
     inputExercise.sets = parseInt(inputExercise.sets)
     inputExercise.reps = parseInt(inputExercise.reps)
-    console.log(exerciseData.exercise_id, woID, inputExercise)
-    debugger
     props.editExercise(exerciseData.exercise_id, woID, inputExercise);
   };
 
   const removeExercise = async e => {
-    let reload = await props.singleWorkout(props.workoutId)
+    let reload = await props.fetchExercises(props.workoutId)
     props.deleteExercise(exerciseData.exercise_id, props.workoutId);
     setIsDeleteOpen(false);
     return reload;
@@ -95,7 +86,7 @@ export const ExerciseList =  (props) => {
 
   return (
     <div className="exercise-list-container" >
-      {isAddFormOpen && <AddExerciseForm closeForms={closeForms} submitExercise={submitExercise} setInputExercise={setInputExercise} inputExercise={inputExercise}/>}
+      {isAddFormOpen && <AddExerciseForm closeForms={closeForms} workoutId={props.workout.id}/>}
       
       {isDeleteOpen && <DeleteExerciseForm closeForms={closeForms} removeExercise={removeExercise}  data={exerciseData} setIsDeleteOpen={setIsDeleteOpen}/>}
       
@@ -129,7 +120,7 @@ export const ExerciseList =  (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP EXERCISE LIST", state.exercises.data, state.workout)
+  console.log("MSTP EXERCISE LIST", state)
   return {
     userId: state.user_id,
     workout: state.workout,
@@ -140,4 +131,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { fetchExercises, addExercise, editExercise, deleteExercise, singleWorkout })(ExerciseList)
+export default connect(mapStateToProps, { fetchExercises, editExercise, deleteExercise, singleWorkout })(ExerciseList)

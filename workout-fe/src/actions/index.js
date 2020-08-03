@@ -20,7 +20,7 @@ export const EDIT_EXERCISE_SUCCESS = "EDIT_EXERCISE_SUCCESS";
 export const POST_EXERCISE_SUCCESS = "POST_EXERCISE_SUCCESS";
 
 
-const baseURL = "https://weight-lifting-journal1.herokuapp.com";
+export const baseURL = "https://weight-lifting-journal1.herokuapp.com";
 
 export const userRegister = (user) => dispatch => {
   // console.log("USER REGISTER -- ACTIONS", user)
@@ -91,6 +91,7 @@ export const fetchExercises = (id) => dispatch => {
 }
 // ADD EXERCISE --  WORKOUT ID, DATA
 export const addExercise = (id, data) => dispatch => {
+  debugger
   dispatch({ type: AUTHORIZING, payload: "Posting Exercise!" })
   axiosWithAuth().post(`${baseURL}/api/exercises/${id}`, data)
     .then(res => dispatch({ type: POST_EXERCISE_SUCCESS, payload: res.data }))
@@ -113,7 +114,5 @@ export const deleteExercise = (id, exercise_id) => dispatch => {
     .then(res => dispatch({ type: DELETE, payload: res.data }))
     return axiosWithAuth().get(`${baseURL}/api/exercises/${exercise_id}`)
       .then(res => dispatch({ type: FETCH_EXERCISE_SUCCESS, payload: res.data }))
-
-    // .then(res => dispatch({ type: FETCH_EXERCISE_SUCCESS, payload: res.data }))
-    // .catch(err => dispatch({ type: ERROR, payload: err.response }))
+      .catch(err => dispatch({ type: ERROR, payload: err.response }))
 }
