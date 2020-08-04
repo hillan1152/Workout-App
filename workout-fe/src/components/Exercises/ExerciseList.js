@@ -9,13 +9,6 @@ import DeleteExerciseForm from './DeleteExerciseForm';
 import EditExerciseForm from './EditExerciseForm';
 
 export const ExerciseList =  (props) => {
-  const [ inputExercise, setInputExercise ] = useState({
-    exercise: "",
-    region: "",
-    weight: 0,
-    sets: 0,
-    reps: 0
-  })
   // PASSES ALL EXERCISE DATA BETWEEN FORMS
   const [ exerciseData, setExerciseData ] = useState();
   // OPEN ADD FORM 
@@ -29,40 +22,21 @@ export const ExerciseList =  (props) => {
 
   useEffect(() => {
     let woID = parseInt(props.workoutId);
+    // if(props.changed){
+    //   props.history.push(`/api/exercises/${woID}`) 
+    // }
+    
     props.fetchExercises(woID)
     props.singleWorkout(woID)
-  }, []);
 
-  const editSingleExercise = e => {
-    let woID = parseInt(props.workoutId);
-    console.log(exerciseData, inputExercise)
-    debugger
-    if(!inputExercise.exercise){
-      inputExercise.exercise = exerciseData.exercise;
-    };
-    if(!inputExercise.region){
-      inputExercise.region = exerciseData.region;
-    };
-    if(!inputExercise.weight){
-      inputExercise.weight = exerciseData.weight;
-    };
-    if(!inputExercise.sets){
-      inputExercise.sets = exerciseData.sets;
-    };
-    if(!inputExercise.reps){
-      inputExercise.reps = exerciseData.reps;
-    };
-    inputExercise.weight = parseInt(inputExercise.weight)
-    inputExercise.sets = parseInt(inputExercise.sets)
-    inputExercise.reps = parseInt(inputExercise.reps)
-    props.editExercise(exerciseData.exercise_id, woID, inputExercise);
-  };
+  }, [props.changed]);
 
-  const removeExercise = async e => {
-    let reload = await props.fetchExercises(props.workoutId)
+
+  const removeExercise = e => {
+    // let reload = await props.fetchExercises(props.workoutId)
     props.deleteExercise(exerciseData.exercise_id, props.workoutId);
     setIsDeleteOpen(false);
-    return reload;
+    // return reload;
   };
 
   const closeForms = () => {
@@ -73,11 +47,11 @@ export const ExerciseList =  (props) => {
 
   const toggle = (name, data) => {
     setExerciseData(data)
-    if(name == 'edit'){
+    if(name === 'edit'){
       setIsEditOpen(true)
       setIsAddFormOpen(false);
       setIsDeleteOpen(false);
-    } else if(name == 'delete'){
+    } else if(name === 'delete'){
       setIsDeleteOpen(true)
       setIsAddFormOpen(false);
       setIsEditOpen(false);
@@ -86,16 +60,16 @@ export const ExerciseList =  (props) => {
 
   return (
     <div className="exercise-list-container" >
-      {isAddFormOpen && <AddExerciseForm closeForms={closeForms} workoutId={props.workout.id}/>}
+      {isAddFormOpen && <AddExerciseForm closeForms={closeForms} />}
       
       {isDeleteOpen && <DeleteExerciseForm closeForms={closeForms} removeExercise={removeExercise}  data={exerciseData} setIsDeleteOpen={setIsDeleteOpen}/>}
       
-      {isEditOpen && <EditExerciseForm closeForms={closeForms} editSingleExercise={editSingleExercise} setInputExercise={setInputExercise} inputExercise={inputExercise} exData={exerciseData}/>}
+      {isEditOpen && <EditExerciseForm closeForms={closeForms} exData={exerciseData} workoutId={props.workout.id}/>}
       
       <div className={`${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`} style={{ display: 'flex', justifyContent: 'center', justifyContent: 'space-evenly' }} onClick={() => closeForms()}>
-        <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", alignSelf: 'center' }}/>
+        {/* <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", alignSelf: 'center' }}/>
+        <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", alignSelf: 'center' }} /> */}
         <h2 >{capital(`${props.workout.name}`)}</h2>
-        <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", alignSelf: 'center' }} />
       </div>
 
       <PlusCircleOutlined style={{ fontSize: "3rem", color:"darkGreen", marginTop: "2%" }} onClick={() => setIsAddFormOpen(true)}/>
@@ -120,13 +94,14 @@ export const ExerciseList =  (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP EXERCISE LIST", state)
+  // console.log("MSTP EXERCISE LIST", state.changed)
   return {
     userId: state.user_id,
     workout: state.workout,
     error: state.error_message.data,
     exercises: state.exercises,
-    fetchMessage: state.fetchMessage
+    fetchMessage: state.fetchMessage,
+    changed: state.changed
   }
 }
 

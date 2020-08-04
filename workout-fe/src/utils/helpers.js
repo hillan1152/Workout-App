@@ -3,3 +3,7 @@ export function capital(string) {
 };
 
 export const baseURL = "https://weight-lifting-journal1.herokuapp.com";
+
+// export const toggleDelete = (open, setOpen) => {
+//   setOpen(!open)
+// }

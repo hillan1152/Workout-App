@@ -9,20 +9,19 @@ export const AddExerciseForm = (props) => {
     weight: 0,
     sets: 0,
     reps: 0
-  })
-  console.log(props.workoutId, inputExercise)
-  
+  })  
+  console.log(props.workout.id)
   const submitExercise = e => {
+    e.preventDefault();
     if(!inputExercise.exercise || !inputExercise.region || !inputExercise.weight || !inputExercise.sets || !inputExercise.reps){
       alert("Please Complete Form")
     };
     inputExercise.weight = parseInt(inputExercise.weight)
     inputExercise.sets = parseInt(inputExercise.sets)
     inputExercise.reps = parseInt(inputExercise.reps)
-    console.log(props.workoutId, inputExercise)
-    props.addExercise(props.workoutId, inputExercise)
+    props.addExercise(props.workout.id, inputExercise)
+    props.closeForms();
   };
-
   const handleChange = e => {
     setInputExercise({ ...inputExercise, [e.target.name]: e.target.value ? e.target.value: '' });
   };
@@ -44,10 +43,12 @@ export const AddExerciseForm = (props) => {
 
 
 
-// const mapStateToProps = (state) => ({
-  
-// })
+const mapStateToProps = (state) => {
+  return {
+    workout: state.workout,
+  }
+}
 
 
 
-export default connect(null, { addExercise })(AddExerciseForm)
+export default connect(mapStateToProps, { addExercise })(AddExerciseForm)
