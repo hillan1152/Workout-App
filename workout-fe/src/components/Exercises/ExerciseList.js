@@ -22,10 +22,6 @@ export const ExerciseList =  (props) => {
 
   useEffect(() => {
     let woID = parseInt(props.workoutId);
-    // if(props.changed){
-    //   props.history.push(`/api/exercises/${woID}`) 
-    // }
-    
     props.fetchExercises(woID)
     props.singleWorkout(woID)
 
