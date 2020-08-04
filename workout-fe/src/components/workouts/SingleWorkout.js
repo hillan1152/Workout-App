@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { StepBackwardFilled, DeleteFilled, EditFilled } from '@ant-design/icons';
+import { DeleteFilled, EditFilled } from '@ant-design/icons';
 
-import { singleWorkout, editWorkout, deleteWorkout, fetchExercises } from '../../actions';
+import { singleWorkout, editWorkout, deleteWorkout, fetchExercises, userWorkouts } from '../../actions';
 import { capital } from '../../utils/helpers';
 import ExerciseList from '../Exercises/ExerciseList';
 
 
 
-export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout, workout, history }) => {
+export const SingleWorkout = ({ match, userWorkouts, singleWorkout, userId, editWorkout, deleteWorkout, workout, history, changed }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
   const [ openWorkoutName, setOpenWorkoutName ] = useState(false);
-  const [ openDelete, setOpenDelete ] = useState(false);
   const [ updateWorkout, setUpdateWorkout ] = useState({
     name: "",
     date: ""
@@ -20,8 +19,9 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
   let workoutId = match.params.id;
 
   useEffect(() => {
-      singleWorkout(workoutId)
-  }, [])
+      singleWorkout(workoutId);
+      userWorkouts(userId);
+  }, [changed])
   
   const handleChange = (e) => {
     setUpdateWorkout({ ...updateWorkout, [e.target.name]: e.target.value ? e.target.value: '' });
@@ -30,12 +30,12 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
   // Toggles all modals
   const toggleChange = (className) => {
 
-    if(className === "delete") {
-      if(openEdit) setOpenEdit(false)
-      setOpenDelete(true)
-    }
-    else if(className === "edit") {
-      if(openDelete) setOpenDelete(false)
+    // if(className === "delete") {
+    //   if(openEdit) setOpenEdit(false)
+    //   setOpenDelete(true)
+    // }
+    if(className === "edit") {
+      // if(openDelete) setOpenDelete(false)
       setOpenEdit(true)
       if(!updateWorkout.name) updateWorkout.name = workout.name;
       if(!updateWorkout.date) updateWorkout.date = moment(workout.date).calendar();
@@ -56,14 +56,6 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
     history.goBack();
   };
 
-  // Confirms Removal and Sends Back to Workout Page
-  const removeWorkout = (e) => {
-    e.preventDefault();
-    deleteWorkout(workoutId);
-    setOpenDelete(false);
-    alert(`Successfully Deleted ${match.params.name} workout`)
-    history.goBack();
-  }
 
   return (
     <div className="single-workout-container">
@@ -78,14 +70,6 @@ export const SingleWorkout = ({ match, singleWorkout, editWorkout, deleteWorkout
             <p>Date: {updateWorkout.date}</p>
             <button>Confirm Edit</button>
           </form>
-        </section> 
-      )}
-      {/* DELETE TOGGLE */}
-      {openDelete && (
-        <section className="confirm-delete">
-          <p onClick={() => setOpenDelete(false)}>x</p>
-          <h3>Are you sure you want to delete {workout.name}?</h3>
-          <button onClick={removeWorkout}>Confirm Delete</button>
         </section> 
       )}
       {/* EDIT FORM: Modal Toggle*/}
@@ -113,10 +97,11 @@ const mapStateToProps = (state) => {
     userId: state.user_id,
     workout: state.workout,
     exercise_list: state.exercises,
-    error: state.error_message
+    error: state.error_message,
+    changed: state.changed
   }
 }
 
 
-export default connect(mapStateToProps, { singleWorkout, editWorkout, deleteWorkout, fetchExercises } )(SingleWorkout)
+export default connect(mapStateToProps, { singleWorkout, editWorkout, deleteWorkout, fetchExercises, userWorkouts } )(SingleWorkout)
 

@@ -6,13 +6,12 @@ import {
   FETCH_WORKOUT_SUCCESS,
   POST_WORKOUT_SUCCESS,
   EDIT_WORKOUT_SUCCESS,
-  DELETE_WORKOUT_SUCCESS,
   FETCH_EXERCISE_SUCCESS,
   POST_EXERCISE_SUCCESS,
   EDIT_EXERCISE_SUCCESS,
   AUTHORIZING,
   ERROR,
-  DELETE
+  DELETE, 
 } from '../actions';
 
 const initialState = {
@@ -24,7 +23,7 @@ const initialState = {
   info: [],
   workout: [],
   exercises: [],
-  edited: false
+  changed: false
 }
 
 export const reducer = (state = initialState, action) => {
@@ -37,11 +36,12 @@ export const reducer = (state = initialState, action) => {
         fetchMessage: action.payload
       }
     case DELETE:
-      // console.log("DELETE");
+      console.log("DELETE", action.payload);
       return {
         ...state,
         isFetching: false,
-        fetchMessage: action.payload
+        fetchMessage: action.payload,
+        changed: true
       }
     case REGISTER_SUCCESS:
       return {
@@ -55,6 +55,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         info: action.payload,
+        changed: false
       }
     case FETCH_WORKOUT_SUCCESS:
       // console.log("FETCH WORKOUT SUCCESS", action.payload)
@@ -62,49 +63,46 @@ export const reducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         workout: action.payload,
+        changed: false
       }
     case FETCH_EXERCISE_SUCCESS:
-      // console.log("FETCH EXERCISE SUCCESS", action.payload)
+      console.log("FETCH EXERCISE SUCCESS", action.payload)
       return {
         ...state,
         isFetching: false,
         exercises: action.payload,
+        changed: false
       }
     case POST_WORKOUT_SUCCESS:
-      // console.log("POST WORKOUT SUCCESS", action.payload)
+      console.log("POST WORKOUT SUCCESS", action.payload)
+      // debugger
       return {
         ...state,
         isFetching: false,
-        workouts: action.payload
+        workouts: action.payload,
+        changed: false
       }
     case EDIT_EXERCISE_SUCCESS:
-      console.log("EDIT EXERCISE SUCCESS", action.payload)
-      debugger
+      console.log("EDIT EXERCISE SUCCESS", state)
       return {
         ...state,
         isFetching: false,
-        edited: action.payload > 0 ? true : false
+        changed: true
     }
     case POST_EXERCISE_SUCCESS:
-    // console.log("POST EXERCISE SUCCESS", action.payload)
-    return {
-      ...state,
-      isFetching: false,
-      exercises: action.payload
+      console.log("POST EXERCISE SUCCESS", action.payload)
+      return {
+        ...state,
+        isFetching: false,
+        changed: true
     }
     case EDIT_WORKOUT_SUCCESS:
-      // console.log("EDIT WORKOUT SUCCESS", action.payload)
+      console.log("EDIT WORKOUT SUCCESS", action.payload)
       return {
         ...state,
         isFetching: false,
-        workouts: action.payload
-      }
-    case DELETE_WORKOUT_SUCCESS:
-      // console.log("DELETE_WORKOUT_SUCCESS", action.payload)
-      return {
-        ...state,
-        isFetching: false,
-        workout: action.payload
+        workout: action.payload,
+        changed: true
       }
     case LOGIN_SUCCESS:
       // console.log("STATE", action.payload)
@@ -124,6 +122,8 @@ export const reducer = (state = initialState, action) => {
         ...state, token: ""
       }
     case ERROR:
+      console.log("ERROR", action.payload)
+      // debugger
       return {
         ...state,
         isFetching: false,
