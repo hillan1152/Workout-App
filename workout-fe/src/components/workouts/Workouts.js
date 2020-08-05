@@ -9,7 +9,6 @@ import { PlusCircleOutlined, DeleteFilled } from '@ant-design/icons';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
 
-
 export const Workouts = ({ info, userId, workout, userWorkouts, deleteWorkout, changed }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);

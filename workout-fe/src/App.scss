@@ -1,5 +1,3 @@
-// @import-normalize;
-
 @import 
     './sass/utilities/custom',
     './sass/components/workouts',
@@ -9,12 +7,14 @@
     './sass/components/exerciseForm',
     './sass/components/login',
     './sass/components/nav',
+    './sass/components/footer',
     
     './sass/utilities/mixins',
     './sass/utilities/variables',
     
     './sass/base/global',
     './sass/base/reset';
+    
     
   
 
@@ -23,12 +23,11 @@
   text-align: center;
   background-color: rgb(250, 250, 250);
   color: black;
+  margin-bottom: none;
+  // max-width: 100vw;
+  // max-height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -38,7 +37,6 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

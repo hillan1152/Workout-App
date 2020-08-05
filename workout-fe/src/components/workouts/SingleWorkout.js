@@ -8,7 +8,6 @@ import { capital } from '../../utils/helpers';
 import ExerciseList from '../Exercises/ExerciseList';
 
 
-
 export const SingleWorkout = ({ match, userWorkouts, singleWorkout, userId, editWorkout, deleteWorkout, workout, history, changed }) => {
   const [ openEdit, setOpenEdit ] = useState(false);
   const [ openWorkoutName, setOpenWorkoutName ] = useState(false);
@@ -29,13 +28,7 @@ export const SingleWorkout = ({ match, userWorkouts, singleWorkout, userId, edit
 
   // Toggles all modals
   const toggleChange = (className) => {
-
-    // if(className === "delete") {
-    //   if(openEdit) setOpenEdit(false)
-    //   setOpenDelete(true)
-    // }
     if(className === "edit") {
-      // if(openDelete) setOpenDelete(false)
       setOpenEdit(true)
       if(!updateWorkout.name) updateWorkout.name = workout.name;
       if(!updateWorkout.date) updateWorkout.date = moment(workout.date).calendar();
