@@ -3,9 +3,8 @@
   background-color: black;
   color: white;
   display: flex;
-  align-self: stretch;
   padding: 10%;
-  height: 8rem;
-  margin-bottom: 0;
+  // margin-top: auto;
+  flex-shrink: 0;
 }
 

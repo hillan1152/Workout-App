@@ -7,7 +7,6 @@ import moment from 'moment';
 import AddExerciseForm from './AddExerciseForm';
 import DeleteExerciseForm from './DeleteExerciseForm';
 import EditExerciseForm from './EditExerciseForm';
-import Footer from '../Footer/Footer';
 
 export const ExerciseList =  (props) => {
   // PASSES ALL EXERCISE DATA BETWEEN FORMS
@@ -86,8 +85,6 @@ export const ExerciseList =  (props) => {
           )
         }))}
       </div>  
-      <Footer/>
-
     </div>
   )
 }

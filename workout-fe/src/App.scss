@@ -20,12 +20,13 @@
 
 
 .App {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
   text-align: center;
   background-color: rgb(250, 250, 250);
   color: black;
-  margin-bottom: none;
-  // max-width: 100vw;
-  // max-height: 100vh;
+  min-height: 100%;
 }
 
 
@@ -35,16 +36,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  
-}
 
 .App-link {
   color: #61dafb;
