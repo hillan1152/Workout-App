@@ -9,10 +9,13 @@
   background-image: url("https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
   background-repeat: no-repeat;
   background-position: top;
-  background-color: rgba(255,255,255,0.6);
+  background-color: rgba(255,255,255,0.3);
   background-blend-mode: lighten;
   height: 90%;
+  width: 100%;
   overflow: auto;
+  display: flex;
+  flex-flow: column;
 }
 .workout-container {
   display: flex;
@@ -46,3 +49,14 @@
   }
 }
 
+.confirm-delete {
+  @include modalForm;
+  align-self: center;
+  font-size: 1.2rem;
+  button {
+    width: 100%;
+    margin-top: 4%;
+    @include button;
+  }
+
+}
