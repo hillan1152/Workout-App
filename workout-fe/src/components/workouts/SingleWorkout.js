@@ -71,7 +71,7 @@ export const SingleWorkout = ({ match, userWorkouts, singleWorkout, userId, edit
       <form className="workout-name-form">
         <p onClick={() => setOpenWorkoutName(false)}>X</p>
         <input name="name" placeholder={capital(`${workout.name}`)} onChange={handleChange}></input>
-        <label htmlFor="date">{moment(workout.date).calendar()}</label>
+        <label htmlFor="date">{moment(workout.date).format("dddd, MMMM Do")}</label>
         <input name="date" type="date" onChange={handleChange}></input>
         <div>
           <EditFilled style={{ fontSize: "2rem", color:"yellow" }} onClick={() => toggleChange("edit")} name="edit"/>

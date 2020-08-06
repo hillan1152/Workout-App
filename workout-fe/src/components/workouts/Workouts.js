@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userWorkouts, deleteWorkout } from '../../actions';
@@ -9,14 +9,21 @@ import { PlusCircleOutlined, DeleteFilled } from '@ant-design/icons';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
 
-export const Workouts = ({ info, userId, workout, userWorkouts, deleteWorkout, changed }) => {
+export const Workouts = ({ info, userId, workout, userWorkouts, deleteWorkout, changed, error }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
   const [ singleData, setSingleData ] = useState()
   
+  const fieldRef = useRef(null);
+
+
+
   useEffect(() => {
+    if(error && fieldRef.current){
+      fieldRef.current.scrollIntoView({ behavior: "smooth" });
+    }
     userWorkouts(userId)
-  }, [changed])
+  }, [changed, error])
 
   // Confirms Removal and Sends Back to Workout Page
   const removeWorkout = (e) => {
@@ -47,35 +54,35 @@ export const Workouts = ({ info, userId, workout, userWorkouts, deleteWorkout, c
     }
   });
   return (
-    <section className="workouts-master">
-    {/* Modal Form */}
-    <div className="align">
-      {isOpen ? <WorkoutForm setIsOpen={setIsOpen} isOpen={isOpen} /> : ''}
-      <PlusCircleOutlined style={{ fontSize: "3rem", color:"lightGreen", width: "100%", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
-    </div> 
-    {/* DELETE TOGGLE */}
-    {openDelete && (
-      <section className="confirm-delete">
-        <h3>Are you sure you want to delete {singleData.name}?</h3>
-        <button onClick={removeWorkout}>Confirm Delete</button>
-        <button onClick={() => setOpenDelete(false)}>Cancel</button>
-      </section> 
-    )}
-    <div className={`workout-container ${isOpen ? "active" : ""}`} onClick={() => setIsOpen(false)}>
-      <h2 onClick={() => setIsOpen(false)}>Weekly Workouts</h2>
-      {sorted_by_date.map(workout => {
-        return (
-        <div className="individual_workout" key={workout.id}>
-          <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
-            {/* <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", alignSelf: 'center' }}/> */}
-            <h3>{ moment(workout.date).calendar() }</h3>
-            <p>{ capital(workout.name) }</p>
-          </Link>
-          <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", alignSelf: 'center' }} onClick={() => deleteModal(workout)}/>
-        </div>
-        )
-      })}
-    </div>
+    <section className="workouts-master" ref={fieldRef}>
+      {/* Modal Form */}
+      <div className="align">
+        {isOpen ? <WorkoutForm setIsOpen={setIsOpen} isOpen={isOpen} /> : ''}
+        <PlusCircleOutlined style={{ fontSize: "3rem", color:"lightGreen", width: "100%", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
+      </div> 
+      {/* DELETE TOGGLE */}
+      {openDelete && (
+        <section className="confirm-delete">
+          <h3>Are you sure you want to delete {singleData.name}?</h3>
+          <button onClick={removeWorkout}>Confirm Delete</button>
+          <button onClick={() => setOpenDelete(false)}>Cancel</button>
+        </section> 
+      )}
+      <div className={`workout-container ${isOpen ? "active" : ""}`} onClick={() => setIsOpen(false)}>
+        <h2 onClick={() => setIsOpen(false)}>Weekly Workouts</h2>
+        {sorted_by_date.map(workout => {
+          return (
+          <div className="individual_workout" key={workout.id}>
+            <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
+              {/* <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", alignSelf: 'center' }}/> */}
+              <h3>{ moment(workout.date).format("dddd, MMMM Do") }</h3>
+              <p>{ capital(workout.name) }</p>
+            </Link>
+            <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", alignSelf: 'center' }} onClick={() => deleteModal(workout)}/>
+          </div>
+          )
+        })}
+      </div>
   </section>
   )
 }
