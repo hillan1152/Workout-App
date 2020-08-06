@@ -9924,6 +9924,10 @@ h3 {
   opacity: 0.8;
 }
 
+.inner-container {
+  height: 89vh;
+}
+
 .align {
   display: flex;
   justify-content: center;
@@ -9942,13 +9946,14 @@ h3 {
   background-color: white;
 }
 
+.workouts-master {
+  background-image: url("https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+  height: 100%;
+}
+
 .workout-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-flow: column;
-  margin-bottom: 5%;
-  color: black;
   height: 100%;
 }
 .workout-container h2 {
@@ -9983,7 +9988,7 @@ h3 {
   flex-flow: column;
   justify-content: flex-start;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin-top: 5%;
   color: black;
 }
@@ -10015,7 +10020,6 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
 .single-workout-container form {
   display: flex;
@@ -10039,15 +10043,15 @@ h3 {
 
 .add-workout-form {
   display: flex;
+  position: absolute;
   flex-direction: column;
   align-items: center;
-  width: 75%;
-  line-height: 1.4;
   background-color: darkgray;
-  padding: 5%;
   border: 2px inset black;
   border-radius: 2px;
-  position: absolute;
+  width: 75%;
+  padding: 5%;
+  line-height: 1.4;
   z-index: 1000;
   margin-top: 15%;
 }
@@ -10068,15 +10072,15 @@ h3 {
 
 .forms {
   display: flex;
+  position: absolute;
   flex-direction: column;
   align-items: center;
-  width: 75%;
-  line-height: 1.4;
   background-color: darkgray;
-  padding: 5%;
   border: 2px inset black;
   border-radius: 2px;
-  position: absolute;
+  width: 75%;
+  padding: 5%;
+  line-height: 1.4;
   z-index: 1000;
   margin-top: 15%;
   border: 2px inset black;
@@ -10113,18 +10117,22 @@ h3 {
   }
 }
 .login-container {
-  background: black;
-  color: white;
+  background-image: url("https://images.unsplash.com/photo-1576678927484-cc907957088c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+  background-repeat: no-repeat;
   display: flex;
   flex-flow: column;
-  align-content: center;
-  height: 100vh;
-  overflow-x: hidden;
+  margin: 0;
   width: 100%;
+  height: 89vh;
 }
 .login-container p {
   margin-top: 5%;
   animation: 0.7s ease-out 0s 1 slideInFromTop;
+}
+.login-container .login-title {
+  margin-top: 10%;
+  font-size: 2.2rem;
+  color: white;
 }
 .login-container form {
   display: flex;
@@ -10134,9 +10142,11 @@ h3 {
   margin-top: 5rem;
   padding: 5%;
   width: 75%;
-  border: 10px inset white;
-  box-shadow: 8px 3px white;
-  color: white;
+  border: 10px inset darkgrey;
+  box-shadow: 8px 3px grey;
+  background-color: whitesmoke;
+  opacity: 0.9;
+  color: black;
   line-height: 2;
   animation: 1s ease-out 0s 1 slideInFromTop;
 }
@@ -10163,6 +10173,17 @@ h3 {
   background-color: black;
   border: 1px solid black;
   color: white;
+}
+
+.err-message {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  background-color: red;
+  width: 80%;
+  height: 5%;
+  padding: 3%;
+  text-align: center;
 }
 
 .nav-align {
@@ -10196,6 +10217,15 @@ h3 {
   padding-top: 5%;
 }
 
+.footer-container {
+  border: 1px solid #000000;
+  background-color: black;
+  color: white;
+  display: flex;
+  padding: 10%;
+  flex-shrink: 0;
+}
+
 * {
   box-sizing: border-box;
   font-family: "Roboto Condensed";
@@ -10207,7 +10237,7 @@ html {
 
 body {
   line-height: 1.6;
-  overflow: auto;
+  overflow: hidden;
 }
 
 h1 {
@@ -10293,14 +10323,13 @@ table {
 }
 
 .App {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
   text-align: center;
   background-color: #fafafa;
   color: black;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  min-height: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -10308,17 +10337,6 @@ table {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }

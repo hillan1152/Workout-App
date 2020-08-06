@@ -4,7 +4,6 @@ import { useLocation, Link } from "react-router-dom";
 
 function Nav(props) {
   const location = useLocation();
-  const history = props;
   const { id, name } = props.workout;
   
   return (

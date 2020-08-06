@@ -17,6 +17,7 @@ export function EditExerciseForm(props) {
   };
 
   const editSingleExercise = e => {
+    e.preventDefault();
     if(!inputExercise.exercise){
       inputExercise.exercise = exData.exercise;
     };
@@ -36,6 +37,7 @@ export function EditExerciseForm(props) {
     inputExercise.sets = parseInt(inputExercise.sets)
     inputExercise.reps = parseInt(inputExercise.reps)
     props.editExercise(exData.exercise_id, props.workout.id, inputExercise);
+    props.closeForms();
   };
   return (
     <div className="forms align">

@@ -33,15 +33,16 @@ export const Login = (props) => {
     }
   }
     
-  // if(error){
-  //   setTimeout(() => {
-  //     window.location.reload()
-  //   }, 1500)
-  // }
+  if(props.error){
+    setTimeout(() => {
+      window.location.reload()
+    }, 2000)
+  }
 
 
   return (
     <div className="login-container">
+      <h2 className="login-title">Welcome To Workout Journal</h2>
       <form onSubmit={handleSubmit}>
         <h2>Please Login</h2>
         <label htmlFor="email">Email</label>

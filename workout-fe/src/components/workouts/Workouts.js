@@ -9,7 +9,6 @@ import { PlusCircleOutlined, DeleteFilled } from '@ant-design/icons';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
 
-
 export const Workouts = ({ info, userId, workout, userWorkouts, deleteWorkout, changed }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
@@ -48,11 +47,11 @@ export const Workouts = ({ info, userId, workout, userWorkouts, deleteWorkout, c
     }
   });
   return (
-    <>
+    <section className="workouts-master">
     {/* Modal Form */}
     <div className="align">
       {isOpen ? <WorkoutForm setIsOpen={setIsOpen} isOpen={isOpen} /> : ''}
-      <PlusCircleOutlined style={{ fontSize: "3rem", color:"green", width: "100%", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
+      <PlusCircleOutlined style={{ fontSize: "3rem", color:"lightGreen", width: "100%", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
     </div> 
     {/* DELETE TOGGLE */}
     {openDelete && (
@@ -77,7 +76,7 @@ export const Workouts = ({ info, userId, workout, userWorkouts, deleteWorkout, c
         )
       })}
     </div>
-  </>
+  </section>
   )
 }
 
