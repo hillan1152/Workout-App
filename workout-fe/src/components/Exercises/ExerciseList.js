@@ -63,12 +63,10 @@ export const ExerciseList =  (props) => {
       {isEditOpen && <EditExerciseForm closeForms={closeForms} exData={exerciseData} workoutId={props.workout.id}/>}
       
       <div className={`${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`} style={{ display: 'flex', justifyContent: 'center', justifyContent: 'space-evenly' }} onClick={() => closeForms()}>
-        {/* <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", alignSelf: 'center' }}/>
-        <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", alignSelf: 'center' }} /> */}
-        <h2 >{capital(`${props.workout.name}`)}</h2>
+        <h2>{capital(`${props.workout.name}`)}</h2>
       </div>
 
-      <PlusCircleOutlined style={{ fontSize: "3rem", color:"darkGreen", marginTop: "2%" }} onClick={() => setIsAddFormOpen(true)}/>
+      <PlusCircleOutlined style={{ fontSize: "3rem", color:"lightGreen", marginTop: "2%" }} onClick={() => setIsAddFormOpen(true)}/>
       
       <div className={`exercise-list-container ${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`}>
         <h4 className={isAddFormOpen ? `active` : ''}>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>

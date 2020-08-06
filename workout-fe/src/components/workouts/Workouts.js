@@ -75,7 +75,7 @@ export const Workouts = ({ info, userId, workout, userWorkouts, deleteWorkout, c
           <div className="individual_workout" key={workout.id}>
             <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
               {/* <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", alignSelf: 'center' }}/> */}
-              <h3>{ moment(workout.date).calendar() }</h3>
+              <h3>{ moment(workout.date).format("dddd, MMMM Do") }</h3>
               <p>{ capital(workout.name) }</p>
             </Link>
             <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", alignSelf: 'center' }} onClick={() => deleteModal(workout)}/>
