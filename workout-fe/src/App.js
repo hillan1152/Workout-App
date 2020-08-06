@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 
 function App(props) {
   const location = useLocation();
-  console.log('LOCATION', location)
+  // console.log('LOCATION', location)
   return (
     <div className="App">
       <div className="inner-container">
@@ -24,7 +24,7 @@ function App(props) {
             <span className="sr-only">Loading...</span>
           </div> 
         </div>}
-        {location.pathname !== '/' ? <Nav/> : ''}
+        {location.pathname !== '/' && location.pathname !== '/signup' ? <Nav/> : ''}
         {/* {props.error_message.data ? <Errors error_message={props.error_message}/> : ''} */}
         <Route exact path="/signup" component={Register}/>
         <Route exact path="/" component={Login}/>

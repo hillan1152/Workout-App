@@ -10230,6 +10230,64 @@ h3 {
   text-align: center;
 }
 
+.form-container {
+  background-image: url("https://images.unsplash.com/photo-1576678927484-cc907957088c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: lighten;
+  display: flex;
+  flex-flow: column;
+  margin: 0;
+  width: 100%;
+  height: 89vh;
+}
+.form-container .reg-form {
+  display: flex;
+  flex-flow: column;
+  align-self: center;
+  align-items: center;
+  margin-top: 5rem;
+  padding: 5%;
+  width: 75%;
+  border: 10px inset darkgrey;
+  box-shadow: 8px 3px grey;
+  background-color: whitesmoke;
+  color: black;
+  line-height: 2;
+  animation: 1s ease-out 0s 1 slideInFromTop;
+}
+.form-container .reg-form p {
+  margin-top: 5%;
+  animation: 0.7s ease-out 0s 1 slideInFromTop;
+}
+.form-container .reg-form .login-title {
+  margin-top: 10%;
+  font-size: 2.2rem;
+  color: white;
+}
+.form-container .reg-form h2 {
+  font-size: 2rem;
+  text-decoration: underline;
+}
+.form-container .reg-form label {
+  font-size: 1.5rem;
+  margin-bottom: 2%;
+}
+.form-container .reg-form input {
+  margin: 3%, 0;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  border: 1px solid black;
+}
+.form-container button {
+  width: 100%;
+  margin-top: 4%;
+  margin-top: 10%;
+  width: 75%;
+  height: 3rem;
+  border-radius: 8px;
+}
+
 .nav-align {
   display: flex;
   justify-content: space-evenly;

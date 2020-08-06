@@ -7,6 +7,7 @@ import moment from 'moment';
 import AddExerciseForm from './AddExerciseForm';
 import DeleteExerciseForm from './DeleteExerciseForm';
 import EditExerciseForm from './EditExerciseForm';
+import { addStyle, editStyle, nameStyle, deleteStyle } from '../../utils/helpers'
 
 export const ExerciseList =  (props) => {
   // PASSES ALL EXERCISE DATA BETWEEN FORMS
@@ -19,6 +20,7 @@ export const ExerciseList =  (props) => {
   const [ isEditOpen, setIsEditOpen ] = useState(false);
 
   const exData = (((props.exercises || {}).data || {}).exercises || []);
+  let count = 0
 
   useEffect(() => {
     let woID = parseInt(props.workoutId);
@@ -29,10 +31,8 @@ export const ExerciseList =  (props) => {
 
 
   const removeExercise = e => {
-    // let reload = await props.fetchExercises(props.workoutId)
     props.deleteExercise(exerciseData.exercise_id, props.workoutId);
     setIsDeleteOpen(false);
-    // return reload;
   };
 
   const closeForms = () => {
@@ -62,23 +62,23 @@ export const ExerciseList =  (props) => {
       
       {isEditOpen && <EditExerciseForm closeForms={closeForms} exData={exerciseData} workoutId={props.workout.id}/>}
       
-      <div className={`${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`} style={{ display: 'flex', justifyContent: 'center', justifyContent: 'space-evenly' }} onClick={() => closeForms()}>
+      <div className={`${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`} style={{...nameStyle}} onClick={() => closeForms()}>
         <h2>{capital(`${props.workout.name}`)}</h2>
       </div>
 
-      <PlusCircleOutlined style={{ fontSize: "3rem", color:"lightGreen", marginTop: "2%" }} onClick={() => setIsAddFormOpen(true)}/>
+      <PlusCircleOutlined style={{...addStyle}} onClick={() => setIsAddFormOpen(true)}/>
       
       <div className={`exercise-list-container ${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`}>
         <h4 className={isAddFormOpen ? `active` : ''}>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
         {((exData || []).map(data => {
           return (
             <section className={`exercise ${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`} key={data.exercise_id} onClick={() => setIsAddFormOpen(false)}>
-              <EditFilled className="edit-icon" style={{ fontSize: "1.5rem", color:"orange", marginTop: "5%", marginLeft: "5%" }} onClick={() => toggle("edit", data)}/>
+              <EditFilled className="edit-icon" style={{...editStyle}} onClick={() => toggle("edit", data)}/>
               <section onClick={() => closeForms()}>
                 <h3>{capital(`${data.exercise}`)}</h3>
                 <p>{data.weight === 0 ? '' : `${data.weight}lbs `}{data.sets}x{data.reps}</p>
               </section>             
-              <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", marginTop: "5%", marginRight: "5%"}} onClick={() => toggle("delete", data)}/>
+              <DeleteFilled className="delete-icon" type="button" style={{...deleteStyle}} onClick={() => toggle("delete", data)}/>
             </section>
           )
         }))}

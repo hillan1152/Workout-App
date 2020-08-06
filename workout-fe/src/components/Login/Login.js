@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useLocation, Link } from "react-router-dom";
 
 // ACTIONS
 import { userLogin } from '../../actions';
@@ -50,6 +51,8 @@ export const Login = (props) => {
         <label htmlFor="password">Password</label>
         <input type="password" name="password" placeholder="Password" onChange={handleChange}/>
         <button type="submit">Submit</button>
+        <h3>Need An Account?</h3>
+        <Link to={'/signup'}>Register Here</Link>
       </form>
       {props.error ? <p className="err-message">{props.error.data.message}</p> : ''}
     </div>
