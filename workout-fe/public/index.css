@@ -9926,7 +9926,7 @@ h3 {
 
 .inner-container {
   min-height: 100%;
-  margin-bottom: -142px;
+  margin-bottom: 10%;
 }
 
 .inner-container:after {
@@ -9958,9 +9958,8 @@ h3 {
   background-position: top;
   background-color: rgba(255, 255, 255, 0.5);
   background-blend-mode: lighten;
-  height: 90vh;
+  height: 90%;
   width: 100%;
-  overflow: auto;
   display: flex;
   flex-flow: column;
 }
@@ -10030,6 +10029,7 @@ h3 {
   width: 100%;
   height: auto;
   color: black;
+  overflow: scroll;
 }
 .exercise-list-container h2 {
   font-size: 2rem;
@@ -10351,7 +10351,6 @@ html {
 
 body {
   line-height: 1.6;
-  overflow: hidden;
 }
 
 h1 {
@@ -10439,11 +10438,10 @@ table {
 .App {
   display: flex;
   flex-flow: column;
-  justify-content: space-around;
   text-align: center;
   background-color: #fafafa;
   color: black;
-  overflow: scroll;
+  height: 100vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
