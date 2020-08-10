@@ -1,6 +1,5 @@
 @import '../utilities/mixins';
 @import '../utilities/variables';
-
 .active {
   opacity: .2;
   background-color: white;
@@ -58,5 +57,4 @@
     margin-top: 4%;
     @include button;
   }
-
 }

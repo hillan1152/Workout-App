@@ -3,19 +3,19 @@
   width: $width;
   height: $height;
   border-radius: 8px;
+  align-self: center;
 }
 
 @mixin modalForm(){
   display: flex;
   position: absolute;
   flex-direction: column;
-  align-items: center;
   background-color: darkgray;
+  margin-top: 8%;
   border: 2px inset black;
   border-radius: 2px;
   width: 75%;
   padding: 5%;
   line-height: 1.4;
   z-index: 1000;
-  margin-top: 15%;
 }

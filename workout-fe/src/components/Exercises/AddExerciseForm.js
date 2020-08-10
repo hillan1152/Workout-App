@@ -10,7 +10,7 @@ export const AddExerciseForm = (props) => {
     sets: 0,
     reps: 0
   })  
-  console.log(props.workout.id)
+
   const submitExercise = e => {
     e.preventDefault();
     if(!inputExercise.exercise || !inputExercise.region || !inputExercise.weight || !inputExercise.sets || !inputExercise.reps){
@@ -22,6 +22,7 @@ export const AddExerciseForm = (props) => {
     props.addExercise(props.workout.id, inputExercise)
     props.closeForms();
   };
+  
   const handleChange = e => {
     setInputExercise({ ...inputExercise, [e.target.name]: e.target.value ? e.target.value: '' });
   };
@@ -40,8 +41,6 @@ export const AddExerciseForm = (props) => {
     </div>
   )
 }
-
-
 
 const mapStateToProps = (state) => {
   return {

@@ -19,13 +19,12 @@ export const ExerciseList =  (props) => {
   // OPEN EDIT FORM 
   const [ isEditOpen, setIsEditOpen ] = useState(false);
 
+  // EXERCISE DATA --- USED FOR MAPPING EXERCISES
   const exData = (((props.exercises || {}).data || {}).exercises || []);
-  let count = 0
 
   useEffect(() => {
     let woID = parseInt(props.workoutId);
     props.fetchExercises(woID)
-    props.singleWorkout(woID)
 
   }, [props.changed]);
 
@@ -54,6 +53,45 @@ export const ExerciseList =  (props) => {
     } 
   }
 
+
+//   const playData = [];
+  
+//   {((exData || []).forEach((exercise) => {
+//     playData.push(
+//       <div 
+//         key={exercise.exercise_id}
+//         onDragStart={(e) => onDragStart(e, exercise.exercise)}
+//         draggable
+//         className="draggable"
+//         style={{ backgroundColor: 'orange', margin: '2rem', padding: '2rem'}}
+//       >
+//         {exercise.exercise}
+//       </div>
+//     )
+//   }))}
+
+// 	const onDragStart = (event, ex_id) => {
+//     console.log('dragstart on div: ', ex_id);
+//     event.dataTransfer.setData("ex_id", ex_id);
+//   }
+//   const onDragOver = (event) => {
+//       event.preventDefault();
+//   }
+//   const onDrop = (event, cat) => {
+//     let taskName = event.dataTransfer.getData("ex_id");
+
+//     let exercises = exData.filter((ex) => {
+//         if (ex.exercise == taskName) {
+//             ex.type = cat;
+//         }
+//         return ex;
+//     });
+
+//     setExerciseData({
+//         ...this.state,
+//         exercises
+//     });
+// }
   return (
     <div className="exercise-list-container" >
       {isAddFormOpen && <AddExerciseForm closeForms={closeForms} />}
@@ -61,12 +99,21 @@ export const ExerciseList =  (props) => {
       {isDeleteOpen && <DeleteExerciseForm closeForms={closeForms} removeExercise={removeExercise}  data={exerciseData} setIsDeleteOpen={setIsDeleteOpen}/>}
       
       {isEditOpen && <EditExerciseForm closeForms={closeForms} exData={exerciseData} workoutId={props.workout.id}/>}
-      
-      <div className={`${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`} style={{...nameStyle}} onClick={() => closeForms()}>
-        <h2>{capital(`${props.workout.name}`)}</h2>
-      </div>
 
       <PlusCircleOutlined style={{...addStyle}} onClick={() => setIsAddFormOpen(true)}/>
+
+      {/* <div className="drag-container">
+	      <h2 className="head">To Do List Drag & Drop</h2>
+		    <div className="inProgress"
+          onDragOver={(e) => onDragOver(e)}
+          onDrop={(e) => onDrop(e, 'inProgress')}
+        >
+          <span className="group-header">In Progress</span>
+          {playData}
+	      </div>      
+	    </div> */}
+
+
       
       <div className={`exercise-list-container ${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`}>
         <h4 className={isAddFormOpen ? `active` : ''}>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
@@ -76,7 +123,7 @@ export const ExerciseList =  (props) => {
               <EditFilled className="edit-icon" style={{...editStyle}} onClick={() => toggle("edit", data)}/>
               <section onClick={() => closeForms()}>
                 <h3>{capital(`${data.exercise}`)}</h3>
-                <p>{data.weight === 0 ? '' : `${data.weight}lbs `}{data.sets}x{data.reps}</p>
+                <p>{data.weight === 0 ? '' : `${data.weight}lbs `}{`${data.sets} sets`}x{`${data.reps} reps`}</p>
               </section>             
               <DeleteFilled className="delete-icon" type="button" style={{...deleteStyle}} onClick={() => toggle("delete", data)}/>
             </section>
