@@ -17,7 +17,7 @@ export const Register = ({ userRegister, history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(user.password != user.reEnter){
+    if(user.password !== user.reEnter){
       return alert('Your Passwords Do Not Match. Try Again!')
     } 
     if(!user.email.includes('@')){

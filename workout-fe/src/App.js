@@ -6,7 +6,7 @@ import PrivateRoute from "./utils/PrivateRoute.js";
 // COMPONENTS
 import Login from './components/Login/Login.js';
 import Register from './components/Register/Register.js';
-import Workouts from './components/workouts/Workouts.js';
+import WorkoutList from './components/workouts/WorkoutList.js';
 import SingleWorkout from './components/workouts/SingleWorkout';
 import Nav from './components/NavBar/Nav';
 import Footer from './components/Footer/Footer';
@@ -28,8 +28,8 @@ function App(props) {
         {/* {props.error_message.data ? <Errors error_message={props.error_message}/> : ''} */}
         <Route exact path="/signup" component={Register}/>
         <Route exact path="/" component={Login}/>
-        <PrivateRoute exact path="/workouts" component={Workouts}/>
         <PrivateRoute exact path="/workouts/:id/:name" component={SingleWorkout}/>
+        <PrivateRoute exact path="/workouts" component={WorkoutList}/>
       </div>
       <Footer/>
     </div>

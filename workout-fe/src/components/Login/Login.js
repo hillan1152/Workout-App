@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // ACTIONS
 import { userLogin } from '../../actions';
@@ -11,14 +11,12 @@ export const Login = (props) => {
     password: ""
   });
   
-  
   useEffect(() => {
     if(props.token){
       props.history.push('/workouts')
     }
 
   }, [props.history, props.token])
-
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value ? e.target.value: '' });
@@ -39,7 +37,6 @@ export const Login = (props) => {
       window.location.reload()
     }, 2000)
   }
-
 
   return (
     <div className="login-container">
