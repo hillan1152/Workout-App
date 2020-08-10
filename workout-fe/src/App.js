@@ -31,7 +31,7 @@ function App(props) {
         <PrivateRoute exact path="/workouts/:id/:name" component={SingleWorkout}/>
         <PrivateRoute exact path="/workouts" component={WorkoutList}/>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }
