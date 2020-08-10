@@ -19,8 +19,17 @@
   opacity: .80;
 }
 .inner-container {
-  height: 89vh;
+  min-height: 100%;
+  margin-bottom: -142px;
 }
+
+.inner-container:after {
+  content: "";
+  display: block;
+}
+
+
+
 // ALIGN 
 .align {
   display: flex;

@@ -19,8 +19,8 @@ function App(props) {
     <div className="App">
       <div className="inner-container">
         {props.isFetching &&
-        <div id="overlay" className="d-flex justify-content-center"  style={{height: "100%"}}>
-          <div className="spinner-border" style={{width: "7rem", height: "7rem", alignSelf: "center", marginBottom: "8rem"}} role="status">
+        <div id="overlay" className="d-flex justify-content-center"  style={{ height: "100%" }}>
+          <div className="spinner-border" style={{ width: "7rem", height: "7rem", alignSelf: "center", marginBottom: "8rem" }} role="status">
             <span className="sr-only">Loading...</span>
           </div> 
         </div>}
