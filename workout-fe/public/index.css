@@ -10340,10 +10340,6 @@ h3 {
   width: 100%;
 }
 
-.footer-container .inner-container:after {
-  height: 142px;
-}
-
 * {
   box-sizing: border-box;
   font-family: "Roboto Condensed";
