@@ -4,8 +4,10 @@
   color: white;
   display: flex;
   padding: 10%;
-  position: fixed;
-  bottom: 0;
   width: 100%;
+}
+
+.footer-container .inner-container:after {
+  height: 142px;
 }
 
