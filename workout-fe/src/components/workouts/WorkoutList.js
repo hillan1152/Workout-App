@@ -5,7 +5,7 @@ import { userWorkouts, deleteWorkout } from '../../actions';
 import moment from 'moment';
 import { capital } from '../../utils/helpers';
 import { PlusCircleOutlined, DeleteFilled } from '@ant-design/icons';
-
+import { nameStyle, addStyle, editStyle, deleteStyle } from '../../utils/helpers';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
 import DeleteWorkoutForm from './DeleteWorkoutForm';
@@ -49,25 +49,26 @@ export const WorkoutList = ({ info, userId, workout, userWorkouts, deleteWorkout
   return (
     <section className="workouts-master" ref={fieldRef}>
       {/* Modal Form */}
-      <PlusCircleOutlined style={{ fontSize: "3rem", color:"lightGreen", width: "100%", border: "none", marginTop: ".7rem"}} onClick={() => setIsOpen(!isOpen)}/>
+      <PlusCircleOutlined className={`${isOpen || openDelete ? "active" : ""}`} style={{...addStyle}} onClick={() => setIsOpen(!isOpen)}/>
       {/* DELETE WORKOUT TOGGLE */}
       {openDelete && <DeleteWorkoutForm singleData={singleData} setOpenDelete={setOpenDelete} deleteWorkout={deleteWorkout}/>}
       {/* ADD WORKOUT TOGGLE */}
       {isOpen ? <WorkoutForm setIsOpen={setIsOpen} isOpen={isOpen} /> : ''}
-      <div className={`workout-container ${isOpen ? "active" : ""}`} onClick={() => setIsOpen(false)}>
-        <h2 onClick={() => setIsOpen(false)}>Weekly Workouts</h2>
+      
+      <div className={`workout-container ${isOpen || openDelete ? "active" : ""}`} onClick={() => setIsOpen(false)}>
+        <h2>Weekly Workouts</h2>
         {sorted_by_date.map(workout => {
           return (
           <div className="individual_workout" key={workout.id}>
-            <div style={{ display: 'flex', justifyContent: 'flex-start', alignContent: 'center'}}>
-              <DeleteFilled className="delete-icon" type="button" style={{ fontSize: "1.5rem", color:"red", alignSelf: 'center'}} onClick={() => deleteModal(workout)}/>
-              <div style={{ display: 'flex', marginLeft: '1.5rem'}}>
+            <section>
+              <DeleteFilled className="delete-icon" type="button" style={{...deleteStyle}} onClick={() => deleteModal(workout)}/>
+              <div>
                 <Link to={`/workouts/${workout.id}/${workout.name}`} className="link">
                   <h3>{ capital(workout.name) }</h3>
                   <p>{ moment(workout.date).format("dddd, MMMM Do") }</p>
                 </Link>
               </div>
-            </div>
+            </section>
           </div>
           )
         })}

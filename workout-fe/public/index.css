@@ -9925,13 +9925,7 @@ h3 {
 }
 
 .inner-container {
-  min-height: 100%;
-  margin-bottom: 10%;
-}
-
-.inner-container:after {
-  content: "";
-  display: block;
+  min-height: 90%;
 }
 
 .align {
@@ -9967,7 +9961,7 @@ h3 {
 .workout-container {
   display: flex;
   flex-flow: column;
-  height: 90%;
+  height: 100%;
 }
 .workout-container h2 {
   margin-top: 2rem;
@@ -9987,6 +9981,13 @@ h3 {
   line-height: 1.3;
   margin-top: 4%;
   background-color: #d6d6d6;
+}
+.individual_workout section {
+  display: flex;
+  justify-content: flex-start;
+}
+.individual_workout div {
+  width: 70%;
 }
 .individual_workout h3 {
   font-weight: bold;
@@ -10025,11 +10026,11 @@ h3 {
   display: flex;
   flex-flow: column;
   align-items: center;
-  justify-content: flex-start;
   width: 100%;
   height: auto;
   color: black;
   overflow: scroll;
+  margin-bottom: 12%;
 }
 .exercise-list-container h2 {
   font-size: 2rem;
@@ -10071,7 +10072,6 @@ h3 {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.7);
   background-blend-mode: lighten;
-  padding-bottom: 20%;
 }
 .single-workout-container h2 {
   font-size: 2.5em;
@@ -10338,6 +10338,7 @@ h3 {
   display: flex;
   padding: 10%;
   width: 100%;
+  height: 10%;
 }
 
 * {
@@ -10442,6 +10443,7 @@ table {
   background-color: #fafafa;
   color: black;
   height: 100vh;
+  overflow: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
