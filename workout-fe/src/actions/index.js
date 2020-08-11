@@ -9,8 +9,10 @@ export const LOGOUT = "LOGOUT";
 export const ERROR = "ERROR";
 export const DELETE = "DELETE";
 export const AUTHORIZING = "AUTHORIZING";
+
 export const OPEN = "OPEN";
 export const CLOSE = "CLOSE";
+export const TOGGLE = "TOGGLE";
 
 export const POST_WORKOUT_SUCCESS = "POST_WORKOUT_SUCCESS";
 export const EDIT_WORKOUT_SUCCESS = "EDIT_WORKOUT_SUCCESS";
@@ -118,4 +120,8 @@ export const open = () => {
 }
 export const close = () => {
   return { type: CLOSE }
+}
+
+export const toggleExercise = (index) => {
+  return { type: TOGGLE, payload: [index] }
 }

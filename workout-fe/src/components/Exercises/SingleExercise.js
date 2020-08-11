@@ -3,8 +3,9 @@ import { DeleteFilled, EditFilled } from '@ant-design/icons';
 import { capital } from '../../utils/helpers'
 
 export default function SingleExercise(props) {
-  const[ isExpanded, setIsExpanded ] = useState(false);
-  
+  const [ isExpanded, setIsExpanded ] = useState(false);
+  const [ isChecked, setIsChecked ] = useState(false);
+
   const toggle = (name, data) => {
     props.setExerciseData(data)
     if(name === 'edit'){
@@ -15,21 +16,31 @@ export default function SingleExercise(props) {
       props.setIsDeleteOpen(true)
       props.setIsAddFormOpen(false);
       props.setIsEditOpen(false);
-    } else if(name === 'expand'){
+    }
+  }
+  const checked = e => {
+    console.log(e.target.checked)
+    if(e.target.checked){
+      setIsChecked(true)
+      setIsExpanded(false)
+    } else {
+      setIsChecked(false)
+    }
+  }
+  const toggleExercises = (index) => {
+      setIsExpanded(!isExpanded)
       props.setIsDeleteOpen(false)
       props.setIsAddFormOpen(false);
       props.setIsEditOpen(false);
-      setIsExpanded(!isExpanded)
-    } 
-  }
+  } 
   return (
     <section className={`exercise ${props.isAddFormOpen || props.isDeleteOpen || props.isEditOpen || props.opened ? `active` : ''}`} >
-      <section className={`upper-exercise ${isExpanded ? 'expansion' : null}`}>
-        <div className={`${isExpanded ? 'expansion' : null}`} onClick={() => toggle("expand", props.data)}><h4>{props.index}</h4></div>
+      <section className={`upper-exercise ${isExpanded ? 'expansion' : null} ${isChecked ? 'faded' : ''}`} >
+        <div className={`${isExpanded ? 'expansion' : null}`} onClick={() => toggleExercises(props.index)}><h4>{props.index}</h4></div>
         
-        <div className={`mid ${isExpanded ? 'expansion' : null}`} onClick={() => toggle("expand", props.data)} ><h3>{capital(`${props.data.exercise}`)}</h3></div>
+        <div className={`mid ${isExpanded ? 'expansion' : null}`} onClick={() => toggleExercises(props.index)} ><h3>{capital(`${props.data.exercise}`)}</h3></div>
         
-        <div className={`${isExpanded ? 'expansion' : null}`}><input type="checkbox"/></div>
+        <div className={`${isExpanded ? 'expansion' : null}`}><input onClick={(e) => checked(e)}type="checkbox"/></div>
       </section>
       {isExpanded && (
       <div className="expanded">

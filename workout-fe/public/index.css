@@ -10142,6 +10142,10 @@ h3 {
   height: 1.5rem;
 }
 
+.faded {
+  opacity: 0.2;
+}
+
 .add-workout-form {
   display: flex;
   position: absolute;
@@ -10493,7 +10497,7 @@ table {
   flex-flow: column;
   text-align: center;
   background-color: #fafafa;
-  color: black;
+  color: white;
   height: 100vh;
   overflow: scroll;
 }

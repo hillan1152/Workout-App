@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { PlusCircleOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 import { fetchExercises, editExercise, deleteExercise, singleWorkout, open } from '../../actions'
 import { capital } from '../../utils/helpers'
 import moment from 'moment';
 import AddExerciseForm from './AddExerciseForm';
 import DeleteExerciseForm from './DeleteExerciseForm';
 import EditExerciseForm from './EditExerciseForm';
-import { addStyle, editStyle, nameStyle, deleteStyle } from '../../utils/helpers'
+import { addStyle } from '../../utils/helpers'
 
 import SingleExercise from './SingleExercise';
 
@@ -25,6 +25,7 @@ export const ExerciseList =  (props) => {
   const exData = (((props.exercises || {}).data || {}).exercises || []);
   const exerciseList = [...exData];
 
+
   useEffect(() => {
     let woID = parseInt(props.workoutId);
     props.fetchExercises(woID)
@@ -41,8 +42,7 @@ export const ExerciseList =  (props) => {
     setIsAddFormOpen(false);
     setIsEditOpen(false);
   };
-
-
+  
   return (
     <div className="exercise-list-container" >
       {isAddFormOpen && <AddExerciseForm closeForms={closeForms} />}
@@ -80,7 +80,7 @@ export const ExerciseList =  (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log("MSTP EXERCISE LIST", state.changed)
+  // console.log("MSTP EXERCISE LIST", state.toggleTracker)
   return {
     userId: state.user_id,
     workout: state.workout,
@@ -88,7 +88,7 @@ const mapStateToProps = (state) => {
     exercises: state.exercises,
     fetchMessage: state.fetchMessage,
     changed: state.changed,
-    opened: state.opened
+    opened: state.opened,
   }
 }
 

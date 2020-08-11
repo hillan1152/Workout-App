@@ -13,7 +13,8 @@ import {
   ERROR,
   DELETE, 
   OPEN,
-  CLOSE
+  CLOSE, 
+  TOGGLE
 } from '../actions';
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   fetchMessage: "",
   error_message: "",
   info: [],
+  toggleTracker: [],
   workout: [],
   exercises: [],
   changed: false,
@@ -123,7 +125,7 @@ export const reducer = (state = initialState, action) => {
       window.location.reload();
       return {
         ...state, token: ""
-      }
+    }
     case ERROR:
       console.log("ERROR", action.payload)
       // debugger
@@ -131,16 +133,21 @@ export const reducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         error_message: action.payload
-      }
+    }
     case OPEN:
       return {
         ...state,
         opened: true
-      }
+    }
     case CLOSE:
       return {
         ...state,
         opened: false
+    }
+    case TOGGLE: 
+      return {
+        ...state,
+        toggleTracker: action.payload
       }
     default: 
       return state;
