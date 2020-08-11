@@ -9,6 +9,7 @@ import DeleteExerciseForm from './DeleteExerciseForm';
 import EditExerciseForm from './EditExerciseForm';
 import { addStyle, editStyle, nameStyle, deleteStyle } from '../../utils/helpers'
 
+import SingleExercise from './SingleExercise';
 
 export const ExerciseList =  (props) => {
   // PASSES ALL EXERCISE DATA BETWEEN FORMS
@@ -40,19 +41,6 @@ export const ExerciseList =  (props) => {
     setIsEditOpen(false);
   };
 
-  const toggle = (name, data) => {
-    setExerciseData(data)
-    if(name === 'edit'){
-      setIsEditOpen(true)
-      setIsAddFormOpen(false);
-      setIsDeleteOpen(false);
-    } else if(name === 'delete'){
-      setIsDeleteOpen(true)
-      setIsAddFormOpen(false);
-      setIsEditOpen(false);
-    } 
-  }
-
   return (
     <div className="exercise-list-container" >
       {isAddFormOpen && <AddExerciseForm closeForms={closeForms} />}
@@ -69,14 +57,18 @@ export const ExerciseList =  (props) => {
         <h4 className={isAddFormOpen ? `active` : ''}>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
         {((exData || []).map(data => {
           return (
-            <section className={`exercise ${isAddFormOpen || isDeleteOpen || isEditOpen || props.opened ? `active` : ''}`} key={data.exercise_id} onClick={() => setIsAddFormOpen(false)}>
-              <EditFilled className="edit-icon" style={{...editStyle}} onClick={() => toggle("edit", data)}/>
-              <section onClick={() => closeForms()}>
-                <h3>{capital(`${data.exercise}`)}</h3>
-                <p>{data.weight === 0 ? '' : `${data.weight}lbs `}{`${data.sets} sets`} x {`${data.reps} reps`}</p>
-              </section>             
-              <DeleteFilled className="delete-icon" type="button" style={{...deleteStyle}} onClick={() => toggle("delete", data)}/>
-            </section>
+            <SingleExercise 
+              key={data.exercise_id} 
+              data={data} 
+              opened={props.opened} 
+              setExerciseData={setExerciseData} 
+              setIsEditOpen={setIsEditOpen}
+              setIsAddFormOpen={setIsAddFormOpen}
+              setIsDeleteOpen={setIsDeleteOpen}
+              isDeleteOpen={isDeleteOpen}
+              isAddFormOpen={isAddFormOpen}
+              closeForms={closeForms}
+            />
           )
         }))}
       </div>  
