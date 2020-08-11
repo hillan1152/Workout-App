@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { singleWorkout, editWorkout, deleteWorkout, fetchExercises, userWorkouts } from '../../actions';
-import { capital } from '../../utils/helpers';
+import { singleWorkout, editWorkout, deleteWorkout, fetchExercises, userWorkouts, close } from '../../actions';
 import ExerciseList from '../Exercises/ExerciseList';
 
 import { EditWorkout } from './EditWorkout';
 
 
-export const SingleWorkout = ({ match, userWorkouts, workout, singleWorkout, userId, changed, editWorkout }) => {
-  const [ openEditWorkout, setOpenEditWorkout ] = useState(false);
-
+export const SingleWorkout = ({ match, userWorkouts, workout, singleWorkout, userId, changed, editWorkout, close, opened }) => {
   let workoutId = match.params.id;
 
   useEffect(() => {
@@ -20,9 +17,8 @@ export const SingleWorkout = ({ match, userWorkouts, workout, singleWorkout, use
   
   return (
     <div className="single-workout-container align">
-      <h2 onClick={() => setOpenEditWorkout(true)}>{capital(`${workout.name}`)}</h2>
+      {opened && <EditWorkout workout={workout} editWorkout={editWorkout} close={close}/>}
       <ExerciseList workoutId={workoutId}/>
-      {openEditWorkout && <EditWorkout workout={workout} setOpenEditWorkout={setOpenEditWorkout} editWorkout={editWorkout}/>}
     </div>
   )
 }
@@ -34,10 +30,11 @@ const mapStateToProps = (state) => {
     workout: state.workout,
     exercise_list: state.exercises,
     error: state.error_message,
-    changed: state.changed
+    changed: state.changed,
+    opened: state.opened
   }
 }
 
 
-export default connect(mapStateToProps, { singleWorkout, editWorkout, deleteWorkout, fetchExercises, userWorkouts } )(SingleWorkout)
+export default connect(mapStateToProps, { singleWorkout, editWorkout, deleteWorkout, fetchExercises, userWorkouts, close } )(SingleWorkout)
 

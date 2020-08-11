@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { PlusCircleOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
-import { fetchExercises, editExercise, deleteExercise, singleWorkout } from '../../actions'
+import { PlusCircleOutlined } from '@ant-design/icons';
+import { fetchExercises, editExercise, deleteExercise, singleWorkout, open } from '../../actions'
 import { capital } from '../../utils/helpers'
 import moment from 'moment';
 import AddExerciseForm from './AddExerciseForm';
 import DeleteExerciseForm from './DeleteExerciseForm';
 import EditExerciseForm from './EditExerciseForm';
-import { addStyle, editStyle, nameStyle, deleteStyle } from '../../utils/helpers'
+import { addStyle } from '../../utils/helpers'
+
+import SingleExercise from './SingleExercise';
 
 export const ExerciseList =  (props) => {
   // PASSES ALL EXERCISE DATA BETWEEN FORMS
@@ -21,11 +23,12 @@ export const ExerciseList =  (props) => {
 
   // EXERCISE DATA --- USED FOR MAPPING EXERCISES
   const exData = (((props.exercises || {}).data || {}).exercises || []);
+  const exerciseList = [...exData];
+
 
   useEffect(() => {
     let woID = parseInt(props.workoutId);
     props.fetchExercises(woID)
-
   }, [props.changed]);
 
 
@@ -39,20 +42,7 @@ export const ExerciseList =  (props) => {
     setIsAddFormOpen(false);
     setIsEditOpen(false);
   };
-
-  const toggle = (name, data) => {
-    setExerciseData(data)
-    if(name === 'edit'){
-      setIsEditOpen(true)
-      setIsAddFormOpen(false);
-      setIsDeleteOpen(false);
-    } else if(name === 'delete'){
-      setIsDeleteOpen(true)
-      setIsAddFormOpen(false);
-      setIsEditOpen(false);
-    } 
-  }
-
+  
   return (
     <div className="exercise-list-container" >
       {isAddFormOpen && <AddExerciseForm closeForms={closeForms} />}
@@ -60,39 +50,47 @@ export const ExerciseList =  (props) => {
       {isDeleteOpen && <DeleteExerciseForm closeForms={closeForms} removeExercise={removeExercise}  data={exerciseData} setIsDeleteOpen={setIsDeleteOpen}/>}
       
       {isEditOpen && <EditExerciseForm closeForms={closeForms} exData={exerciseData} workoutId={props.workout.id}/>}
+      
+      <h2 className={`${isAddFormOpen || isDeleteOpen || isEditOpen || props.opened ? `active` : ''}`} onClick={() => props.open()}>{capital(`${props.workout.name}`)}</h2>
 
       <PlusCircleOutlined style={{...addStyle}} onClick={() => setIsAddFormOpen(true)}/>
       
-      <div className={`exercise-list-container ${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`}>
+      <div className={`exercise-list ${isAddFormOpen || isDeleteOpen || isEditOpen || props.opened ? `active` : ''}`}>
         <h4 className={isAddFormOpen ? `active` : ''}>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
-        {((exData || []).map(data => {
+        {exerciseList.map((data, index) => {
           return (
-            <section className={`exercise ${isAddFormOpen || isDeleteOpen || isEditOpen ? `active` : ''}`} key={data.exercise_id} onClick={() => setIsAddFormOpen(false)}>
-              <EditFilled className="edit-icon" style={{...editStyle}} onClick={() => toggle("edit", data)}/>
-              <section onClick={() => closeForms()}>
-                <h3>{capital(`${data.exercise}`)}</h3>
-                <p>{data.weight === 0 ? '' : `${data.weight}lbs `}{`${data.sets} sets`} x {`${data.reps} reps`}</p>
-              </section>             
-              <DeleteFilled className="delete-icon" type="button" style={{...deleteStyle}} onClick={() => toggle("delete", data)}/>
-            </section>
+            <SingleExercise 
+              index={index}
+              key={data.exercise_id} 
+              data={data} 
+              opened={props.opened} 
+              setExerciseData={setExerciseData} 
+              setIsEditOpen={setIsEditOpen}
+              setIsAddFormOpen={setIsAddFormOpen}
+              setIsDeleteOpen={setIsDeleteOpen}
+              isDeleteOpen={isDeleteOpen}
+              isAddFormOpen={isAddFormOpen}
+              closeForms={closeForms}
+            />
           )
-        }))}
+        })}
       </div>  
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  // console.log("MSTP EXERCISE LIST", state.changed)
+  // console.log("MSTP EXERCISE LIST", state.toggleTracker)
   return {
     userId: state.user_id,
     workout: state.workout,
     error: state.error_message.data,
     exercises: state.exercises,
     fetchMessage: state.fetchMessage,
-    changed: state.changed
+    changed: state.changed,
+    opened: state.opened,
   }
 }
 
 
-export default connect(mapStateToProps, { fetchExercises, editExercise, deleteExercise, singleWorkout })(ExerciseList)
+export default connect(mapStateToProps, { fetchExercises, editExercise, deleteExercise, singleWorkout, open })(ExerciseList)
