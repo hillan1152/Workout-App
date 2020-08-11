@@ -18,7 +18,7 @@
 .workout-container {
   display: flex;
   flex-flow: column;
-  height: 90%;
+  height: 100%;
   h2 {
     margin-top: 2rem;
     font-size: 2.2rem;
@@ -38,6 +38,13 @@
   line-height: 1.3;
   margin-top: 4%;
   background-color: #d6d6d6;
+  section {
+    display: flex;
+    justify-content: flex-start;
+  }
+  div {
+    width: 70%;
+  }
   h3 {
     font-weight: bold;
     font-size: 1.5rem;
