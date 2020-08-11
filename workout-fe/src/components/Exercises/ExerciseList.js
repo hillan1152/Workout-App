@@ -23,6 +23,7 @@ export const ExerciseList =  (props) => {
 
   // EXERCISE DATA --- USED FOR MAPPING EXERCISES
   const exData = (((props.exercises || {}).data || {}).exercises || []);
+  const exerciseList = [...exData];
 
   useEffect(() => {
     let woID = parseInt(props.workoutId);
@@ -41,6 +42,7 @@ export const ExerciseList =  (props) => {
     setIsEditOpen(false);
   };
 
+
   return (
     <div className="exercise-list-container" >
       {isAddFormOpen && <AddExerciseForm closeForms={closeForms} />}
@@ -55,9 +57,10 @@ export const ExerciseList =  (props) => {
       
       <div className={`exercise-list ${isAddFormOpen || isDeleteOpen || isEditOpen || props.opened ? `active` : ''}`}>
         <h4 className={isAddFormOpen ? `active` : ''}>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
-        {((exData || []).map(data => {
+        {exerciseList.map((data, index) => {
           return (
             <SingleExercise 
+              index={index}
               key={data.exercise_id} 
               data={data} 
               opened={props.opened} 
@@ -70,14 +73,14 @@ export const ExerciseList =  (props) => {
               closeForms={closeForms}
             />
           )
-        }))}
+        })}
       </div>  
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  // console.log("MSTP EXERCISE LIST", state.changed)
+  console.log("MSTP EXERCISE LIST", state.changed)
   return {
     userId: state.user_id,
     workout: state.workout,

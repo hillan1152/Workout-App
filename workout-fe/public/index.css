@@ -10027,7 +10027,6 @@ h3 {
   flex-flow: column;
   align-items: center;
   width: 100%;
-  color: black;
   margin-bottom: 12%;
   overflow: scroll;
 }
@@ -10051,20 +10050,67 @@ h3 {
 
 .exercise {
   display: flex;
-  justify-content: space-between;
+  flex-flow: column;
+  justify-content: center;
   line-height: 1.2;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-top: 6%;
-  background-color: #e0e0e0;
   border: 2px inset gray;
   width: 95%;
+  background-color: white;
+  color: black;
 }
-.exercise h3 {
-  margin-bottom: 4%;
-  font-weight: bolder;
-}
-.exercise div {
+
+.upper-exercise {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+.upper-exercise div {
+  width: 20%;
+  padding: 5%;
+}
+.upper-exercise .mid {
+  width: 80%;
+}
+.upper-exercise h3 {
+  font-weight: bolder;
+  color: black;
+}
+
+.expanded {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f05454;
+  color: white;
+  font-weight: bold;
+  padding: 4%;
+  width: 100%;
+}
+.expanded div {
+  display: flex;
+  flex-flow: column;
+  margin: 3%;
+}
+
+.expanded-left {
+  width: 80%;
+}
+.expanded-left .exercise-weight {
+  margin-bottom: 2%;
+}
+
+.expansion {
+  background-color: #f05454;
+  color: white;
+}
+.expansion h3 {
+  color: white;
+}
+.expansion h4 {
+  color: white;
 }
 
 .single-workout-container {
@@ -10072,14 +10118,10 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  background-image: url("https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-position: top;
+  background-color: black;
+  color: white;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
-  background-blend-mode: lighten;
+  height: 100%;
   overflow: scroll;
 }
 .single-workout-container h2 {
@@ -10312,7 +10354,7 @@ h3 {
 .nav-align {
   display: flex;
   justify-content: space-evenly;
-  border-bottom: 2px solid black;
+  border: 2px solid black;
   width: 100%;
   height: 5rem;
   text-decoration: none;
@@ -10324,7 +10366,7 @@ h3 {
 }
 
 .nav-location {
-  background-color: #466b7a;
+  background-color: #f05454;
   text-decoration: none;
 }
 
@@ -10453,7 +10495,7 @@ table {
   background-color: #fafafa;
   color: black;
   height: 100vh;
-  overflow: auto;
+  overflow: scroll;
 }
 
 @media (prefers-reduced-motion: no-preference) {
