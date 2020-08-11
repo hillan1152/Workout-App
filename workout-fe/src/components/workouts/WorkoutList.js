@@ -5,7 +5,7 @@ import { userWorkouts, deleteWorkout } from '../../actions';
 import moment from 'moment';
 import { capital } from '../../utils/helpers';
 import { PlusCircleOutlined, DeleteFilled } from '@ant-design/icons';
-import { nameStyle, addStyle, editStyle, deleteStyle } from '../../utils/helpers';
+import { addStyle, deleteStyle } from '../../utils/helpers';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
 import DeleteWorkoutForm from './DeleteWorkoutForm';
