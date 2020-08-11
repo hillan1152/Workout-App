@@ -10366,21 +10366,23 @@ h3 {
   text-decoration: none;
 }
 
-.nav-location {
-  background-color: #f05454;
-  text-decoration: none;
-}
-
 .left-nav {
   width: 100%;
   border-right: 2px solid black;
   padding-top: 5%;
   text-decoration: none;
+  background-color: white;
 }
 
 .right-nav {
   width: 100%;
   padding-top: 5%;
+  background-color: white;
+}
+
+.nav-location {
+  background-color: #f05454;
+  text-decoration: none;
 }
 
 .footer-container {
@@ -10494,8 +10496,8 @@ table {
   display: flex;
   flex-flow: column;
   text-align: center;
-  background-color: #fafafa;
   color: white;
+  background-color: black;
   height: 100vh;
   overflow: scroll;
 }
