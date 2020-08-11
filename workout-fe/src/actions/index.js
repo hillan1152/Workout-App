@@ -9,6 +9,8 @@ export const LOGOUT = "LOGOUT";
 export const ERROR = "ERROR";
 export const DELETE = "DELETE";
 export const AUTHORIZING = "AUTHORIZING";
+export const OPEN = "OPEN";
+export const CLOSE = "CLOSE";
 
 export const POST_WORKOUT_SUCCESS = "POST_WORKOUT_SUCCESS";
 export const EDIT_WORKOUT_SUCCESS = "EDIT_WORKOUT_SUCCESS";
@@ -109,4 +111,11 @@ export const deleteExercise = (id, workout_id) => dispatch => {
   axiosWithAuth().delete(`${baseURL}/api/exercises/in_workout/${id}`)
     .then(res => dispatch({ type: DELETE, payload: res.data }))
     .catch(err => dispatch({ type: ERROR, payload: err.response }))
+}
+
+export const open = () => {
+  return { type: OPEN }
+}
+export const close = () => {
+  return { type: CLOSE }
 }

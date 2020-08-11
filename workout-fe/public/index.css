@@ -10027,10 +10027,9 @@ h3 {
   flex-flow: column;
   align-items: center;
   width: 100%;
-  height: auto;
   color: black;
-  overflow: scroll;
   margin-bottom: 12%;
+  overflow: scroll;
 }
 .exercise-list-container h2 {
   font-size: 2rem;
@@ -10039,6 +10038,15 @@ h3 {
 }
 .exercise-list-container h4 {
   font-size: 1.5rem;
+}
+
+.exercise-list {
+  width: 100%;
+  margin-bottom: 15%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  z-index: 0;
 }
 
 .exercise {
@@ -10072,6 +10080,7 @@ h3 {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.7);
   background-blend-mode: lighten;
+  overflow: scroll;
 }
 .single-workout-container h2 {
   font-size: 2.5em;
@@ -10339,6 +10348,7 @@ h3 {
   padding: 10%;
   width: 100%;
   height: 10%;
+  z-index: 1;
 }
 
 * {

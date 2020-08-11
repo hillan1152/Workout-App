@@ -12,6 +12,8 @@ import {
   AUTHORIZING,
   ERROR,
   DELETE, 
+  OPEN,
+  CLOSE
 } from '../actions';
 
 const initialState = {
@@ -23,7 +25,8 @@ const initialState = {
   info: [],
   workout: [],
   exercises: [],
-  changed: false
+  changed: false,
+  opened: false
 }
 
 export const reducer = (state = initialState, action) => {
@@ -128,6 +131,16 @@ export const reducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         error_message: action.payload
+      }
+    case OPEN:
+      return {
+        ...state,
+        opened: true
+      }
+    case CLOSE:
+      return {
+        ...state,
+        opened: false
       }
     default: 
       return state;

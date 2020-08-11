@@ -32,9 +32,9 @@ export const AddExerciseForm = (props) => {
         <h2>Add An Exercise</h2>
         <input onChange={handleChange} placeholder="Exercise Name" name="exercise"/>
         <input onChange={handleChange} placeholder="Region" name="region"/>
-        <input onChange={handleChange} placeholder="Weight" name="weight"/>
-        <input onChange={handleChange} placeholder="Sets" name="sets"/>
-        <input onChange={handleChange} placeholder="Reps" name="reps"/>
+        <input onChange={handleChange} type="number" placeholder="Weight" name="weight"/>
+        <input onChange={handleChange} type="number" placeholder="Sets" name="sets"/>
+        <input onChange={handleChange} type="number" placeholder="Reps" name="reps"/>
         <button type="submit">Add</button>
       </form>
       <button onClick={() => props.closeForms()}>Cancel</button>

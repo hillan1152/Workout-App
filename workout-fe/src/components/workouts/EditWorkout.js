@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { capital } from '../../utils/helpers';
 import moment from 'moment';
-import { editWorkout } from '../../actions';
+import { editWorkout, close } from '../../actions';
 
 
 export const EditWorkout = (props) => {
@@ -29,7 +29,7 @@ export const EditWorkout = (props) => {
     // props.history.goBack();
   };
   return (
-    <div className="forms">
+    <div className="forms align">
       <form onSubmit={submitEdit}>
         <h2>Edit Workout Name</h2>
         <input onChange={handleChange} name="name" placeholder={capital(`${props.workout.name}`)}/>
@@ -37,17 +37,11 @@ export const EditWorkout = (props) => {
         <input onChange={handleChange} name="date" type="date" />
         <button type="submit">Submit</button>
       </form>
-      <button onClick={() => props.setOpenEditWorkout(false)}>Cancel</button>
+      <button onClick={() => props.close()}>Cancel</button>
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
-  console.log("EDIT WORKOUT", state)
-  return {
-    workout: state.workout,
-  }
-}
 
 
-export default connect(mapStateToProps, { editWorkout: editWorkout })(EditWorkout)
+export default connect(null, { editWorkout: editWorkout, close })(EditWorkout)

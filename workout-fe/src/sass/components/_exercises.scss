@@ -3,10 +3,10 @@
   flex-flow: column;
   align-items: center;
   width: 100%;
-  height: auto;
+  // height: auto;
   color: black;
-  overflow: scroll;
   margin-bottom: 12%;
+  overflow: scroll;
   h2 {
     font-size: 2rem;
     font-weight: bolder;
@@ -15,6 +15,14 @@
   h4 {
     font-size: 1.5rem;
   }
+}
+.exercise-list {
+  width: 100%;
+  margin-bottom: 15%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  z-index: 0;
 }
 .exercise {
   display: flex;
