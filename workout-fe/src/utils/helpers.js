@@ -27,7 +27,7 @@ export const editStyle = {
 export const deleteStyle = {
   fontSize: "1.5rem", 
   color:"red", 
-  background: "none",
+  backgroundColor: "none",
   marginTop: "5%",
   marginRight: "5%"
 }

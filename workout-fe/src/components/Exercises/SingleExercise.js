@@ -49,7 +49,7 @@ export default function SingleExercise(props) {
         </div>
         <div className="expanded-right">
           <EditFilled className="edit-icon" style={{ color: 'yellow', marginBottom: '1.2rem'}} onClick={() => toggle("edit", props.data)}/>
-          <DeleteFilled className="delete-icon" type="button" style={{color: 'darkGreen'}} onClick={() => toggle("delete", props.data)}/>
+          <DeleteFilled className="delete-icon" type="button" style={{ color: 'darkGreen', backgroundColor: 'none'}} onClick={() => toggle("delete", props.data)}/>
         </div>
       </div>)}
     </section>
