@@ -82,9 +82,7 @@ export const ExerciseList =  (props) => {
 const mapStateToProps = (state) => {
   // console.log("MSTP EXERCISE LIST", state.toggleTracker)
   return {
-    userId: state.user_id,
     workout: state.workout,
-    error: state.error_message.data,
     exercises: state.exercises,
     fetchMessage: state.fetchMessage,
     changed: state.changed,

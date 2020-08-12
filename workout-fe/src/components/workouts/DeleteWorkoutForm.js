@@ -8,7 +8,7 @@ export default function DeleteWorkoutForm(props) {
     props.setOpenDelete(false);
   };
   return (
-    <section className="confirm-delete">
+    <section className="forms align">
       <h3>Are you sure you want to delete {props.singleData.name}?</h3>
       <button onClick={removeWorkout}>Confirm Delete</button>
       <button onClick={() => props.setOpenDelete(false)}>Cancel</button>

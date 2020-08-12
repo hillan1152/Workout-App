@@ -1,4 +1,99 @@
 @charset "UTF-8";
+* {
+  box-sizing: border-box;
+  font-family: "Roboto Condensed";
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: 4.5rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.75rem;
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -9930,26 +10025,17 @@ h3 {
 }
 
 .align {
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  width: 75%;
 }
-
-.align-ex {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: #e0e0e0;
+.align input {
+  width: 75%;
 }
 
 .active {
-  opacity: 0.2;
-  background-color: white;
+  opacity: 0.5;
 }
 
 .workouts-master {
-  color: white;
-  background-color: black;
   height: 90%;
   width: 100%;
   display: flex;
@@ -9963,7 +10049,6 @@ h3 {
 }
 .workout-container h2 {
   margin-top: 2rem;
-  font-size: 2.2rem;
   font-weight: bolder;
 }
 .workout-container .link {
@@ -9978,7 +10063,7 @@ h3 {
   padding: 3%;
   line-height: 1.3;
   margin-top: 4%;
-  background-color: #d6d6d6;
+  background-color: white;
 }
 .individual_workout section {
   display: flex;
@@ -9989,17 +10074,14 @@ h3 {
 }
 .individual_workout h3 {
   font-weight: bold;
-  font-size: 1.5rem;
-}
-.individual_workout p {
-  font-size: 1.2rem;
 }
 
 .confirm-delete {
   display: flex;
   position: absolute;
   flex-direction: column;
-  background-color: darkgray;
+  color: black;
+  background-color: white;
   margin-top: 8%;
   border: 2px inset black;
   border-radius: 2px;
@@ -10013,7 +10095,7 @@ h3 {
 .confirm-delete button {
   width: 100%;
   margin-top: 4%;
-  margin-top: 10%;
+  margin-top: 5%;
   width: 75%;
   height: 3rem;
   border-radius: 8px;
@@ -10053,7 +10135,6 @@ h3 {
   line-height: 1.2;
   font-size: 1.8rem;
   margin-top: 6%;
-  border: 2px inset gray;
   width: 95%;
   background-color: white;
   color: black;
@@ -10126,92 +10207,68 @@ h3 {
   font-weight: bolder;
   margin: 3% 0;
 }
-.single-workout-container form {
-  display: flex;
-  flex-flow: column wrap;
-  align-self: center;
-}
-.single-workout-container input {
-  margin: 4% 0;
-}
-.single-workout-container .back-arrow {
-  width: 20%;
-  height: 1.5rem;
-}
 
 .faded {
   opacity: 0.2;
 }
 
-.add-workout-form {
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  background-color: darkgray;
-  margin-top: 8%;
-  border: 2px inset black;
-  border-radius: 2px;
-  width: 75%;
-  padding: 5%;
-  line-height: 1.4;
-  z-index: 1000;
-}
-.add-workout-form input {
-  width: 100%;
-  justify-content: center;
-  margin-top: 2%;
-  height: 3rem;
-}
-.add-workout-form button {
-  width: 100%;
-  margin-top: 4%;
-  margin-top: 10%;
-  width: 75%;
-  height: 3rem;
-  border-radius: 8px;
-  align-self: center;
-}
-
 .forms {
   display: flex;
-  position: absolute;
-  flex-direction: column;
-  background-color: darkgray;
-  margin-top: 8%;
-  border: 2px inset black;
-  border-radius: 2px;
-  width: 75%;
-  padding: 5%;
-  line-height: 1.4;
-  z-index: 1000;
-  border: 2px inset black;
+  flex-flow: column;
   align-self: center;
-  align-content: center;
+  align-items: center;
+  padding: 5%;
+  border: 5px inset lightgoldenrodyellow;
+  box-shadow: 7px 1px grey;
+  background-color: whitesmoke;
+  color: black;
+  animation: 1.5s ease-out 0s 1 slideInFromTop;
+  animation: none;
+  margin-bottom: none;
+  position: absolute;
   z-index: 1001;
-  background-color: darkgray;
-  height: auto;
-}
-.forms input {
-  width: 100%;
-  justify-content: center;
-  margin-top: 2%;
-  height: 3rem;
+  margin-top: 5%;
 }
 .forms h2 {
   font-size: 2rem;
+  text-decoration: underline;
+}
+.forms label {
+  font-size: 1.5rem;
+  margin-bottom: 2%;
+}
+.forms input {
+  margin: 1.2%;
+  height: 2.5rem;
+  font-size: 1.2rem;
 }
 .forms button {
-  align-self: center;
-  margin-top: 10%;
+  margin-top: 5%;
   width: 75%;
   height: 3rem;
   border-radius: 8px;
   align-self: center;
 }
+.forms button:hover {
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+}
 
-.active-ex {
-  opacity: 0.2;
-  background-color: #e0e0e0;
+.add-workout {
+  width: 75%;
+}
+.add-workout input {
+  width: 100%;
+  margin: 3%;
+}
+.add-workout section {
+  display: flex;
+  justify-content: center;
+  flex-flow: row;
+}
+.add-workout section input {
+  width: 30%;
 }
 
 @keyframes slideInFromTop {
@@ -10226,16 +10283,11 @@ h3 {
   background-image: url("https://images.unsplash.com/photo-1576678927484-cc907957088c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
   background-repeat: no-repeat;
   background-color: rgba(255, 255, 255, 0.5);
-  background-blend-mode: lighten;
   display: flex;
   flex-flow: column;
   margin: 0;
   width: 100%;
-  height: 89vh;
-}
-.login-container p {
-  margin-top: 5%;
-  animation: 0.7s ease-out 0s 1 slideInFromTop;
+  height: 100%;
 }
 .login-container .login-title {
   margin-top: 10%;
@@ -10247,15 +10299,13 @@ h3 {
   flex-flow: column;
   align-self: center;
   align-items: center;
-  margin-top: 5rem;
   padding: 5%;
-  width: 75%;
-  border: 10px inset darkgrey;
-  box-shadow: 8px 3px grey;
+  border: 5px inset lightgoldenrodyellow;
+  box-shadow: 7px 1px grey;
   background-color: whitesmoke;
   color: black;
-  line-height: 2;
-  animation: 1s ease-out 0s 1 slideInFromTop;
+  animation: 1.5s ease-out 0s 1 slideInFromTop;
+  width: 75%;
 }
 .login-container form h2 {
   font-size: 2rem;
@@ -10266,90 +10316,82 @@ h3 {
   margin-bottom: 2%;
 }
 .login-container form input {
-  margin: 3%, 0;
+  margin: 1.2%;
   height: 2.5rem;
   font-size: 1.2rem;
 }
 .login-container form button {
-  margin-top: 10%;
-  border-radius: 8px;
-  height: 3rem;
+  margin-top: 5%;
   width: 75%;
+  height: 3rem;
+  border-radius: 8px;
+  align-self: center;
 }
 .login-container form button:hover {
   background-color: black;
-  border: 1px solid black;
+  border: 1px solid white;
   color: white;
 }
-
-.err-message {
-  display: flex;
-  justify-content: center;
+.login-container .err-message {
   align-self: center;
-  background-color: red;
-  width: 80%;
-  height: 5%;
+  background-color: #f05454;
+  width: 75%;
+  height: 7%;
   padding: 3%;
-  text-align: center;
+  animation: 0.7s ease-out 0s 1 slideInFromTop;
 }
 
-.form-container {
+.reg-container {
   background-image: url("https://images.unsplash.com/photo-1576678927484-cc907957088c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
-  background-repeat: no-repeat;
-  background-color: rgba(255, 255, 255, 0.5);
-  background-blend-mode: lighten;
   display: flex;
   flex-flow: column;
-  margin: 0;
-  width: 100%;
-  height: 89vh;
+  height: 100%;
 }
-.form-container button {
-  width: 100%;
-  margin-top: 4%;
-  margin-top: 10%;
+.reg-container button {
+  margin-top: 5%;
   width: 75%;
   height: 3rem;
   border-radius: 8px;
   align-self: center;
 }
-.form-container .reg-form {
+.reg-container .reg-form {
   display: flex;
   flex-flow: column;
   align-self: center;
   align-items: center;
-  margin-top: 5rem;
   padding: 5%;
-  width: 75%;
-  border: 10px inset darkgrey;
-  box-shadow: 8px 3px grey;
+  border: 5px inset lightgoldenrodyellow;
+  box-shadow: 7px 1px grey;
   background-color: whitesmoke;
   color: black;
-  line-height: 2;
-  animation: 1s ease-out 0s 1 slideInFromTop;
-}
-.form-container .reg-form p {
-  margin-top: 5%;
-  animation: 0.7s ease-out 0s 1 slideInFromTop;
-}
-.form-container .reg-form .login-title {
+  animation: 1.5s ease-out 0s 1 slideInFromTop;
+  width: 75%;
   margin-top: 10%;
-  font-size: 2.2rem;
-  color: white;
 }
-.form-container .reg-form h2 {
+.reg-container .reg-form h2 {
   font-size: 2rem;
   text-decoration: underline;
 }
-.form-container .reg-form label {
+.reg-container .reg-form label {
   font-size: 1.5rem;
   margin-bottom: 2%;
 }
-.form-container .reg-form input {
-  margin: 3%, 0;
+.reg-container .reg-form input {
+  margin: 1.2%;
   height: 2.5rem;
   font-size: 1.2rem;
-  border: 1px solid black;
+}
+.reg-container .reg-form button {
+  margin-top: 5%;
+  width: 75%;
+  height: 3rem;
+  border-radius: 8px;
+  align-self: center;
+}
+.reg-container .reg-form button:hover {
+  background-color: black;
+  border: 1px solid white;
+  color: white;
 }
 
 .nav-align {
@@ -10387,109 +10429,21 @@ h3 {
 
 .footer-container {
   border: 1px solid #443d3d;
-  background-color: #443d3d;
-  color: white;
+  background-color: whitesmoke;
+  color: black;
   display: flex;
-  padding: 10%;
+  text-align: center;
+  padding: 8%;
   width: 100%;
-  min-height: 10%;
+  height: 10%;
   z-index: 1;
   bottom: 0;
 }
-
-* {
-  box-sizing: border-box;
-  font-family: "Roboto Condensed";
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  line-height: 1.6;
-}
-
-h1 {
-  font-size: 4.5rem;
-}
-
-h2 {
-  font-size: 3.5rem;
-}
-
-h3 {
-  font-size: 2rem;
-}
-
-h4 {
-  font-size: 1.75;
-}
-
-p {
-  font-size: 1.6rem;
-}
-
-a {
-  text-decoration: none;
-}
-
-.bold {
-  font-weight: 700;
-}
-
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-
-body {
-  line-height: 1;
-}
-
-ol, ul {
-  list-style: none;
-}
-
-blockquote, q {
-  quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: "";
-  content: none;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+.footer-container .logout {
+  height: 100%;
+  display: flex;
+  align-self: center;
+  justify-content: flex-start;
 }
 
 .App {
@@ -10499,25 +10453,6 @@ table {
   color: white;
   background-color: black;
   height: 100vh;
-  overflow: scroll;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /*# sourceMappingURL=index.css.map */

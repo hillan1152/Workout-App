@@ -19,7 +19,6 @@ export default function SingleExercise(props) {
     }
   }
   const checked = e => {
-    console.log(e.target.checked)
     if(e.target.checked){
       setIsChecked(true)
       setIsExpanded(false)
@@ -36,7 +35,7 @@ export default function SingleExercise(props) {
   return (
     <section className={`exercise ${props.isAddFormOpen || props.isDeleteOpen || props.isEditOpen || props.opened ? `active` : ''}`} >
       <section className={`upper-exercise ${isExpanded ? 'expansion' : null} ${isChecked ? 'faded' : ''}`} >
-        <div className={`${isExpanded ? 'expansion' : null}`} onClick={() => toggleExercises(props.index)}><h4>{props.index}</h4></div>
+        <div className={`${isExpanded ? 'expansion' : null}`} onClick={() => toggleExercises(props.index)}><h4>{props.index + 1}</h4></div>
         
         <div className={`mid ${isExpanded ? 'expansion' : null}`} onClick={() => toggleExercises(props.index)} ><h3>{capital(`${props.data.exercise}`)}</h3></div>
         

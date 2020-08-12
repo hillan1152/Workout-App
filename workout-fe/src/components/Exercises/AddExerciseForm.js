@@ -27,14 +27,16 @@ export const AddExerciseForm = (props) => {
     setInputExercise({ ...inputExercise, [e.target.name]: e.target.value ? e.target.value: '' });
   };
   return (
-    <div className="forms align">
+    <div className="forms add-workout">
       <form onSubmit={submitExercise}>
         <h2>Add An Exercise</h2>
         <input onChange={handleChange} placeholder="Exercise Name" name="exercise"/>
         <input onChange={handleChange} placeholder="Region" name="region"/>
-        <input onChange={handleChange} type="number" placeholder="Weight" name="weight"/>
-        <input onChange={handleChange} type="number" placeholder="Sets" name="sets"/>
-        <input onChange={handleChange} type="number" placeholder="Reps" name="reps"/>
+        <section>
+          <input onChange={handleChange} type="number" placeholder="Wt" name="weight"/>
+          <input onChange={handleChange} type="number" placeholder="Sets" name="sets"/>
+          <input onChange={handleChange} type="number" placeholder="Reps" name="reps"/>
+        </section>
         <button type="submit">Add</button>
       </form>
       <button onClick={() => props.closeForms()}>Cancel</button>
