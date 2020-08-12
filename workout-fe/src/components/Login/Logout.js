@@ -5,7 +5,7 @@ import { logout } from '../../actions/index';
 
 export const Logout = ({ logout}) => {
   return (
-      <p onClick={() => logout()}>Logout</p>
+      <p className="logout" onClick={() => logout()}>Logout</p>
   )
 }
 

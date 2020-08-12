@@ -10025,16 +10025,10 @@ h3 {
 }
 
 .align {
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  width: 75%;
 }
-
-.align-ex {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: #e0e0e0;
+.align input {
+  width: 75%;
 }
 
 .active {
@@ -10101,7 +10095,7 @@ h3 {
 .confirm-delete button {
   width: 100%;
   margin-top: 4%;
-  margin-top: 10%;
+  margin-top: 5%;
   width: 75%;
   height: 3rem;
   border-radius: 8px;
@@ -10213,89 +10207,68 @@ h3 {
   font-weight: bolder;
   margin: 3% 0;
 }
-.single-workout-container form {
-  display: flex;
-  flex-flow: column wrap;
-  align-self: center;
-}
-.single-workout-container input {
-  margin: 4% 0;
-}
-.single-workout-container .back-arrow {
-  width: 20%;
-  height: 1.5rem;
-}
 
 .faded {
   opacity: 0.2;
 }
 
-.add-workout-form {
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  color: black;
-  background-color: white;
-  margin-top: 8%;
-  border: 2px inset black;
-  border-radius: 2px;
-  width: 75%;
-  padding: 5%;
-  line-height: 1.4;
-  z-index: 1000;
-}
-.add-workout-form input {
-  width: 100%;
-  justify-content: center;
-  margin-top: 2%;
-  height: 3rem;
-}
-.add-workout-form button {
-  width: 100%;
-  margin-top: 4%;
-  margin-top: 10%;
-  width: 75%;
-  height: 3rem;
-  border-radius: 8px;
-  align-self: center;
-}
-
 .forms {
   display: flex;
-  position: absolute;
-  flex-direction: column;
-  color: black;
-  background-color: white;
-  margin-top: 8%;
-  border: 2px inset black;
-  border-radius: 2px;
-  width: 75%;
-  padding: 5%;
-  line-height: 1.4;
-  z-index: 1000;
-  border: 2px inset black;
+  flex-flow: column;
   align-self: center;
-  align-content: center;
+  align-items: center;
+  padding: 5%;
+  border: 5px inset lightgoldenrodyellow;
+  box-shadow: 7px 1px grey;
+  background-color: whitesmoke;
+  color: black;
+  animation: 1.5s ease-out 0s 1 slideInFromTop;
+  animation: none;
+  margin-bottom: none;
+  position: absolute;
   z-index: 1001;
-  height: auto;
-}
-.forms input {
-  width: 100%;
-  justify-content: center;
-  border: 1px solid black;
-  margin-top: 2%;
-  height: 3rem;
+  margin-top: 5%;
 }
 .forms h2 {
   font-size: 2rem;
+  text-decoration: underline;
+}
+.forms label {
+  font-size: 1.5rem;
+  margin-bottom: 2%;
+}
+.forms input {
+  margin: 1.2%;
+  height: 2.5rem;
+  font-size: 1.2rem;
 }
 .forms button {
-  align-self: center;
-  margin-top: 10%;
+  margin-top: 5%;
   width: 75%;
   height: 3rem;
   border-radius: 8px;
   align-self: center;
+}
+.forms button:hover {
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+}
+
+.add-workout {
+  width: 75%;
+}
+.add-workout input {
+  width: 100%;
+  margin: 3%;
+}
+.add-workout section {
+  display: flex;
+  justify-content: center;
+  flex-flow: row;
+}
+.add-workout section input {
+  width: 30%;
 }
 
 @keyframes slideInFromTop {
@@ -10316,9 +10289,6 @@ h3 {
   width: 100%;
   height: 100%;
 }
-.login-container p {
-  animation: 0.7s ease-out 0s 1 slideInFromTop;
-}
 .login-container .login-title {
   margin-top: 10%;
   font-size: 2.2rem;
@@ -10330,13 +10300,12 @@ h3 {
   align-self: center;
   align-items: center;
   padding: 5%;
-  width: 75%;
-  border: 8px inset lightgoldenrodyellow;
+  border: 5px inset lightgoldenrodyellow;
   box-shadow: 7px 1px grey;
   background-color: whitesmoke;
   color: black;
-  line-height: 2;
   animation: 1.5s ease-out 0s 1 slideInFromTop;
+  width: 75%;
 }
 .login-container form h2 {
   font-size: 2rem;
@@ -10347,30 +10316,29 @@ h3 {
   margin-bottom: 2%;
 }
 .login-container form input {
-  margin: 3%, 0;
+  margin: 1.2%;
   height: 2.5rem;
   font-size: 1.2rem;
 }
 .login-container form button {
-  margin-top: 10%;
+  margin-top: 5%;
   width: 75%;
   height: 3rem;
   border-radius: 8px;
   align-self: center;
-  margin-bottom: 1rem;
 }
 .login-container form button:hover {
   background-color: black;
   border: 1px solid white;
   color: white;
 }
-
-.err-message {
+.login-container .err-message {
   align-self: center;
   background-color: #f05454;
   width: 75%;
   height: 7%;
   padding: 3%;
+  animation: 0.7s ease-out 0s 1 slideInFromTop;
 }
 
 .reg-container {
@@ -10380,7 +10348,7 @@ h3 {
   height: 100%;
 }
 .reg-container button {
-  margin-top: 10%;
+  margin-top: 5%;
   width: 75%;
   height: 3rem;
   border-radius: 8px;
@@ -10392,14 +10360,13 @@ h3 {
   align-self: center;
   align-items: center;
   padding: 5%;
-  width: 75%;
-  border: 8px inset lightgoldenrodyellow;
+  border: 5px inset lightgoldenrodyellow;
   box-shadow: 7px 1px grey;
   background-color: whitesmoke;
   color: black;
-  line-height: 2;
   animation: 1.5s ease-out 0s 1 slideInFromTop;
-  margin-top: 3rem;
+  width: 75%;
+  margin-top: 10%;
 }
 .reg-container .reg-form h2 {
   font-size: 2rem;
@@ -10410,17 +10377,16 @@ h3 {
   margin-bottom: 2%;
 }
 .reg-container .reg-form input {
-  margin: 3%, 0;
+  margin: 1.2%;
   height: 2.5rem;
   font-size: 1.2rem;
 }
 .reg-container .reg-form button {
-  margin-top: 10%;
+  margin-top: 5%;
   width: 75%;
   height: 3rem;
   border-radius: 8px;
   align-self: center;
-  margin-bottom: 1rem;
 }
 .reg-container .reg-form button:hover {
   background-color: black;
@@ -10472,6 +10438,12 @@ h3 {
   height: 10%;
   z-index: 1;
   bottom: 0;
+}
+.footer-container .logout {
+  height: 100%;
+  display: flex;
+  align-self: center;
+  justify-content: flex-start;
 }
 
 .App {

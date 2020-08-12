@@ -18,27 +18,19 @@
   padding-top: 25%;
   opacity: .80;
 }
+// Height for Entire Inner Section 
 .inner-container {
   min-height: 90%;
   overflow: scroll;
 }
-
-
-
-
 // ALIGN 
 .align {
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  width: 75%;
+  input {
+    width: 75%;
+  }
 }
 
-.align-ex {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: rgb(224, 224, 224);
-}
 
 // Images
 // Deadlift

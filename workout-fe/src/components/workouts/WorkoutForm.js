@@ -25,7 +25,7 @@ function WorkoutForm({ addWorkout, userWorkouts, setIsOpen, userId }) {
   };
 
   return (
-    <div className="forms workout-form">
+    <div className="forms align">
       <form  onSubmit={handleSubmit} onClick={() => setIsOpen(true)}>
         <h2>Add a Workout</h2>
         <input type="text" name="name" placeholder="Workout Name" onChange={handleChange}/>

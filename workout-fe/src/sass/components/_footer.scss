@@ -9,6 +9,12 @@
   height: 10%;
   z-index: 1;
   bottom: 0;
+  .logout {
+    height: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: flex-start;
+  }
 }
 
 

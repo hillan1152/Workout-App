@@ -16,7 +16,7 @@ export const SingleWorkout = ({ match, userWorkouts, workout, singleWorkout, use
   }, [changed])
   
   return (
-    <div className="single-workout-container align">
+    <div className="single-workout-container">
       {opened && <EditWorkout workout={workout} editWorkout={editWorkout} close={close}/>}
       <ExerciseList workoutId={workoutId}/>
     </div>
