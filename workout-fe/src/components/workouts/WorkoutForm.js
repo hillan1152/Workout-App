@@ -18,7 +18,6 @@ function WorkoutForm({ addWorkout, userWorkouts, setIsOpen, userId }) {
   // Submit Workout, Updates List, Closes Modal
   const handleSubmit = (e) => {
     e.preventDefault();
-    workout.date = moment(workout.date).calendar();
     addWorkout(userId, workout);
     userWorkouts(userId);
     setIsOpen(false)

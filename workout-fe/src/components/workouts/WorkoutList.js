@@ -61,7 +61,7 @@ export const WorkoutList = ({ info, userId, workout, userWorkouts, deleteWorkout
           return (
           <div className="individual_workout" key={workout.id}>
             <section>
-              <DeleteFilled className="delete-icon" onClick={() => deleteModal(workout)}/>
+              <DeleteFilled className="delete-icon" style={{...deleteStyle}} onClick={() => deleteModal(workout)}/>
               <div>
                 <Link className="link" to={`/workouts/${workout.id}/${workout.name}`} >
                   <h3>{ capital(workout.name) }</h3>
