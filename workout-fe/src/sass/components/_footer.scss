@@ -1,11 +1,12 @@
 .footer-container {
   border: 1px solid #443d3d;
-  background-color: #443d3d;
-  color: white;
+  background-color: whitesmoke;
+  color: black;
   display: flex;
-  padding: 10%;
+  text-align: center;
+  padding: 8%;
   width: 100%;
-  min-height: 10%;
+  height: 10%;
   z-index: 1;
   bottom: 0;
 }

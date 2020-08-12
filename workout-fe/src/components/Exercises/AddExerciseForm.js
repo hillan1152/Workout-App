@@ -27,7 +27,7 @@ export const AddExerciseForm = (props) => {
     setInputExercise({ ...inputExercise, [e.target.name]: e.target.value ? e.target.value: '' });
   };
   return (
-    <div className="forms align">
+    <div className="forms">
       <form onSubmit={submitExercise}>
         <h2>Add An Exercise</h2>
         <input onChange={handleChange} placeholder="Exercise Name" name="exercise"/>

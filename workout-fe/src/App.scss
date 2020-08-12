@@ -1,20 +1,21 @@
 @import 
-    './sass/utilities/custom',
-    './sass/components/workouts',
-    './sass/components/exercises',
-    './sass/components/singleworkout',
-    './sass/components/workoutForm',
-    './sass/components/exerciseForm',
-    './sass/components/login',
-    './sass/components/register',
-    './sass/components/nav',
-    './sass/components/footer',
-    
-    './sass/utilities/mixins',
-    './sass/utilities/variables',
-    
-    './sass/base/global',
-    './sass/base/reset';
+  './sass/base/global',
+  './sass/base/reset',
+
+  './sass/utilities/custom',
+  './sass/components/workouts',
+  './sass/components/exercises',
+  './sass/components/singleworkout',
+  './sass/components/workoutForm',
+  './sass/components/exerciseForm',
+  './sass/components/login',
+  './sass/components/register',
+  './sass/components/nav',
+  './sass/components/footer',
+  './sass/utilities/mixins',
+  './sass/utilities/variables'
+  
+;
     
     
   
@@ -27,26 +28,5 @@
   color: white;
   background-color: black;
   height: 100vh;
-  overflow: scroll;
-}
-
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  // overflow: scroll;
 }

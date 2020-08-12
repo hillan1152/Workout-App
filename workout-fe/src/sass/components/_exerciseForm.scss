@@ -4,11 +4,11 @@
   align-self: center;
   align-content: center;
   z-index: 1001;
-  background-color: darkgray;
   height: auto;
   input {
     width: 100%;
     justify-content: center;
+    border: 1px solid black;
     margin-top: 2%;
     height: 3rem;
   }
@@ -19,9 +19,4 @@
     align-self: center;
     @include button;
   }
-}
-
-.active-ex {
-  opacity: .2;
-  background-color: rgb(224, 224, 224);
 }
