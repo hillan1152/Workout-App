@@ -9,7 +9,7 @@ import DeleteExerciseForm from './DeleteExerciseForm';
 import EditExerciseForm from './EditExerciseForm';
 import { addStyle } from '../../utils/helpers'
 
-import SingleExercise from './SingleExercise';
+import ExerciseCard from './ExerciseCard';
 
 export const ExerciseList =  (props) => {
   // PASSES ALL EXERCISE DATA BETWEEN FORMS
@@ -59,7 +59,7 @@ export const ExerciseList =  (props) => {
         <h4 className={isAddFormOpen ? `active` : ''}>{moment(props.workout.date).format("dddd, MMMM Do")}</h4>
         {exerciseList.map((data, index) => {
           return (
-            <SingleExercise 
+            <ExerciseCard 
               index={index}
               key={data.exercise_id} 
               data={data} 

@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userWorkouts, deleteWorkout } from '../../actions';
 import moment from 'moment';
-import { capital } from '../../utils/helpers';
 import { PlusCircleOutlined, DeleteFilled } from '@ant-design/icons';
 import { addStyle, deleteStyle } from '../../utils/helpers';
 // COMPONENTS
 import WorkoutForm from './WorkoutForm';
 import DeleteWorkoutForm from './DeleteWorkoutForm';
+import WorkoutCard from './WorkoutCard';
 
 export const WorkoutList = ({ info, userId, workout, userWorkouts, deleteWorkout, changed, error }) => {
   const [ isOpen, setIsOpen ] = useState(false);
@@ -24,28 +24,13 @@ export const WorkoutList = ({ info, userId, workout, userWorkouts, deleteWorkout
     userWorkouts(userId)
   }, [changed, error])
 
-
-  // OPENS DELETE MODAL & ADDS DATA FOR MANIPULATION
-  const deleteModal = (data) => {
-    setOpenDelete(true);
-    setSingleData(data)
-  }
   // SORT ALL WORKOUTS BY DATE
   let sorted_by_date = info.sort((a, b) => {
     let x = new moment(a.date).format('YYYYMMDD');
     let y = new moment(b.date).format('YYYYMMDD');
     return x - y
   });
-  // GATHER ALL FUTURE/PAST DATES
-  let future = [];
-  let past = [];
-  sorted_by_date.forEach(day => {
-    if(moment(day.date).format('YYYYMMDD') >= moment().format('YYYYMMDD')){
-      future.push(day)
-    } else {
-      past.push(day)
-    }
-  });
+
   return (
     <section className="workouts-master" ref={fieldRef}>
       {/* Modal Form */}
@@ -59,18 +44,12 @@ export const WorkoutList = ({ info, userId, workout, userWorkouts, deleteWorkout
         <h2>Weekly Workouts</h2>
         {sorted_by_date.map(workout => {
           return (
-          <div className="individual_workout" key={workout.id}>
-            <section>
-              <DeleteFilled className="delete-icon" style={{...deleteStyle}} onClick={() => deleteModal(workout)}/>
-              <div>
-                <Link className="link" to={`/workouts/${workout.id}/${workout.name}`} >
-                  <h3>{ capital(workout.name) }</h3>
-                  <p>{ moment(workout.date).format("dddd, MMMM Do") }</p>
-                </Link>
-              </div>
-            </section>
-          </div>
-          )
+            <WorkoutCard 
+              key={workout.id}
+              workout={workout}
+              setSingleData={setSingleData}
+              setOpenDelete={setOpenDelete}
+            />)
         })}
       </div>
 
