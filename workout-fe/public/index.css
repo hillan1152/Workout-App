@@ -10046,6 +10046,7 @@ h3 {
   display: flex;
   flex-flow: column;
   height: 100%;
+  padding-bottom: 10%;
 }
 .workout-container h2 {
   margin-top: 2rem;
