@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { DeleteFilled, EditFilled } from '@ant-design/icons';
 import { capital } from '../../utils/helpers'
 
 export default function SingleExercise(props) {
   const [ isExpanded, setIsExpanded ] = useState(false);
   const [ isChecked, setIsChecked ] = useState(false);
+  // useEffect(() => {
+  //   let checked = JSON.parse(localStorage.getItem('checkList'));
+  //   console.log(checked)
+  //   // checked.forEach(check => {
+  //   //   if(check == props.data.exercise_id){
+  //   //     setIsChecked(true)
+  //   //   }
+  //   // })
+  // }, [])
 
   const toggle = (name, data) => {
     props.setExerciseData(data)
@@ -45,7 +54,7 @@ export default function SingleExercise(props) {
       <div className="expanded">
         <div className="expanded-left">
           <p className="exercise-weight">{props.data.weight === 0 ? '' : `Weight: ${props.data.weight}lbs `}</p>
-          <p>{`Reps: ${props.data.reps}  `}  {`Sets: ${props.data.sets} `}</p>
+          <p>{`Sets: ${props.data.sets} `}{`Reps: ${props.data.reps}  `}</p>
         </div>
         <div className="expanded-right">
           <EditFilled className="edit-icon" style={{ color: 'yellow', marginBottom: '1.2rem'}} onClick={() => toggle("edit", props.data)}/>
