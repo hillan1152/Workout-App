@@ -17,7 +17,7 @@ function App(props) {
   // console.log('LOCATION', location)
   return (
     <div className="App">
-      <div className="inner-container">
+      <div className="inner-container" id="capture">
         {props.isFetching &&
         <div id="overlay" className="d-flex justify-content-center"  style={{ height: "100%" }}>
           <div className="spinner-border" style={{ width: "7rem", height: "7rem", alignSelf: "center", marginBottom: "8rem" }} role="status">

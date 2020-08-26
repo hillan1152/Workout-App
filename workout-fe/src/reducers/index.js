@@ -14,7 +14,6 @@ import {
   DELETE, 
   OPEN,
   CLOSE, 
-  TOGGLE
 } from '../actions';
 
 const initialState = {
@@ -24,7 +23,6 @@ const initialState = {
   fetchMessage: "",
   error_message: "",
   info: [],
-  toggleTracker: [],
   workout: [],
   exercises: [],
   changed: false,
@@ -102,7 +100,6 @@ export const reducer = (state = initialState, action) => {
         changed: true
     }
     case EDIT_WORKOUT_SUCCESS:
-      console.log("EDIT WORKOUT SUCCESS", action.payload)
       return {
         ...state,
         isFetching: false,
@@ -110,14 +107,12 @@ export const reducer = (state = initialState, action) => {
         changed: true
       }
     case LOGIN_SUCCESS:
-      // console.log("STATE", action.payload)
       localStorage.setItem('token', action.payload.token);
       localStorage.setItem('id', action.payload.userId);
       return {
         ...state,
         isFetching: false,
         token: localStorage.getItem('token', action.payload.token),
-        // user_id: localStorage.getItem('id', action.payload.userId),
         fetchMessage: action.payload.message,
       }
     case LOGOUT:
@@ -127,7 +122,6 @@ export const reducer = (state = initialState, action) => {
         ...state, token: ""
     }
     case ERROR:
-      console.log("ERROR", action.payload)
       // debugger
       return {
         ...state,
@@ -144,11 +138,6 @@ export const reducer = (state = initialState, action) => {
         ...state,
         opened: false
     }
-    case TOGGLE: 
-      return {
-        ...state,
-        toggleTracker: action.payload
-      }
     default: 
       return state;
     }
