@@ -5,15 +5,6 @@ import { capital } from '../../utils/helpers'
 export default function SingleExercise(props) {
   const [ isExpanded, setIsExpanded ] = useState(false);
   const [ isChecked, setIsChecked ] = useState(false);
-  // useEffect(() => {
-  //   let checked = JSON.parse(localStorage.getItem('checkList'));
-  //   console.log(checked)
-  //   // checked.forEach(check => {
-  //   //   if(check == props.data.exercise_id){
-  //   //     setIsChecked(true)
-  //   //   }
-  //   // })
-  // }, [])
 
   const toggle = (name, data) => {
     props.setExerciseData(data)
