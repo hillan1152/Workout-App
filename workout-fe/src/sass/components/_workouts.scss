@@ -14,6 +14,7 @@
   flex-flow: column;
   height: 100%;
   padding-bottom: 10%;
+  align-items: center;
   h2 {
     margin-top: 2rem;
     font-weight: bolder;
@@ -21,6 +22,9 @@
   .link {
     text-decoration: none;
     color: black;
+  }
+  nav {
+    margin-top: 2%;
   }
 }
 

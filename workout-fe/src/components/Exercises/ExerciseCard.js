@@ -27,10 +27,10 @@ export default function SingleExercise(props) {
     }
   }
   const toggleExercises = (index) => {
-      setIsExpanded(!isExpanded)
-      props.setIsDeleteOpen(false)
-      props.setIsAddFormOpen(false);
-      props.setIsEditOpen(false);
+    setIsExpanded(!isExpanded)
+    props.setIsDeleteOpen(false)
+    props.setIsAddFormOpen(false);
+    props.setIsEditOpen(false);
   } 
   return (
     <section className={`exercise ${props.isAddFormOpen || props.isDeleteOpen || props.isEditOpen || props.opened ? `active` : ''}`} >

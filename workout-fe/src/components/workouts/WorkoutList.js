@@ -35,7 +35,7 @@ export const WorkoutList = ({ info, userId, workout, userWorkouts, deleteWorkout
   
   // SET UP PAGINATION
   const [ currentPage, setCurrentPage ] = useState(1);
-  const [ workoutsPerPage, setworkoutsPerPage ] = useState(4);
+  const [ workoutsPerPage, setworkoutsPerPage ] = useState(5);
 
   // GET CURRENT POST
   const indexOfLastPost = currentPage * workoutsPerPage;

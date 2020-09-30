@@ -14,7 +14,6 @@ import { useLocation } from "react-router-dom";
 
 function App(props) {
   const location = useLocation();
-  console.log('LOCATION', location)
   return (
     <div className="App">
       <div className="inner-container" id="capture">
