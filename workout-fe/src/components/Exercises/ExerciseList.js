@@ -42,6 +42,8 @@ export const ExerciseList =  (props) => {
     setIsAddFormOpen(false);
     setIsEditOpen(false);
   };
+
+  console.log("exercise List", exerciseList)
   
   return (
     <div className="exercise-list-container" >
@@ -80,7 +82,7 @@ export const ExerciseList =  (props) => {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("MSTP EXERCISE LIST", state.toggleTracker)
+  // console.log("MSTP EXERCISE LIST", state.exercises)
   return {
     workout: state.workout,
     exercises: state.exercises,
