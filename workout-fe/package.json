@@ -6,7 +6,7 @@
     "@ant-design/icons": "^4.2.1",
     "@testing-library/jest-dom": "^5.11.0",
     "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "cors": "^2.8.5",
     "html2canvas": "^1.0.0-rc.7",
